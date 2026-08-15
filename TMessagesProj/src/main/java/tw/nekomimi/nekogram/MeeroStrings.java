@@ -131,7 +131,7 @@ public final class MeeroStrings {
         put("MeeroGroupStorage", "Storage", "التخزين");
         put("MeeroHeaderEdit", "Edit", "تحرير");
         put("MeeroHeroMsg1", "Hey 👋 how are you?", "مرحبا 👋 شلونك؟");
-        put("MeeroHeroMsg2", "Did you try the new Meero design?", "هلا والله! جرّبت تصميم ميرو الجديد؟");
+        put("MeeroHeroMsg2", "Did you try the new Meero design?", "هلا والله! جرّبت تصميم آراس ڪرام الجديد؟");
         put("MeeroHeroMsg3", "Wooow fire 🔥", "وااو ناريي 🔥");
         put("MeeroHiddenChats", "Hidden chats", "المحادثات المخفية");
         put("MeeroHunterClearConfirm", "Delete the whole log?", "تمسح السجل كله؟");
@@ -148,8 +148,8 @@ public final class MeeroStrings {
         put("MeeroHunterSelectedCount", "Selected: %251$d", "المحدد: %251$d");
         put("MeeroHunterSomeone", "Someone", "شخص ما");
         put("MeeroHunterTitle", "Delete catcher", "صائد الحاذف");
-        put("MeeroIconAlt", "MeeroX (alt)", "MeeroX (بديل)");
-        put("MeeroIconStyle2", "MeeroX (style 2)", "MeeroX (نمط ٢)");
+        put("MeeroIconAlt", "aRRaSGram (alt)", " (بديل)");
+        put("MeeroIconStyle2", "aRRaSGram (style 2)", "aRRaSGram (نمط ٢)");
         put("MeeroIosAlertsInfo", "Rules a hairline above the buttons of a dialog and between each pair, the way Telegram for iOS separates its alert actions.", "يرسم خطاً رفيعاً فوق أزرار الحوار وبين كل زرين، مثل ما يفصل تلكرام آيفون أزرار تنبيهاته.");
         put("MeeroIosAnimInfo", "New messages spring into place from the corner, the way iOS does.", "الرسائل الجديدة تنبثق من الزاوية بحركة نابضة، مثل الآيفون.");
         put("MeeroIosCallInfo", "Draws the round controls on the call screen at the 72dp Telegram for iOS uses instead of 52, spaces them the way it does, and sets each label at 13dp, 8dp below its button.", "يرسم أزرار المكالمة الدائرية بقياس 72 مثل تلكرام آيفون بدل 52، ويباعد بينها بنفس طريقته، ويكتب كل تسمية بقياس 13 على بعد 8 تحت زرها.");
@@ -343,7 +343,7 @@ public final class MeeroStrings {
         put("MixerAccentMint", "Mint Green", "أخضر نعناعي");
         put("MixerAccentOrange", "Orange", "برتقالي");
         put("MixerAccentRed", "Red", "أحمر");
-        put("MixerAccentRose", "Meero Rose", "وردة ميرو");
+        put("MixerAccentRose", "Meero Rose", "وردة");
         put("MixerAccentSky", "Sky", "سماوي");
         put("MixerAccentViolet", "Violet", "بنفسجي");
         put("MixerApplied", "Mixed theme applied — it is now listed with your themes and can be shared as a file.", "انطبق الثيم المخلوط — صار مدرجاً مع ثيماتك وتقدر تشاركه كملف.");
@@ -355,7 +355,7 @@ public final class MeeroStrings {
         put("MixerBgPaper", "Paper White", "أبيض ورقي");
         put("MixerFailed", "Could not generate the theme file. Please try again.", "ما قدرنا نولّد ملف الثيم، جرّب مرة ثانية.");
         put("MixerHeader", "Compose your theme by feel", "كوّن ثيمك على ذوقك");
-        put("MixerHubTitle", "Theme Mixer (MeeroX)", "صانع الثيمات (ميرو)");
+        put("MixerHubTitle", "Theme Mixer (aRRaSGram)", "صانع الثيمات (آراس ڪرام)");
         put("MixerInBubble", "Incoming bubble", "فقاعة الطرف الثاني");
         put("MixerInBubbleBlack", "Pure AMOLED black", "أسود AMOLED خالص");
         put("MixerInBubbleFollow", "Follow background style", "يتبع نمط الخلفية");
@@ -378,7 +378,7 @@ public final class MeeroStrings {
         put("SmartFolderUnreadChats", "Unread chats", "محادثات غير مقروءة");
         put("SmartFolderUnreadChatsRule", "Rule: contacts + non-contacts + groups with unread", "القاعدة: جهات اتصال + غير معروفين + مجموعات بها غير مقروء");
         put("SmartFoldersHeader", "One-tap folders, built from rules", "مجلدات بلمسة وحدة، مبنية بقواعد");
-        put("SmartFoldersHubTitle", "Smart Folders (MeeroX)", "المجلدات الذكية (ميرو)");
+        put("SmartFoldersHubTitle", "Smart Folders (aRRaSGram)", "المجلدات الذكية (آراس ڪرام)");
         put("SmartFoldersInfo", "Each preset creates a real synced Telegram folder composed of rules (type, unread, muted). It appears in your chats list immediately, syncs to every device, and can be edited or removed from Telegram's regular Folders settings. Count-based rules (e.g. \"unread more than 5\") cannot live in the server engine, so they are approximated by \"unread\".", "كل قالب ينشئ مجلد تيليجرام حقيقي متزامن مركّب من قواعد (النوع، غير المقروء، المكتوم). يظهر بقائمة محادثاتك فوراً، يتزامن لكل أجهزتك، وتقدر تعدله أو تحذفه من إعدادات «المجلدات» الرسمية. القواعد العددية (مثلاً «غير مقروء أكثر من 5») ما يدعمها محرك السيرفر، فاستبدلناها بـ«غير مقروء».");
         put("SmartFoldersTitle", "Smart Folders", "المجلدات الذكية");
         put("StyleIos", "iOS", "آي أو إس");
