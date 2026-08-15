@@ -5,6 +5,7 @@ import static org.telegram.messenger.LocaleController.getString;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.graphics.Color;
 
 import androidx.core.content.ContextCompat;
 
