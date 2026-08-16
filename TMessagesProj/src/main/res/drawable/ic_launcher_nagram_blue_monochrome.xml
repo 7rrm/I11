@@ -4,8 +4,16 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-  <!-- v171: clean flat letter M monochrome for themed icons (bat-capsule removed) -->
-    <group android:scaleX="0.6405882" android:scaleY="0.6405882" android:translateX="92.009415" android:translateY="92.009415">
-      <path android:fillColor="#FFFFFF" android:pathData="M86 150H150V362H86ZM362 150H426V362H362ZM94.7 172L232.7 318L279.3 274L141.3 128ZM370.7 128L232.7 274L279.3 318L417.3 172Z" android:strokeColor="#00000000"/>
+    <!-- K monochrome for themed icons -->
+    <group android:scaleX="0.6405882" android:scaleY="0.6405882" 
+           android:translateX="92.009415" android:translateY="92.009415">
+        <path 
+            android:fillColor="#FFFFFF" 
+            android:pathData="
+                M86 150H150V362H86Z
+                M150 256L360 150L420 150L210 256Z
+                M150 256L420 362L360 362L150 280Z
+            " 
+            android:strokeColor="#00000000"/>
     </group>
 </vector>
