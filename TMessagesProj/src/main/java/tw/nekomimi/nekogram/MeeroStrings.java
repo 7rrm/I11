@@ -491,7 +491,8 @@ public final class MeeroStrings {
         put("MeeroMenuWatchDiagDesc", "Off by default - turn on only when a menu misbehaves: it copies a technical report you can send to the developer", "مطفأ افتراضيًا — شغّله فقط إذا صارت مشكلة بقائمة: ينسخ تقريرًا فنيًا ترسله للمطور");
         put("MeeroIosAttachPanel", "iOS-style attach sheet", "لوحة إرفاق بنمط آيفون");
         put("MeeroIosAttachPanelDesc", "The attach panel's first face in iOS style: drag grabber and a grouped action list with colored icons", "الوجهة الأولى للوحة الإرفاق بشكل iOS: قبضة سحب وقائمة إجراءات مجمعة بأيقونات ملونة");
-        
+
+    }
         // ============================================================
         // ✅ المفاتيح من strings_meerox.xml (موجودة هنا)
         // ============================================================
