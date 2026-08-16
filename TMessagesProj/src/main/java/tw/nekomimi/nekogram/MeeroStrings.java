@@ -131,7 +131,7 @@ public final class MeeroStrings {
         put("MeeroGroupStorage", "Storage", "التخزين");
         put("MeeroHeaderEdit", "Edit", "تحرير");
         put("MeeroHeroMsg1", "Hey 👋 how are you?", "مرحبا 👋 شلونك؟");
-        put("MeeroHeroMsg2", "Did you try the new Meero design?", "هلا والله! جرّبت تصميم ميرو الجديد؟");
+        put("MeeroHeroMsg2", "Did you try the new aRRaSGram design?", "هلا والله! جرّبت تصميم آراس ڪرام الجديد؟");
         put("MeeroHeroMsg3", "Wooow fire 🔥", "وااو ناريي 🔥");
         put("MeeroHiddenChats", "Hidden chats", "المحادثات المخفية");
         put("MeeroHunterClearConfirm", "Delete the whole log?", "تمسح السجل كله؟");
@@ -148,8 +148,8 @@ public final class MeeroStrings {
         put("MeeroHunterSelectedCount", "Selected: %1$d", "المحدد: %1$d");
         put("MeeroHunterSomeone", "Someone", "شخص ما");
         put("MeeroHunterTitle", "Delete catcher", "صائد الحاذف");
-        put("MeeroIconAlt", "MeeroX (alt)", "MeeroX (بديل)");
-        put("MeeroIconStyle2", "MeeroX (style 2)", "MeeroX (نمط ٢)");
+        put("MeeroIconAlt", "aRRaSGram (alt)", "aRRaSGram (بديل)");
+        put("MeeroIconStyle2", "aRRaSGram (style 2)", "aRRaSGram (نمط ٢)");
         put("MeeroIosAlertsInfo", "Rules a hairline above the buttons of a dialog and between each pair, the way Telegram for iOS separates its alert actions.", "يرسم خطاً رفيعاً فوق أزرار الحوار وبين كل زرين، مثل ما يفصل تلكرام آيفون أزرار تنبيهاته.");
         put("MeeroIosAnimInfo", "New messages spring into place from the corner, the way iOS does.", "الرسائل الجديدة تنبثق من الزاوية بحركة نابضة، مثل الآيفون.");
         put("MeeroIosCallInfo", "Draws the round controls on the call screen at the 72dp Telegram for iOS uses instead of 52, spaces them the way it does, and sets each label at 13dp, 8dp below its button.", "يرسم أزرار المكالمة الدائرية بقياس 72 مثل تلكرام آيفون بدل 52، ويباعد بينها بنفس طريقته، ويكتب كل تسمية بقياس 13 على بعد 8 تحت زرها.");
@@ -248,8 +248,8 @@ public final class MeeroStrings {
         put("MeeroSectionData", "Data", "البيانات");
         put("MeeroSectionInfo", "About", "حول");
         put("MeeroSepFadeInfo", "Hairline separators inside iOS-style cards fade in over 120ms after the menu settles instead of snapping in at once. OFF restores the instant appearance.", "الفواصل الشعرية داخل بطاقات iOS تتلاشى تدريجياً خلال 120ms بعد استقرار القائمة بدل الظهور الفجائي. الإطفاء يرجّع الظهور الفوري.");
-        put("MeeroSettingsInfo", "Every MeeroX switch in one place, grouped by what it changes.", "كل مفاتيح MeeroX بمكان واحد، مقسّمة حسب الي تغيّره.");
-        put("MeeroSettingsTitle", "MeeroX", "MeeroX");
+        put("MeeroSettingsInfo", "Every aRRaSGram switch in one place, grouped by what it changes.", "كل مفاتيح aRRaSGram بمكان واحد، مقسّمة حسب الي تغيّره.");
+        put("MeeroSettingsTitle", "aRRaSGram", "aRRaSGram");
         put("MeeroSigContinue", "Continue at my own risk", "الاستمرار على مسؤوليتي");
         put("MeeroSigExit", "Exit now", "خروج فوري");
         put("MeeroSigWarningText", "This copy's signature does NOT match the official MeeroX fingerprint. It may be a fake or tampered build that can steal your account.\n\nThis copy:\n%1$s\n\nOfficial fingerprint:\n%2$s\n\nInstall MeeroX only from the developer's official channel.", "توقيع هذه النسخة لا يطابق بصمة MeeroX الرسمية. يمكن أن تكون نسخة مقرصنة أو معدّلة تسرق حسابك وبياناتك.\n\nبصمة هذه النسخة:\n%1$s\n\nالبصمة الرسمية:\n%2$s\n\nحمّل MeeroX فقط من قناة المطور الرسمية.");
@@ -355,7 +355,7 @@ public final class MeeroStrings {
         put("MixerBgPaper", "Paper White", "أبيض ورقي");
         put("MixerFailed", "Could not generate the theme file. Please try again.", "ما قدرنا نولّد ملف الثيم، جرّب مرة ثانية.");
         put("MixerHeader", "Compose your theme by feel", "كوّن ثيمك على ذوقك");
-        put("MixerHubTitle", "Theme Mixer (MeeroX)", "صانع الثيمات (ميرو)");
+        put("MixerHubTitle", "Theme Mixer (aRRaSGram)", "صانع الثيمات (آراس ڪرام)");
         put("MixerInBubble", "Incoming bubble", "فقاعة الطرف الثاني");
         put("MixerInBubbleBlack", "Pure AMOLED black", "أسود AMOLED خالص");
         put("MixerInBubbleFollow", "Follow background style", "يتبع نمط الخلفية");
@@ -378,7 +378,7 @@ public final class MeeroStrings {
         put("SmartFolderUnreadChats", "Unread chats", "محادثات غير مقروءة");
         put("SmartFolderUnreadChatsRule", "Rule: contacts + non-contacts + groups with unread", "القاعدة: جهات اتصال + غير معروفين + مجموعات بها غير مقروء");
         put("SmartFoldersHeader", "One-tap folders, built from rules", "مجلدات بلمسة وحدة، مبنية بقواعد");
-        put("SmartFoldersHubTitle", "Smart Folders (MeeroX)", "المجلدات الذكية (ميرو)");
+        put("SmartFoldersHubTitle", "Smart Folders (aRRaSGram)", "المجلدات الذكية (آراس ڪرام)");
         put("SmartFoldersInfo", "Each preset creates a real synced Telegram folder composed of rules (type, unread, muted). It appears in your chats list immediately, syncs to every device, and can be edited or removed from Telegram's regular Folders settings. Count-based rules (e.g. \"unread more than 5\") cannot live in the server engine, so they are approximated by \"unread\".", "كل قالب ينشئ مجلد تيليجرام حقيقي متزامن مركّب من قواعد (النوع، غير المقروء، المكتوم). يظهر بقائمة محادثاتك فوراً، يتزامن لكل أجهزتك، وتقدر تعدله أو تحذفه من إعدادات «المجلدات» الرسمية. القواعد العددية (مثلاً «غير مقروء أكثر من 5») ما يدعمها محرك السيرفر، فاستبدلناها بـ«غير مقروء».");
         put("SmartFoldersTitle", "Smart Folders", "المجلدات الذكية");
         put("StyleIos", "iOS", "آي أو إس");
@@ -407,8 +407,8 @@ public final class MeeroStrings {
         put("meeroFlexWidth", "Flexible menu width", "عرض مرن للقوائم");
         put("meeroGhostSwipeRead", "Ghost read by swipe", "قراءة شبحية بالسحب");
         put("meeroGlassBorders", "Glass edges", "حدود زجاجية");
-        put("meeroGlassSettings", "Meero glass design", "تصميم ميرو الزجاجي");
-        put("meeroGlassSwitches", "Meero glass switches", "مفاتيح ميرو الزجاجية");
+        put("meeroGlassSettings", "aRRaSGram glass design", "تصميم آراس ڪرام الزجاجي");
+        put("meeroGlassSwitches", "aRRaSGram glass switches", "مفاتيح آراس ڪرام الزجاجية");
         put("meeroIosAlerts", "iOS dialog rules", "فواصل الحوارات مثل الآيفون");
         put("meeroIosAnim", "iOS message animation", "أنميشن الرسائل بنمط iOS");
         put("meeroIosCall", "iOS call buttons", "أزرار المكالمة مثل الآيفون");
@@ -483,7 +483,7 @@ public final class MeeroStrings {
         put("MeeroAuditIntegrityBad", "Tamper detected - the first broken seal is at entry %1$d", "عبث مكتشف — أول ختم مكسور عند القياس %1$d");
         put("MeeroAuditIntegrityNone", "No sealed entries to verify yet", "لا توجد قياسات مختومة للتحقق بعد");
         put("AboutMainChannel", "My main channel", "قناتي الاساسيه");
-        put("MeeroChannelPromoBody", "Join the official channel to get MeeroX updates first and everything new.", "اشترك بالقناة الرسمية حتى توصلك تحديثات MeeroX أول بأول وكل جديدنا");
+        put("MeeroChannelPromoBody", "Join the official channel to get MeeroX updates first and everything new.", "اشترك بالقناة الرسمية حتى توصلك تحديثات آراس ڪرام - aRRaSGram أول بأول وكل جديدنا");
         put("MeeroChannelPromoJoin", "Join the channel", "اشتراك في القناة");
         put("MeeroWatchCopied", "Technical report copied - paste it and send it to the app developer", "تم نسخ تقرير فني — ألصقه وأرسله لمطور التطبيق");
         put("MeeroChatHeaderAvatar", "Chat top-bar avatar", "صورة البار العلوي للمحادثة");
