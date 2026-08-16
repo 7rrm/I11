@@ -4,20 +4,30 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-  <!-- v171: clean flat letter M (bat-capsule shape removed per his order).
-       Border = inflated white back layer (white fill + white stroke on the
-       same geometry), blue M on top => even rim, no stroke knotting. -->
-  <group android:scaleX="0.6405882" android:scaleY="0.6405882" android:translateX="92.009415" android:translateY="92.009415">
-    <group>
-      <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-      <path android:pathData="M86 150H150V362H86Z" android:fillColor="#fff" android:strokeColor="#fff" android:strokeWidth="40" android:strokeLineJoin="round"/>
-      <path android:pathData="M362 150H426V362H362Z" android:fillColor="#fff" android:strokeColor="#fff" android:strokeWidth="40" android:strokeLineJoin="round"/>
-      <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z" android:fillColor="#fff" android:strokeColor="#fff" android:strokeWidth="40" android:strokeLineJoin="round"/>
-      <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z" android:fillColor="#fff" android:strokeColor="#fff" android:strokeWidth="40" android:strokeLineJoin="round"/>
-      <path android:pathData="M86 150H150V362H86Z" android:fillColor="#0095ff"/>
-      <path android:pathData="M362 150H426V362H362Z" android:fillColor="#0095ff"/>
-      <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z" android:fillColor="#0095ff"/>
-      <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z" android:fillColor="#0095ff"/>
+    <!-- K: blue with white border -->
+    <group android:scaleX="0.6405882" android:scaleY="0.6405882" 
+           android:translateX="92.009415" android:translateY="92.009415">
+        <group>
+            <clip-path android:pathData="M0 0H512V512H0V0Z"/>
+            
+            <!-- الطبقة البيضاء (الحدود) -->
+            <path android:pathData="
+                    M86 150H150V362H86Z
+                    M150 256L360 150L420 150L210 256Z
+                    M150 256L420 362L360 362L150 280Z
+                " 
+                  android:fillColor="#fff" 
+                  android:strokeColor="#fff" 
+                  android:strokeWidth="40" 
+                  android:strokeLineJoin="round"/>
+            
+            <!-- الطبقة الزرقاء (الحرف) -->
+            <path android:pathData="
+                    M86 150H150V362H86Z
+                    M150 256L360 150L420 150L210 256Z
+                    M150 256L420 362L360 362L150 280Z
+                " 
+                  android:fillColor="#0095ff"/>
+        </group>
     </group>
-  </group>
 </vector>
