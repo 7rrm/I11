@@ -1,17 +1,29 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="512"
-    android:viewportHeight="512">
-  <!-- v171: clean flat letter M, google 3-color; diagonals UNDER stems -->
-  <group android:scaleX="0.66" android:scaleY="0.66" android:translateX="87.04" android:translateY="88.60445">
-    <group>
-      <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-      <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z" android:fillColor="#EA4335"/>
-      <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z" android:fillColor="#EA4335"/>
-      <path android:pathData="M86 150H150V362H86Z" android:fillColor="#34A853"/>
-      <path android:pathData="M362 150H426V362H362Z" android:fillColor="#4285F4"/>
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="512" android:viewportHeight="512">
+    <!-- K with Google 3-colors -->
+    <group android:scaleX="0.66" android:scaleY="0.66" 
+           android:translateX="87.04" android:translateY="88.60445">
+        <group>
+            <clip-path android:pathData="M0 0H512V512H0V0Z"/>
+            
+            <!-- الخط المائل العلوي (أحمر) -->
+            <path android:pathData="M150 256L360 150L420 150L210 256Z" 
+                  android:fillColor="#EA4335"/>
+            
+            <!-- الخط المائل السفلي (أحمر) -->
+            <path android:pathData="M150 256L420 362L360 362L150 280Z" 
+                  android:fillColor="#EA4335"/>
+            
+            <!-- الخط العمودي (أخضر) -->
+            <path android:pathData="M86 150H150V362H86Z" 
+                  android:fillColor="#34A853"/>
+            
+            <!-- لا يوجد خط أيمن في حرف K، نضيف لمسة زرقاء -->
+            <path android:pathData="M360 150L420 150L420 362L360 362Z" 
+                  android:fillColor="#4285F4" 
+                  android:alpha="0.3"/>
+        </group>
     </group>
-  </group>
 </vector>
