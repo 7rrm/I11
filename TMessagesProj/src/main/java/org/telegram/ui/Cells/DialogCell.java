@@ -210,7 +210,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
      * the text inset is derived here rather than left at 72.
      */
     private static final int MEERO_AVATAR_SIZE = 60;
-    private static final int MEERO_AVATAR_START = 16;
+    private static final int MEERO_AVATAR_START = 14;
     private static final int MEERO_TEXT_START = 84;
 
     /** Avatar diameter for this row, in dp. */
