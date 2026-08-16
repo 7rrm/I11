@@ -1,17 +1,24 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="512"
-    android:viewportHeight="512">
-  <!-- v171: clean flat letter M, darkgreen whites; diagonals UNDER stems -->
-  <group android:scaleX="0.6713793" android:scaleY="0.6713793" android:translateX="84.1269" android:translateY="84.1269">
-    <group>
-      <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-      <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z" android:fillColor="#FFFFFF"/>
-      <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z" android:fillColor="#FFFFFF"/>
-      <path android:pathData="M86 150H150V362H86Z" android:fillColor="#E6FFFFFF"/>
-      <path android:pathData="M362 150H426V362H362Z" android:fillColor="#E6FFFFFF"/>
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="512" android:viewportHeight="512">
+    <!-- K with gradient transparency -->
+    <group android:scaleX="0.6713793" android:scaleY="0.6713793" 
+           android:translateX="84.1269" android:translateY="84.1269">
+        <group>
+            <clip-path android:pathData="M0 0H512V512H0V0Z"/>
+            
+            <!-- الخط العمودي (شفاف 70%) -->
+            <path android:pathData="M86 150H150V362H86Z" 
+                  android:fillColor="#B3FFFFFF"/>
+            
+            <!-- المائل العلوي (شفاف 85%) -->
+            <path android:pathData="M150 256L360 150L420 150L210 256Z" 
+                  android:fillColor="#D9FFFFFF"/>
+            
+            <!-- المائل السفلي (أبيض صافي) -->
+            <path android:pathData="M150 256L420 362L360 362L150 280Z" 
+                  android:fillColor="#FFFFFF"/>
+        </group>
     </group>
-  </group>
 </vector>
