@@ -1,17 +1,65 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    <!-- Design 2 (Marker M): one continuous round-capped stroke on telegram blue -->
+    android:width="108dp" 
+    android:height="108dp"
+    android:viewportWidth="108" 
+    android:viewportHeight="108">
+    <!-- Design 2 (Marker Glass K): continuous round-capped stroke, glass effect on telegram blue -->
+    
+    <!-- خلفية زرقاء متدرجة (نفس الأصل) -->
     <path android:pathData="M0,0h108v108h-108z">
         <aapt:attr name="android:fillColor">
-            <gradient android:startX="0" android:startY="0" android:endX="0" android:endY="108" android:type="linear">
+            <gradient 
+                android:startX="0" android:startY="0" 
+                android:endX="0" android:endY="108" 
+                android:type="linear">
                 <item android:offset="0" android:color="#FF2AABEE"/>
                 <item android:offset="1" android:color="#FF229ED9"/>
             </gradient>
         </aapt:attr>
     </path>
-    <path android:pathData="M28.69,76.78 L28.69,32.06 L54.00,63.28 L79.31,32.06 L79.31,76.78"
-        android:strokeColor="#FFFFFF" android:strokeWidth="11.81"
-        android:strokeLineCap="round" android:strokeLineJoin="round"/>
+    
+    <!-- حرف K بخط متصل (Marker Style) مع تأثير زجاجي -->
+    <path android:pathData="
+            M28.69,76.78 
+            L28.69,32.06 
+            L54.00,54.00 
+            L79.31,32.06 
+            L79.31,76.78"
+        android:strokeColor="#FFFFFF" 
+        android:strokeWidth="11.81"
+        android:strokeAlpha="0.85"
+        android:strokeLineCap="round" 
+        android:strokeLineJoin="round"/>
+    
+    <!-- تأثير توهج زجاجي (طبقة خلفية) -->
+    <path android:pathData="
+            M28.69,76.78 
+            L28.69,32.06 
+            L54.00,54.00 
+            L79.31,32.06 
+            L79.31,76.78"
+        android:strokeColor="#FFFFFF" 
+        android:strokeWidth="18"
+        android:strokeAlpha="0.12"
+        android:strokeLineCap="round" 
+        android:strokeLineJoin="round"/>
+    
+    <!-- انعكاس الضوء (زجاجي) -->
+    <path android:fillColor="#FFFFFF" 
+          android:alpha="0.10"
+          android:pathData="
+              M28.69,32.06 
+              L40.00,38.00 
+              L40.00,42.00 
+              L28.69,36.00 Z"/>
+    
+    <!-- نقطة بريق -->
+    <path android:fillColor="#FFFFFF" 
+          android:alpha="0.45"
+          android:pathData="
+              M35.00,28.00 
+              L38.00,26.00 
+              L40.00,28.00 
+              L38.00,30.00 Z"/>
 </vector>
