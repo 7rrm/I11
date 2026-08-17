@@ -1,17 +1,47 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="512" android:viewportHeight="512">
-    <!-- Neon wireframe K - one-stroke continuous tube -->
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <!-- Neon Glass K: neon wireframe K with glass effect -->
+    
     <group android:scaleX="0.649" android:scaleY="0.649" 
            android:translateX="89.856" android:translateY="89.856">
         <group>
             <clip-path android:pathData="M0 0H512V512H0V0Z"/>
+            
+            <!-- طبقة التوهج الزجاجي (خلفية) -->
             <path android:pathData="
                     M146 364 L146 152 L260 256 L380 152 L380 364"
-                  android:strokeColor="#9CEFFF" android:strokeWidth="22"
+                  android:strokeColor="#9CEFFF" 
+                  android:strokeWidth="35"
                   android:fillColor="#00000000"
-                  android:strokeLineCap="round" android:strokeLineJoin="round"/>
+                  android:strokeAlpha="0.15"
+                  android:strokeLineCap="round" 
+                  android:strokeLineJoin="round"/>
+            
+            <!-- الخط الرئيسي (نيون زجاجي) -->
+            <path android:pathData="
+                    M146 364 L146 152 L260 256 L380 152 L380 364"
+                  android:strokeColor="#9CEFFF" 
+                  android:strokeWidth="22"
+                  android:fillColor="#00000000"
+                  android:strokeAlpha="0.85"
+                  android:strokeLineCap="round" 
+                  android:strokeLineJoin="round"/>
+            
+            <!-- تأثير زجاجي (انعكاس الضوء) -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.06"
+                  android:pathData="
+                      M146 152 L260 200 L260 220 L146 172 Z"/>
+            
+            <!-- نقطة بريق نيون -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.3"
+                  android:pathData="
+                      M160 160 L170 155 L175 160 L170 165 Z"/>
         </group>
     </group>
 </vector>
