@@ -1,10 +1,97 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    <!-- Design 4 (Rose Duo M): rose stems #FF4E8A + white diagonals on near-black -->
-    <path android:fillColor="#0D0D11" android:pathData="M0,0h108v108h-108z"/>
-    <path android:fillColor="#FFFFFF" android:pathData="M25.46,37.63 L49.09,64.62 L58.91,56.01 L35.29,29.02 L25.46,37.63 Z"/>
-    <path android:fillColor="#FFFFFF" android:pathData="M72.73,29.02 L49.09,56.01 L58.91,64.62 L82.54,37.63 L72.73,29.02 Z"/>
-    <path android:fillColor="#FF4E8A" android:pathData="M23.83,33.33h13.08v41.34h-13.08z"/>
-    <path android:fillColor="#FF4E8A" android:pathData="M71.09,33.33h13.07v41.34h-13.07z"/>
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" 
+    android:height="108dp"
+    android:viewportWidth="108" 
+    android:viewportHeight="108">
+    <!-- Design 4 (Rose Duo Glass K): rose stems #FF4E8A + white diagonals with glass effect on near-black -->
+    
+    <!-- خلفية سوداء (نفس الأصل) -->
+    <path android:fillColor="#0D0D11" 
+          android:pathData="M0,0h108v108h-108z"/>
+    
+    <!-- الخط العمودي (وردي زجاجي) بدلاً من M -->
+    <path android:pathData="M23.83,27.00 L36.91,27.00 L36.91,81.00 L23.83,81.00 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="23.83" android:startY="27"
+                android:endX="36.91" android:endY="81"
+                android:type="linear">
+                <item android:offset="0" android:color="#CCFF4E8A"/>
+                <item android:offset="0.3" android:color="#99FF4E8A"/>
+                <item android:offset="0.7" android:color="#77E8437A"/>
+                <item android:offset="1" android:color="#55C0376A"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- الخط العمودي الثاني (وردي زجاجي) -->
+    <path android:pathData="M71.09,27.00 L84.16,27.00 L84.16,81.00 L71.09,81.00 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="71.09" android:startY="27"
+                android:endX="84.16" android:endY="81"
+                android:type="linear">
+                <item android:offset="0" android:color="#CCFF4E8A"/>
+                <item android:offset="0.3" android:color="#99FF4E8A"/>
+                <item android:offset="0.7" android:color="#77E8437A"/>
+                <item android:offset="1" android:color="#55C0376A"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- المائل العلوي (أبيض زجاجي) -->
+    <path android:pathData="M36.91,54.00 L68.00,27.00 L80.00,27.00 L49.00,54.00 L36.91,54.00 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="36.91" android:startY="27"
+                android:endX="80" android:endY="54"
+                android:type="linear">
+                <item android:offset="0" android:color="#CCFFFFFF"/>
+                <item android:offset="0.5" android:color="#99FFFFFF"/>
+                <item android:offset="1" android:color="#77FFFFFF"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- المائل السفلي (أبيض زجاجي) -->
+    <path android:pathData="M36.91,56.00 L84.16,81.00 L71.09,81.00 L36.91,58.00 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="36.91" android:startY="56"
+                android:endX="84.16" android:endY="81"
+                android:type="linear">
+                <item android:offset="0" android:color="#CCFFFFFF"/>
+                <item android:offset="0.5" android:color="#99FFFFFF"/>
+                <item android:offset="1" android:color="#55FFFFFF"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- تأثير زجاجي (انعكاس الضوء) -->
+    <path android:fillColor="#FFFFFF" 
+          android:alpha="0.10"
+          android:pathData="
+              M23.83,27.00 
+              L36.91,27.00 
+              L36.91,33.00 
+              L23.83,33.00 Z"/>
+    
+    <!-- نقطة بريق وردي -->
+    <path android:fillColor="#FF4E8A" 
+          android:alpha="0.4"
+          android:pathData="
+              M25.00,29.00 
+              L28.00,27.00 
+              L30.00,29.00 
+              L28.00,31.00 Z"/>
+    
+    <!-- نقطة بريق أبيض -->
+    <path android:fillColor="#FFFFFF" 
+          android:alpha="0.4"
+          android:pathData="
+              M38.00,29.00 
+              L42.00,27.00 
+              L44.00,29.00 
+              L42.00,31.00 Z"/>
 </vector>
