@@ -1,66 +1,10 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp" 
-    android:height="108dp"
-    android:viewportWidth="108" 
-    android:viewportHeight="108">
-    <!-- Design 1 (Bold Glass K): flat sharp letterform, glass effect on near-black -->
-    
-    <!-- خلفية سوداء (نفس الأصل) -->
-    <path android:fillColor="#0D0D11" 
-          android:pathData="M0,0h108v108h-108z"/>
-    
-    <!-- حرف K زجاجي (بدلاً من M) -->
-    <!-- الخط العمودي -->
-    <path android:pathData="M22.00,27.00 L35.50,27.00 L35.50,81.00 L22.00,81.00 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="22" android:startY="27"
-                android:endX="35.50" android:endY="81"
-                android:type="linear">
-                <item android:offset="0" android:color="#CCFFFFFF"/>
-                <item android:offset="0.3" android:color="#99FFFFFF"/>
-                <item android:offset="0.7" android:color="#77FFFFFF"/>
-                <item android:offset="1" android:color="#55FFFFFF"/>
-            </gradient>
-        </aapt:attr>
-    </path>
-    
-    <!-- المائل العلوي -->
-    <path android:pathData="M35.50,54.00 L70.00,27.00 L83.50,27.00 L49.00,54.00 L35.50,54.00 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="35.50" android:startY="27"
-                android:endX="83.50" android:endY="54"
-                android:type="linear">
-                <item android:offset="0" android:color="#CCFFFFFF"/>
-                <item android:offset="0.5" android:color="#99FFFFFF"/>
-                <item android:offset="1" android:color="#77FFFFFF"/>
-            </gradient>
-        </aapt:attr>
-    </path>
-    
-    <!-- المائل السفلي -->
-    <path android:pathData="M35.50,56.00 L85.00,81.00 L71.50,81.00 L35.50,58.00 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startX="35.50" android:startY="56"
-                android:endX="85" android:endY="81"
-                android:type="linear">
-                <item android:offset="0" android:color="#CCFFFFFF"/>
-                <item android:offset="0.5" android:color="#99FFFFFF"/>
-                <item android:offset="1" android:color="#55FFFFFF"/>
-            </gradient>
-        </aapt:attr>
-    </path>
-    
-    <!-- تأثير الزجاج (انعكاس الضوء) -->
-    <path android:fillColor="#FFFFFF" 
-          android:alpha="0.15"
-          android:pathData="M22.00,27.00 L35.50,27.00 L35.50,35.00 L22.00,35.00 Z"/>
-    
-    <!-- بريق -->
-    <path android:fillColor="#FFFFFF" 
-          android:alpha="0.4"
-          android:pathData="M24.00,29.00 L28.00,27.00 L30.00,29.00 L28.00,31.00 Z"/>
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Design 1 (Bold Sans M): flat sharp letterform, white on near-black -->
+    <path android:fillColor="#0D0D11" android:pathData="M0,0h108v108h-108z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M18.14,31.64h13.5v44.72h-13.5z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M76.36,31.64h13.5v44.72h-13.5z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M19.97,36.28 L49.09,67.08 L58.91,57.80 L29.80,27.00 L19.97,36.28 Z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M78.20,27.00 L49.09,57.80 L58.91,67.08 L88.03,36.28 L78.20,27.00 Z"/>
 </vector>
