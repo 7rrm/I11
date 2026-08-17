@@ -1220,45 +1220,19 @@ public class ActionBarPopupWindow extends PopupWindow {
             setTouchInterceptor((v, e) -> {
                 if (e.getAction() == MotionEvent.ACTION_DOWN) {
                     final ActionBarPopupWindowLayout meeroLayout = (ActionBarPopupWindowLayout) contentView;
-                    // MeeroX v206 - ROOT CAUSE of the 5-build dead-tap saga
-                    // (owner field evidence: "the last two buttons work,
-                    // everything above them is dead", menu closes on the dead
-                    // tap, and the watch recorded NOTHING for those taps -
-                    // i.e. the DOWNs never reached the layout at all):
-                    //
-                    // This interceptor runs at WINDOW level, BEFORE any
-                    // dispatch, and treats taps outside the background
-                    // drawable's bounds as "outside" -> dismiss + consume.
-                    // But the two-card iOS skin's dispatchDraw leaves CARD 2
-                    // (the small bottom destructive card) in the drawable's
-                    // bounds - the LAST setBounds call wins. With the skin
-                    // on, "inside" silently shrank to the red card only, so
-                    // every main-card row tap died right here; no layout
-                    // record, no CLICK, and v205's UP-fallback could never
-                    // run because the window was dismissed at DOWN.
-                    //
-                    // While the skin owns the card, test against the whole
-                    // content area inset by the card's own ring pads (union
-                    // of both cards) - genuine ring/outside taps still
-                    // dismiss, exactly like the stock affordance. Stock path
-                    // below stays byte-exact for every other popup class.
-                    if (meeroLayout.isMeeroIosSkinOn()) {
-                        final android.graphics.Rect pad = meeroLayout.getPadding();
-                        AndroidUtilities.rectTmp.set(
-                                (int) contentView.getX() + pad.left,
-                                (int) contentView.getY() + pad.top,
-                                (int) contentView.getX() + contentView.getWidth() - pad.right,
-                                (int) contentView.getY() + contentView.getHeight() - pad.bottom);
-                        if (!AndroidUtilities.rectTmp.contains((int) e.getX(), (int) e.getY())) {
-                            dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
+                    
+                    // ✅ التعديل: إزالة كتلة isMeeroIosSkinOn واستخدام منطق موحد
                     Drawable backgroundDrawable = meeroLayout.getBackgroundDrawable();
                     AndroidUtilities.rectTmp.set(backgroundDrawable.getBounds());
                     AndroidUtilities.rectTmp.offset(contentView.getX(), contentView.getY());
+                    
                     if (!AndroidUtilities.rectTmp.contains(e.getX(), e.getY())) {
+                        // ✅ تحقق إذا كان هناك خيار تحت الإصبع قبل الإغلاق
+                        View child = findChildUnder(e.getX(), e.getY());
+                        if (child != null && child instanceof ActionBarMenuSubItem) {
+                            // لا تغلق، دع النقر يمر إلى الخيار
+                            return false;
+                        }
                         dismiss();
                         return true;
                     }
@@ -1272,8 +1246,30 @@ public class ActionBarPopupWindow extends PopupWindow {
                 superListenerField.set(this, NOP);
             } catch (Exception e) {
                 mSuperScrollListener = null;
+        }
+        }
+    }
+    // ✅ أضف هذه الدالة بعد دالة init() مباشرة
+    private View findChildUnder(float x, float y) {
+        View contentView = getContentView();
+        if (!(contentView instanceof ActionBarPopupWindowLayout)) {
+            return null;
+        }
+        ActionBarPopupWindowLayout layout = (ActionBarPopupWindowLayout) contentView;
+        
+        for (int i = 0; i < layout.getItemsCount(); i++) {
+            View child = layout.getItemAt(i);
+            if (child == null || child.getVisibility() != View.VISIBLE) {
+                continue;
+            }
+            int[] location = new int[2];
+            child.getLocationOnScreen(location);
+            if (x >= location[0] && x <= location[0] + child.getWidth() &&
+                y >= location[1] && y <= location[1] + child.getHeight()) {
+                return child;
             }
         }
+        return null;
     }
 
     public void setDismissAnimationDuration(int value) {
