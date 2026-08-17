@@ -1,24 +1,41 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="512" android:viewportHeight="512">
-    <!-- K with gradient transparency -->
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <!-- Dark Green Whites Glass K: clean flat letter K with transparent white -->
+    
     <group android:scaleX="0.6713793" android:scaleY="0.6713793" 
            android:translateX="84.1269" android:translateY="84.1269">
         <group>
             <clip-path android:pathData="M0 0H512V512H0V0Z"/>
             
-            <!-- الخط العمودي (شفاف 70%) -->
-            <path android:pathData="M86 150H150V362H86Z" 
-                  android:fillColor="#B3FFFFFF"/>
-            
-            <!-- المائل العلوي (شفاف 85%) -->
+            <!-- المائل العلوي (أبيض مع شفافية أقل) -->
             <path android:pathData="M150 256L360 150L420 150L210 256Z" 
-                  android:fillColor="#D9FFFFFF"/>
+                  android:fillColor="#CCFFFFFF"/>
             
-            <!-- المائل السفلي (أبيض صافي) -->
+            <!-- المائل السفلي (أبيض مع شفافية أقل) -->
             <path android:pathData="M150 256L420 362L360 362L150 280Z" 
-                  android:fillColor="#FFFFFF"/>
+                  android:fillColor="#CCFFFFFF"/>
+            
+            <!-- الخط العمودي (أبيض شفاف 90% مثل الأصل) -->
+            <path android:pathData="M86 150H150V362H86Z" 
+                  android:fillColor="#E6FFFFFF"/>
+            
+            <!-- تأثير زجاجي (انعكاس الضوء) -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.10"
+                  android:pathData="
+                      M86 150H150V362H86Z
+                      M150 256L360 150L420 150L210 256Z
+                  "/>
+            
+            <!-- نقطة بريق -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.4"
+                  android:pathData="
+                      M100 160 L110 155 L115 160 L110 165 Z"/>
         </group>
     </group>
 </vector>
