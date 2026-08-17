@@ -4,68 +4,42 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-    <!-- Warm Glass K: clean flat letter K with warm colorful gradients -->
-    
-    <group android:scaleX="0.6713793" android:scaleY="0.6713793" 
-           android:translateX="84.1269" android:translateY="84.1269">
+    <!-- v171: clean flat letter M, warm colorful gradients (bat-capsule shape removed) -->
+    <group android:scaleX="0.6713793" android:scaleY="0.6713793" android:translateX="84.1269" android:translateY="84.1269">
         <group>
             <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-            
-            <!-- الخط العمودي لـ K (تدرج دافئ) -->
             <path android:pathData="M86 150H150V362H86Z">
                 <aapt:attr name="android:fillColor">
-                    <gradient
-                        android:startX="86" android:startY="150"
-                        android:endX="150" android:endY="362"
-                        android:type="linear">
-                        <item android:offset="0.08" android:color="#CCFFA476"/>
-                        <item android:offset="0.5" android:color="#99FFB86B"/>
-                        <item android:offset="1" android:color="#66FFC061"/>
+                    <gradient android:startX="86" android:startY="150" android:endX="150" android:endY="362" android:type="linear">
+                        <item android:offset="0.08" android:color="#FFA476"/>
+                        <item android:offset="1" android:color="#FFC061"/>
                     </gradient>
                 </aapt:attr>
             </path>
-            
-            <!-- المائل العلوي لـ K (تدرج دافئ) -->
-            <path android:pathData="M150 256L360 150L420 150L210 256Z">
+            <path android:pathData="M362 150H426V362H362Z">
                 <aapt:attr name="android:fillColor">
-                    <gradient
-                        android:startX="150" android:startY="150"
-                        android:endX="420" android:endY="256"
-                        android:type="linear">
-                        <item android:offset="0.08" android:color="#CCFFA476"/>
-                        <item android:offset="0.5" android:color="#99FFB86B"/>
-                        <item android:offset="1" android:color="#66FFC061"/>
+                    <gradient android:startX="362" android:startY="150" android:endX="426" android:endY="362" android:type="linear">
+                        <item android:offset="0.08" android:color="#FFA476"/>
+                        <item android:offset="1" android:color="#FFC061"/>
                     </gradient>
                 </aapt:attr>
             </path>
-            
-            <!-- المائل السفلي لـ K (تدرج دافئ) -->
-            <path android:pathData="M150 256L420 362L360 362L150 280Z">
+            <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z">
                 <aapt:attr name="android:fillColor">
-                    <gradient
-                        android:startX="150" android:startY="256"
-                        android:endX="420" android:endY="362"
-                        android:type="linear">
-                        <item android:offset="0.08" android:color="#CCFFA476"/>
-                        <item android:offset="0.5" android:color="#99FFB86B"/>
-                        <item android:offset="1" android:color="#66FFC061"/>
+                    <gradient android:startX="94.7" android:startY="128" android:endX="279.3" android:endY="318" android:type="linear">
+                        <item android:offset="0.08" android:color="#FFA476"/>
+                        <item android:offset="1" android:color="#FFC061"/>
                     </gradient>
                 </aapt:attr>
             </path>
-            
-            <!-- تأثير زجاجي (انعكاس الضوء) -->
-            <path android:fillColor="#FFFFFF" 
-                  android:alpha="0.10"
-                  android:pathData="
-                      M86 150H150V362H86Z
-                      M150 256L360 150L420 150L210 256Z
-                  "/>
-            
-            <!-- نقطة بريق دافئ -->
-            <path android:fillColor="#FFFFFF" 
-                  android:alpha="0.4"
-                  android:pathData="
-                      M100 160 L110 155 L115 160 L110 165 Z"/>
+            <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z">
+                <aapt:attr name="android:fillColor">
+                    <gradient android:startX="232.7" android:startY="128" android:endX="417.3" android:endY="318" android:type="linear">
+                        <item android:offset="0.08" android:color="#FFA476"/>
+                        <item android:offset="1" android:color="#FFC061"/>
+                    </gradient>
+                </aapt:attr>
+            </path>
         </group>
     </group>
 </vector>
