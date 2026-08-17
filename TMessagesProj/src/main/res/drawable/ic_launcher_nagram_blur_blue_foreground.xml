@@ -4,13 +4,14 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-    <!-- K with diamond sheen effect -->
+    <!-- Blur Sheen Glass K: clean flat letter K with blur sheen effect -->
+    
     <group android:scaleX="0.7510345" android:scaleY="0.7510345" 
            android:translateX="63.735172" android:translateY="63.735172">
         <group>
             <clip-path android:pathData="M0,0h512v512h-512z"/>
             
-            <!-- الخط العمودي -->
+            <!-- الخط العمودي لـ K -->
             <path android:pathData="M86 150H150V362H86Z">
                 <aapt:attr name="android:fillColor">
                     <gradient
@@ -18,15 +19,13 @@
                         android:endX="150" android:endY="362"
                         android:type="linear">
                         <item android:offset="0" android:color="#FFFFFFFF"/>
-                        <item android:offset="0.30" android:color="#FFE0F7FA"/>
-                        <item android:offset="0.50" android:color="#FFB2EBF2"/>
-                        <item android:offset="0.70" android:color="#FFE0F7FA"/>
+                        <item android:offset="0.48" android:color="#FFE3F1FF"/>
                         <item android:offset="1" android:color="#FFFFFFFF"/>
                     </gradient>
                 </aapt:attr>
             </path>
             
-            <!-- المائل العلوي -->
+            <!-- المائل العلوي لـ K -->
             <path android:pathData="M150 256L360 150L420 150L210 256Z">
                 <aapt:attr name="android:fillColor">
                     <gradient
@@ -34,15 +33,13 @@
                         android:endX="420" android:endY="256"
                         android:type="linear">
                         <item android:offset="0" android:color="#FFFFFFFF"/>
-                        <item android:offset="0.30" android:color="#FFE0F7FA"/>
-                        <item android:offset="0.50" android:color="#FFB2EBF2"/>
-                        <item android:offset="0.70" android:color="#FFE0F7FA"/>
+                        <item android:offset="0.48" android:color="#FFE3F1FF"/>
                         <item android:offset="1" android:color="#FFFFFFFF"/>
                     </gradient>
                 </aapt:attr>
             </path>
             
-            <!-- المائل السفلي -->
+            <!-- المائل السفلي لـ K -->
             <path android:pathData="M150 256L420 362L360 362L150 280Z">
                 <aapt:attr name="android:fillColor">
                     <gradient
@@ -50,13 +47,25 @@
                         android:endX="420" android:endY="362"
                         android:type="linear">
                         <item android:offset="0" android:color="#FFFFFFFF"/>
-                        <item android:offset="0.30" android:color="#FFE0F7FA"/>
-                        <item android:offset="0.50" android:color="#FFB2EBF2"/>
-                        <item android:offset="0.70" android:color="#FFE0F7FA"/>
+                        <item android:offset="0.48" android:color="#FFE3F1FF"/>
                         <item android:offset="1" android:color="#FFFFFFFF"/>
                     </gradient>
                 </aapt:attr>
             </path>
+            
+            <!-- تأثير إضافي: انعكاس الضوء العلوي -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.20"
+                  android:pathData="
+                      M86 150H150V362H86Z
+                      M150 256L360 150L420 150L210 256Z
+                  "/>
+            
+            <!-- نقطة بريق -->
+            <path android:fillColor="#FFFFFF" 
+                  android:alpha="0.6"
+                  android:pathData="
+                      M100 160 L110 155 L115 160 L110 165 Z"/>
         </group>
     </group>
 </vector>
