@@ -167,12 +167,17 @@ public final class MeeroChatLock {
      *  user-approved) so nothing leaks into system notifications. */
     public static synchronized void addLocked(int account, long dialogId) {
         if (isListed(dialogId)) return;
+    
+        // ✅ التحقق من المفتاح العام هنا فقط، وليس في weMuted
+        if (!NekoConfig.meeroChatLock.Bool()) return;
+    
         JSONArray array = readIds(NekoConfig.meeroChatLockList.String());
         array.put(dialogId);
         NekoConfig.meeroChatLockList.setConfigString(array.toString());
+    
         try {
             NotificationsController.getInstance(account)
-                    .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_FOREVER);
+                .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_FOREVER);
             JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
             muted.put(dialogId);
             NekoConfig.meeroChatLockMuted.setConfigString(muted.toString());
