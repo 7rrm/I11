@@ -154,6 +154,8 @@ public final class MeeroChatLock {
     }
 
     private static boolean weMuted(long dialogId) {
+        // ✅ تم إزالة الشرط if (!NekoConfig.meeroChatLock.Bool())
+        // حتى تعمل الدالة بغض النظر عن المفتاح العام
         JSONArray array = readIds(NekoConfig.meeroChatLockMuted.String());
         for (int i = 0; i < array.length(); i++) {
             if (array.optLong(i, Long.MIN_VALUE) == dialogId) return true;
