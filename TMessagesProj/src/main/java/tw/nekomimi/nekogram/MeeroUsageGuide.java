@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -32,9 +33,12 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
-            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (positiveButton != null) {
-                // 1. توسيط الزر
+            // الحل: استخدام View أولاً ثم التحقق
+            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (view != null && view instanceof Button) {
+                Button positiveButton = (Button) view;
+                
+                // توسيط الزر
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -43,14 +47,14 @@ public final class MeeroUsageGuide {
                 positiveButton.setLayoutParams(params);
                 positiveButton.setGravity(Gravity.CENTER);
 
-                // 2. شكل بيضاوي (iOS style) - خلفية زرقاء
+                // شكل بيضاوي - خلفية زرقاء ونص أبيض
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setShape(GradientDrawable.RECTANGLE);
-                drawable.setCornerRadius(AndroidUtilities.dp(25)); // بيضاوي
-                drawable.setColor(Color.parseColor("#007AFF")); // خلفية زرقاء فاتحة
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.parseColor("#007AFF"));
 
                 positiveButton.setBackground(drawable);
-                positiveButton.setTextColor(Color.WHITE); // نص أبيض
+                positiveButton.setTextColor(Color.WHITE);
                 positiveButton.setTextSize(16);
                 positiveButton.setPadding(
                     AndroidUtilities.dp(32),
@@ -58,20 +62,6 @@ public final class MeeroUsageGuide {
                     AndroidUtilities.dp(32),
                     AndroidUtilities.dp(12)
                 );
-
-                // 3. تأثير الضغط (يخف الزر عند الضغط)
-                positiveButton.setOnTouchListener((v, event) -> {
-                    switch (event.getAction()) {
-                        case android.view.MotionEvent.ACTION_DOWN:
-                            v.setAlpha(0.7f);
-                            break;
-                        case android.view.MotionEvent.ACTION_UP:
-                        case android.view.MotionEvent.ACTION_CANCEL:
-                            v.setAlpha(1.0f);
-                            break;
-                    }
-                    return false;
-                });
             }
         });
 
@@ -93,8 +83,10 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
-            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (positiveButton != null) {
+            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (view != null && view instanceof Button) {
+                Button positiveButton = (Button) view;
+                
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -106,10 +98,10 @@ public final class MeeroUsageGuide {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setShape(GradientDrawable.RECTANGLE);
                 drawable.setCornerRadius(AndroidUtilities.dp(25));
-                drawable.setColor(Color.parseColor("#007AFF")); // خلفية زرقاء
+                drawable.setColor(Color.parseColor("#007AFF"));
 
                 positiveButton.setBackground(drawable);
-                positiveButton.setTextColor(Color.WHITE); // نص أبيض
+                positiveButton.setTextColor(Color.WHITE);
                 positiveButton.setTextSize(16);
                 positiveButton.setPadding(
                     AndroidUtilities.dp(32),
@@ -117,19 +109,6 @@ public final class MeeroUsageGuide {
                     AndroidUtilities.dp(32),
                     AndroidUtilities.dp(12)
                 );
-
-                positiveButton.setOnTouchListener((v, event) -> {
-                    switch (event.getAction()) {
-                        case android.view.MotionEvent.ACTION_DOWN:
-                            v.setAlpha(0.7f);
-                            break;
-                        case android.view.MotionEvent.ACTION_UP:
-                        case android.view.MotionEvent.ACTION_CANCEL:
-                            v.setAlpha(1.0f);
-                            break;
-                    }
-                    return false;
-                });
             }
         });
 
