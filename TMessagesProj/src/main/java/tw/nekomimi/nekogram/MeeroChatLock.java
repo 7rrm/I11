@@ -181,6 +181,27 @@ public final class MeeroChatLock {
         }
     }
 
+    /**
+    * إلغاء كتم الدردشة بغض النظر عن حالة القفل
+    * هذه الدالة مستوحاة من النسخة القديمة التي كانت تعمل بشكل صحيح
+    */
+    public static void unmuteChat(int account, long dialogId) {
+        try {
+            NotificationsController.getInstance(account)
+                .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_UNMUTE);
+        } catch (Throwable t) {
+            if (BuildVars.LOGS_ENABLED) FileLog.e(t);
+        }
+    
+        // إزالة من قائمة الكتم إذا كانت موجودة
+        JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
+        JSONArray kept = new JSONArray();
+        for (int i = 0; i < muted.length(); i++) {
+            long id = muted.optLong(i, Long.MIN_VALUE);
+            if (id != Long.MIN_VALUE && id != dialogId) kept.put(id);
+        }
+        NekoConfig.meeroChatLockMuted.setConfigString(kept.toString());
+    }
     /** Removes the lock and restores notification defaults - but only if WE
      *  were the ones who muted it; a chat muted by hand stays muted. */
      public static synchronized void removeLocked(int account, long dialogId) {
