@@ -34,7 +34,7 @@ public final class MeeroChannelPromo {
     }
 
     private static final String PREF_DONE = "meerox_channel_promo_done";
-    private static final String CHANNEL = "Y_VBB";
+    private static final String CHANNEL = "InaRaS5";
 
     private static AlertDialog showing;
 
