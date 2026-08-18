@@ -3,11 +3,19 @@ package tw.nekomimi.nekogram;
 import tw.nekomimi.nekogram.MeeroStrings;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
+import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ActionBar.Theme;
 
 /**
  * MeeroX v111 (user-requested): one shared "طريقة الاستخدام" popup.
@@ -30,11 +38,66 @@ public final class MeeroUsageGuide {
 
     public static void show(Context context, String textKey) {
         if (context == null || textKey == null) return;
-        new AlertDialog.Builder(context)
+        
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(MeeroStrings.s(268))
-                .setMessage(MeeroStrings.s(textKey))
-                .setPositiveButton(MeeroStrings.s(269), null)
-                .show();
+                .setMessage(MeeroStrings.s(textKey));
+        
+        AlertDialog dialog = builder.create();
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, MeeroStrings.s(269), (di, which) -> di.dismiss());
+        
+        dialog.setOnShowListener(dialogInterface -> {
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (positiveButton != null) {
+                // 1. توسيط الزر
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                params.topMargin = AndroidUtilities.dp(8);
+                params.bottomMargin = AndroidUtilities.dp(8);
+                positiveButton.setLayoutParams(params);
+                positiveButton.setGravity(Gravity.CENTER);
+                
+                // 2. تنسيق الزر بشكل بيضاوي (iOS style)
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25)); // زوايا دائرية بيضاوية
+                drawable.setColor(Color.TRANSPARENT); // خلفية شفافة
+                drawable.setStroke(AndroidUtilities.dp(2), Color.parseColor("#007AFF")); // حدود زرقاء فاتحة
+                
+                positiveButton.setBackground(drawable);
+                
+                // 3. لون النص أزرق
+                positiveButton.setTextColor(Color.parseColor("#007AFF"));
+                
+                // 4. حجم النص
+                positiveButton.setTextSize(16);
+                
+                // 5. Padding مناسب
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+                
+                // 6. تأثير الضغط
+                positiveButton.setOnTouchListener((v, event) -> {
+                    switch (event.getAction()) {
+                        case android.view.MotionEvent.ACTION_DOWN:
+                            v.setAlpha(0.7f);
+                            break;
+                        case android.view.MotionEvent.ACTION_UP:
+                        case android.view.MotionEvent.ACTION_CANCEL:
+                            v.setAlpha(1.0f);
+                            break;
+                    }
+                    return false;
+                });
+            }
+        });
+        
+        dialog.show();
     }
 
     /* v186 (batch 2D): numeric vault-id form - call sites no longer carry
@@ -46,10 +109,56 @@ public final class MeeroUsageGuide {
 
     public static void show(Context context, int textId) {
         if (context == null) return;
-        new AlertDialog.Builder(context)
+        
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(MeeroStrings.s(268))
-                .setMessage(MeeroStrings.s(textId))
-                .setPositiveButton(MeeroStrings.s(269), null)
-                .show();
+                .setMessage(MeeroStrings.s(textId));
+        
+        AlertDialog dialog = builder.create();
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, MeeroStrings.s(269), (di, which) -> di.dismiss());
+        
+        dialog.setOnShowListener(dialogInterface -> {
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (positiveButton != null) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                params.topMargin = AndroidUtilities.dp(8);
+                params.bottomMargin = AndroidUtilities.dp(8);
+                positiveButton.setLayoutParams(params);
+                positiveButton.setGravity(Gravity.CENTER);
+                
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.TRANSPARENT);
+                drawable.setStroke(AndroidUtilities.dp(2), Color.parseColor("#007AFF"));
+                
+                positiveButton.setBackground(drawable);
+                positiveButton.setTextColor(Color.parseColor("#007AFF"));
+                positiveButton.setTextSize(16);
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+                
+                positiveButton.setOnTouchListener((v, event) -> {
+                    switch (event.getAction()) {
+                        case android.view.MotionEvent.ACTION_DOWN:
+                            v.setAlpha(0.7f);
+                            break;
+                        case android.view.MotionEvent.ACTION_UP:
+                        case android.view.MotionEvent.ACTION_CANCEL:
+                            v.setAlpha(1.0f);
+                            break;
+                    }
+                    return false;
+                });
+            }
+        });
+        
+        dialog.show();
     }
 }
