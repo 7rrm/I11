@@ -181,31 +181,29 @@ public final class MeeroChatLock {
 
     /** Removes the lock and restores notification defaults - but only if WE
      *  were the ones who muted it; a chat muted by hand stays muted. */
-    public static synchronized void removeLocked(int account, long dialogId) {
-        JSONArray array = readIds(NekoConfig.meeroChatLockList.String());
-        JSONArray out = new JSONArray();
-        for (int i = 0; i < array.length(); i++) {
-            long id = array.optLong(i, Long.MIN_VALUE);
-            if (id != Long.MIN_VALUE && id != dialogId) out.put(id);
-        }
-        NekoConfig.meeroChatLockList.setConfigString(out.toString());
-        unlocked.remove(dialogId);
-        if (weMuted(dialogId)) {
-            try {
-                NotificationsController.getInstance(account)
-                        .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_UNMUTE);
-            } catch (Throwable t) {
-                if (BuildVars.LOGS_ENABLED) FileLog.e(t);
-            }
-            JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
-            JSONArray kept = new JSONArray();
-            for (int i = 0; i < muted.length(); i++) {
-                long id = muted.optLong(i, Long.MIN_VALUE);
-                if (id != Long.MIN_VALUE && id != dialogId) kept.put(id);
-            }
-            NekoConfig.meeroChatLockMuted.setConfigString(kept.toString());
-        }
-    }
+     public static synchronized void removeLocked(int account, long dialogId) {
+         JSONArray array = readIds(NekoConfig.meeroChatLockList.String());
+         JSONArray out = new JSONArray();
+         for (int i = 0; i < array.length(); i++) {
+             long id = array.optLong(i, Long.MIN_VALUE);
+             if (id != Long.MIN_VALUE && id != dialogId) out.put(id);
+         }
+         NekoConfig.meeroChatLockList.setConfigString(out.toString());
+         unlocked.remove(dialogId);
+         try {
+             NotificationsController.getInstance(account)
+                 .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_UNMUTE);
+         } catch (Throwable t) {
+             if (BuildVars.LOGS_ENABLED) FileLog.e(t);
+         }
+         JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
+         JSONArray kept = new JSONArray();
+         for (int i = 0; i < muted.length(); i++) {
+             long id = muted.optLong(i, Long.MIN_VALUE);
+             if (id != Long.MIN_VALUE && id != dialogId) kept.put(id);
+         }
+         NekoConfig.meeroChatLockMuted.setConfigString(kept.toString());
+     }
 
     // ---------------- unlock method + 8-digit code (v107) ----------------
 
