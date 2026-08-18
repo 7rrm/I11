@@ -190,19 +190,21 @@ public final class MeeroChatLock {
         }
         NekoConfig.meeroChatLockList.setConfigString(out.toString());
         unlocked.remove(dialogId);
-        try {
-            NotificationsController.getInstance(account)
-                .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_UNMUTE);
-        } catch (Throwable t) {
-            if (BuildVars.LOGS_ENABLED) FileLog.e(t);
+        if (weMuted(dialogId)) {
+            try {
+                NotificationsController.getInstance(account)
+                        .setDialogNotificationsSettings(dialogId, 0, NotificationsController.SETTING_MUTE_UNMUTE);
+            } catch (Throwable t) {
+                if (BuildVars.LOGS_ENABLED) FileLog.e(t);
+            }
+            JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
+            JSONArray kept = new JSONArray();
+            for (int i = 0; i < muted.length(); i++) {
+                long id = muted.optLong(i, Long.MIN_VALUE);
+                if (id != Long.MIN_VALUE && id != dialogId) kept.put(id);
+            }
+            NekoConfig.meeroChatLockMuted.setConfigString(kept.toString());
         }
-        JSONArray muted = readIds(NekoConfig.meeroChatLockMuted.String());
-        JSONArray kept = new JSONArray();
-        for (int i = 0; i < muted.length(); i++) {
-            long id = muted.optLong(i, Long.MIN_VALUE);
-            if (id != Long.MIN_VALUE && id != dialogId) kept.put(id);
-        }
-        NekoConfig.meeroChatLockMuted.setConfigString(kept.toString());
     }
 
     // ---------------- unlock method + 8-digit code (v107) ----------------
@@ -230,23 +232,13 @@ public final class MeeroChatLock {
         }
     }
 
-    /** Stores the code as a salted hash. The raw code is never kept.
-     *  v183: the hash itself becomes seed-bound ("v2:"), derived natively
-     *  inside libmeerocore - so a stolen hash db cannot be cracked offline. */
+    /** Stores the code as a salted SHA-256 hash. The raw code is never kept. */
     public static synchronized boolean setCode(String code) {
         if (code == null || code.length() != 8) return false;
         try {
             byte[] salt = new byte[16];
             new SecureRandom().nextBytes(salt);
             String saltB64 = Base64.encodeToString(salt, Base64.NO_WRAP);
-            final byte[] v2 = MeeroCore.ready()
-                    ? MeeroCore.nLockDerive(saltB64, code)
-                    : MeeroCore.javaV2Derive(saltB64, code);
-            if (v2 != null) {
-                NekoConfig.meeroChatLockCodeSalt.setConfigString(saltB64);
-                NekoConfig.meeroChatLockCodeHash.setConfigString("v2:" + Base64.encodeToString(v2, Base64.NO_WRAP));
-                return true;
-            }
             String hash = digest(saltB64, code);
             if (hash == null) return false;
             NekoConfig.meeroChatLockCodeSalt.setConfigString(saltB64);
@@ -260,34 +252,8 @@ public final class MeeroChatLock {
 
     public static boolean verifyCode(String code) {
         if (code == null || code.length() != 8 || !hasCode()) return false;
-        final String stored = NekoConfig.meeroChatLockCodeHash.String();
-        final String saltB64 = NekoConfig.meeroChatLockCodeSalt.String();
-        final boolean legacy = !stored.startsWith("v2:");
-        if (MeeroCore.ready()) {
-            try {
-                final byte[] expected = legacy
-                        ? MeeroCore.nLegacyDigest(saltB64, code)
-                        : MeeroCore.nLockDerive(saltB64, code);
-                final byte[] actual = Base64.decode(legacy ? stored : stored.substring(3), Base64.NO_WRAP);
-                final boolean ok = expected != null && MeeroCore.nConstEq(expected, actual);
-                if (ok && legacy) {
-                    /* silent upgrade: first successful legacy verify rewrites
-                     * the hash seed-bound, old hash never seen again */
-                    final byte[] nv = MeeroCore.nLockDerive(saltB64, code);
-                    if (nv != null) {
-                        NekoConfig.meeroChatLockCodeHash.setConfigString("v2:" + Base64.encodeToString(nv, Base64.NO_WRAP));
-                    }
-                }
-                return ok;
-            } catch (Throwable t) {
-                /* fall through to the java path */
-            }
-        }
-        if (legacy) {
-            return stored.equals(digest(saltB64, code));
-        }
-        final byte[] v2 = MeeroCore.javaV2Derive(saltB64, code);
-        return v2 != null && stored.substring(3).equals(Base64.encodeToString(v2, Base64.NO_WRAP));
+        String actual = digest(NekoConfig.meeroChatLockCodeSalt.String(), code);
+        return NekoConfig.meeroChatLockCodeHash.String().equals(actual);
     }
 
     // ---------------- hiding locked chats from lists/search (v107) ----------------
@@ -389,9 +355,9 @@ public final class MeeroChatLock {
             final ViewGroup content = (ViewGroup) fv;
             if (getMethod() == METHOD_CODE8 && hasCode()) {
                 attachCodeLockCover(content,
-                        MeeroStrings.s(64),
-                        MeeroStrings.s(98),
-                        MeeroStrings.s(43),
+                        MeeroStrings.s("MeeroChatLockTitle"),
+                        MeeroStrings.s("MeeroGateCodeHint"),
+                        MeeroStrings.s("MeeroChatLockCodeWrong"),
                         () -> {
                             try {
                                 fragment.finishFragment();
@@ -416,8 +382,8 @@ public final class MeeroChatLock {
                         });
             } else {
                 attachGateCover(content,
-                        MeeroStrings.s(64),
-                        MeeroStrings.s(49),
+                        MeeroStrings.s("MeeroChatLockTitle"),
+                        MeeroStrings.s("MeeroChatLockGateSubtitle"),
                         () -> maybePromptLockSettings(fragment));
             }
         } catch (Throwable t) {
@@ -429,8 +395,8 @@ public final class MeeroChatLock {
         if (promptingLockSettings) return;
         promptingLockSettings = true;
         authenticateSystem(fragment.getParentActivity(),
-                MeeroStrings.s(64),
-                MeeroStrings.s(49),
+                MeeroStrings.s("MeeroChatLockTitle"),
+                MeeroStrings.s("MeeroChatLockGateSubtitle"),
                 () -> {
                     promptingLockSettings = false;
                     lockSettingsUnlocked = true;
@@ -463,8 +429,8 @@ public final class MeeroChatLock {
             }
             promptingLockSettings = true;
             authenticateSystem(act,
-                    MeeroStrings.s(64),
-                    MeeroStrings.s(49),
+                    MeeroStrings.s("MeeroChatLockTitle"),
+                    MeeroStrings.s("MeeroChatLockGateSubtitle"),
                     () -> {
                         promptingLockSettings = false;
                         lockSettingsUnlocked = true;
@@ -548,19 +514,6 @@ public final class MeeroChatLock {
             o.put("t", System.currentTimeMillis());
             o.put("p", place);
             o.put("ok", success);
-            /* v183 (batch 2A): tamper-evident chain - each entry carries the
-             * native HMAC of (previous entry | this entry); the audit screen
-             * verifies the whole chain (wiring lands in a later batch). */
-            if (MeeroCore.ready()) {
-                try {
-                    final JSONObject prev = old.optJSONObject(0);
-                    final String mac = MeeroCore.nAuditMac(prev != null ? prev.toString() : "", o.toString());
-                    if (mac != null) {
-                        o.put("s", mac);
-                    }
-                } catch (Throwable ignored) {
-                }
-            }
             JSONArray out = new JSONArray();
             out.put(o);
             for (int i = 0; i < old.length() && out.length() < AUDIT_LIMIT; i++) {
@@ -579,50 +532,6 @@ public final class MeeroChatLock {
 
     public static synchronized void clearAudit() {
         NekoConfig.meeroLockAuditLog.setConfigString("");
-    }
-
-    /**
-     * v186 (batch 2D): tamper-evidence verification for the audit chain.
-     * Walks the newest-first log; every sealed entry must satisfy
-     * s == nAuditMac(jsonOf(olderNeighbour), jsonOf(entry without "s")).
-     * Entries from before v183 carry no seal and are skipped (not broken),
-     * and when the log sits at its cap the OLDEST entry's predecessor was
-     * dropped as it rolled off - that tail is reported as unverifiable,
-     * never as tampering. Result: {checked, firstBadIndex(-1 = clean),
-     * tailUnverified(0/1)}. The seal itself is recomputed inside
-     * libmeerocore; R8 renamed this assembly anyway.
-     */
-    public static int[] verifyAuditChain() {
-        int[] res = new int[]{0, -1, 0};
-        if (!MeeroCore.ready()) return res;
-        try {
-            JSONArray entries = auditEntries();
-            int n = entries.length();
-            for (int i = 0; i < n; i++) {
-                JSONObject cur = entries.optJSONObject(i);
-                if (cur == null || !cur.has("s")) continue; // pre-seal era entry
-                JSONObject next = i + 1 < n ? entries.optJSONObject(i + 1) : null;
-                if (next == null && n >= AUDIT_LIMIT) {
-                    res[2] = 1; // tail's predecessor rolled off the cap
-                    continue;
-                }
-                // rebuild this entry WITHOUT its seal, in the exact
-                // record-time key order (t, p, ok) so toString() matches
-                JSONObject bare = new JSONObject();
-                bare.put("t", cur.optLong("t"));
-                bare.put("p", cur.optInt("p"));
-                bare.put("ok", cur.optBoolean("ok"));
-                String mac = MeeroCore.nAuditMac(next != null ? next.toString() : "", bare.toString());
-                res[0]++;
-                if (mac == null || !mac.equals(cur.optString("s", ""))) {
-                    res[1] = i;
-                    return res;
-                }
-            }
-        } catch (Throwable t) {
-            if (BuildVars.LOGS_ENABLED) FileLog.e(t);
-        }
-        return res;
     }
 
     // ---------------- gate state ----------------
@@ -657,12 +566,12 @@ public final class MeeroChatLock {
 
     /** v107: gate title/hint follow the active unlock method. */
     public static CharSequence gateTitle() {
-        return MeeroStrings.s(50);
+        return MeeroStrings.s("MeeroChatLockGateTitle");
     }
 
     public static CharSequence gateHint() {
         return (getMethod() == METHOD_CODE8
-                ? MeeroStrings.s(98) : MeeroStrings.s(48));
+                ? MeeroStrings.s("MeeroGateCodeHint") : MeeroStrings.s("MeeroChatLockGateHint"));
     }
 
     /** Opaque, theme-colored cover with a lock glyph, added on top of the
@@ -840,8 +749,8 @@ public final class MeeroChatLock {
             final ViewGroup content = (ViewGroup) fv;
             if (getMethod() == METHOD_CODE8 && hasCode()) {
                 attachCodeLockCover(content, gateTitle(),
-                        MeeroStrings.s(47),
-                        MeeroStrings.s(43),
+                        MeeroStrings.s("MeeroChatLockEnterCodeHint"),
+                        MeeroStrings.s("MeeroChatLockCodeWrong"),
                         () -> {
                             try {
                                 chat.finishFragment();
@@ -882,9 +791,9 @@ public final class MeeroChatLock {
             final ViewGroup content = (ViewGroup) fv;
             if (getMethod() == METHOD_CODE8 && hasCode()) {
                 attachCodeLockCover(content,
-                        MeeroStrings.s(276),
-                        MeeroStrings.s(274),
-                        MeeroStrings.s(43),
+                        MeeroStrings.s("MeeroVaultTitle"),
+                        MeeroStrings.s("MeeroVaultGateHint"),
+                        MeeroStrings.s("MeeroChatLockCodeWrong"),
                         () -> {
                             try {
                                 fragment.finishFragment();
@@ -909,8 +818,8 @@ public final class MeeroChatLock {
                         });
             } else {
                 attachGateCover(content,
-                        MeeroStrings.s(276),
-                        MeeroStrings.s(274),
+                        MeeroStrings.s("MeeroVaultTitle"),
+                        MeeroStrings.s("MeeroVaultGateHint"),
                         () -> maybePromptVault(fragment));
             }
         } catch (Throwable t) {
@@ -950,8 +859,8 @@ public final class MeeroChatLock {
         if (promptingDialogId == dialogId) return;
         promptingDialogId = dialogId;
         authenticateSystem(chat.getParentActivity(),
-                MeeroStrings.s(50),
-                MeeroStrings.s(49),
+                MeeroStrings.s("MeeroChatLockGateTitle"),
+                MeeroStrings.s("MeeroChatLockGateSubtitle"),
                 () -> {
                     promptingDialogId = Long.MIN_VALUE;
                     markUnlocked(dialogId);
@@ -968,8 +877,8 @@ public final class MeeroChatLock {
         if (promptingVault) return;
         promptingVault = true;
         authenticateSystem(fragment.getParentActivity(),
-                MeeroStrings.s(276),
-                MeeroStrings.s(274),
+                MeeroStrings.s("MeeroVaultTitle"),
+                MeeroStrings.s("MeeroVaultGateHint"),
                 () -> {
                     promptingVault = false;
                     markVaultUnlocked();
@@ -1005,8 +914,8 @@ public final class MeeroChatLock {
             }
             promptingDialogId = dialogId;
             authenticateSystem(act,
-                    MeeroStrings.s(50),
-                    MeeroStrings.s(49),
+                    MeeroStrings.s("MeeroChatLockGateTitle"),
+                    MeeroStrings.s("MeeroChatLockGateSubtitle"),
                     () -> {
                         promptingDialogId = Long.MIN_VALUE;
                         markUnlocked(dialogId);
@@ -1053,8 +962,8 @@ public final class MeeroChatLock {
             }
             promptingVault = true;
             authenticateSystem(act,
-                    MeeroStrings.s(276),
-                    MeeroStrings.s(274),
+                    MeeroStrings.s("MeeroVaultTitle"),
+                    MeeroStrings.s("MeeroVaultGateHint"),
                     () -> {
                         promptingVault = false;
                         markVaultUnlocked();
@@ -1164,7 +1073,7 @@ public final class MeeroChatLock {
             NotificationManager manager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
             if (Build.VERSION.SDK_INT >= 26) {
                 NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
-                        MeeroStrings.s(64), NotificationManager.IMPORTANCE_DEFAULT);
+                        MeeroStrings.s("MeeroChatLockTitle"), NotificationManager.IMPORTANCE_DEFAULT);
                 manager.createNotificationChannel(channel);
             }
             Intent intent = new Intent(ctx, LaunchActivity.class);
@@ -1174,8 +1083,8 @@ public final class MeeroChatLock {
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx, CHANNEL_ID)
                     .setSmallIcon(R.drawable.nagram_notification)
-                    .setContentTitle(MeeroStrings.s(50))
-                    .setContentText(MeeroStrings.s(58))
+                    .setContentTitle(MeeroStrings.s("MeeroChatLockGateTitle"))
+                    .setContentText(MeeroStrings.s("MeeroChatLockNewMessage"))
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent);
             NotificationManagerCompat.from(ctx).notify(("l:" + System.currentTimeMillis()).hashCode(), builder.build());
