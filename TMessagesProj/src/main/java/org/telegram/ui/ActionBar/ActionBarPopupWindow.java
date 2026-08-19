@@ -142,11 +142,6 @@ public class ActionBarPopupWindow extends PopupWindow {
         public int subtractBackgroundHeight;
         Rect rect;
 
-        // MeeroX: متغيرات لحل مشكلة اللمس
-        private float meeroDownX = -1f, meeroDownY = -1f;
-        private int meeroSerialAtDown, meeroSlopPx = -1;
-        private boolean meeroMovedFar;
-
         public Rect getPadding() {
             return bgPaddings;
         }
@@ -726,96 +721,6 @@ public class ActionBarPopupWindow extends PopupWindow {
 
         Path path;
 
-        private View meeroRowAt(float x, float y) {
-            try {
-                int[] location = new int[2];
-                getLocationOnScreen(location);
-                float screenX = x + location[0];
-                float screenY = y + location[1];
-                
-                for (int i = 0; i < linearLayout.getChildCount(); i++) {
-                    final View v = linearLayout.getChildAt(i);
-                    if (!(v instanceof ActionBarMenuSubItem) || v.getVisibility() != View.VISIBLE) {
-                        continue;
-                    }
-                    Rect r = new Rect();
-                    if (v.getGlobalVisibleRect(r)) {
-                        if (r.contains((int) screenX, (int) screenY)) {
-                            return v;
-                        }
-                    }
-                }
-            } catch (Throwable ignore) {
-            }
-            return null;
-        }
-
-        // MeeroX: dispatchTouchEvent مع دعم النقر السريع الثابت فقط
-        @Override
-        public boolean dispatchTouchEvent(MotionEvent ev) {
-            if (!isMeeroIosSkinOn()) {
-                return super.dispatchTouchEvent(ev);
-            }
-
-            final int action = ev.getActionMasked();
-
-            if (action == MotionEvent.ACTION_DOWN) {
-                if (meeroSlopPx < 0) {
-                    try {
-                        final int slop = android.view.ViewConfiguration.get(getContext()).getScaledTouchSlop();
-                        meeroSlopPx = slop * slop * 4;
-                    } catch (Throwable ignore) {
-                        meeroSlopPx = 0;
-                    }
-                }
-                meeroDownX = ev.getX();
-                meeroDownY = ev.getY();
-                meeroMovedFar = false;
-                meeroSerialAtDown = tw.nekomimi.nekogram.MeeroMenuWatch.clickSeqVol();
-                
-                final boolean consumed = super.dispatchTouchEvent(ev);
-                tw.nekomimi.nekogram.MeeroMenuWatch.onDown(getContext(), ev.getX(), ev.getY(), getWidth(), getHeight(), consumed);
-                return consumed;
-            }
-
-            if (action == MotionEvent.ACTION_MOVE && !meeroMovedFar && meeroDownX >= 0) {
-                final float dx = ev.getX() - meeroDownX;
-                final float dy = ev.getY() - meeroDownY;
-                if (dx * dx + dy * dy > meeroSlopPx) {
-                    meeroMovedFar = true;
-                }
-            }
-
-            final boolean r = super.dispatchTouchEvent(ev);
-
-            // MeeroX fix: معالجة النقر السريع الثابت فقط
-            if (action == MotionEvent.ACTION_UP && meeroDownX >= 0
-                    && !(swipeBackLayout != null && swipeBackLayout.isForegroundOpen())
-                    && tw.nekomimi.nekogram.MeeroMenuWatch.clickSeqVol() == meeroSerialAtDown) {
-                
-                // شرط التنفيذ: النقر الثابت فقط (لم تتحرك اللمسة)
-                boolean isTap = !meeroMovedFar;
-                
-                if (isTap) {
-                    final View row = meeroRowAt(ev.getX(), ev.getY());
-                    if (row != null) {
-                        try {
-                            tw.nekomimi.nekogram.MeeroMenuWatch.onFallbackDelivered(row.getTag());
-                            FileLog.d("MeeroX: menu fallback delivered click, id=" + row.getTag());
-                            row.performClick();
-                        } catch (Throwable t) {
-                            FileLog.e(t);
-                        }
-                    }
-                }
-            }
-
-            if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-                meeroDownX = -1f;
-            }
-            return r;
-        }
-
         @Override
         protected void dispatchDraw(Canvas canvas) {
             if (swipeBackGravityRight) {
@@ -1166,10 +1071,23 @@ public class ActionBarPopupWindow extends PopupWindow {
                         (ActionBarPopupWindowLayout) contentView;
                     
                     // MeeroX fix: إذا كانت iOS Skin مفعلة، نترك اللمسة تمر
+                    // ونعتمد على OnClickListener لكل خيار (الطريقة الأصلية)
                     if (meeroLayout.isMeeroIosSkinOn()) {
+                        // نتحقق إذا كانت اللمسة داخل حدود القائمة
+                        Drawable backgroundDrawable = meeroLayout.getBackgroundDrawable();
+                        if (backgroundDrawable != null) {
+                            AndroidUtilities.rectTmp.set(backgroundDrawable.getBounds());
+                            AndroidUtilities.rectTmp.offset(contentView.getX(), contentView.getY());
+                            if (!AndroidUtilities.rectTmp.contains(e.getX(), e.getY())) {
+                                dismiss();
+                                return true;
+                            }
+                        }
+                        // إذا كانت داخل القائمة، نمرر اللمسة إلى الأطفال
                         return false;
                     }
                     
+                    // الكود الأصلي للـ Stock UI
                     Drawable backgroundDrawable = meeroLayout.getBackgroundDrawable();
                     if (backgroundDrawable != null) {
                         AndroidUtilities.rectTmp.set(backgroundDrawable.getBounds());
