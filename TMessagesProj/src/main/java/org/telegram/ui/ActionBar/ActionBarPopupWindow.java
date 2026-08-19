@@ -775,14 +775,57 @@ public class ActionBarPopupWindow extends PopupWindow {
             return null;
         }
 
-        // MeeroX: dispatchTouchEvent المحسن لحل مشكلة اللمس
+        // دالة مساعدة للتحقق من أن النقطة داخل القائمة
+        private boolean isPointInsidePopup(float x, float y) {
+            try {
+                // الحصول على حدود القائمة
+                int[] location = new int[2];
+                getLocationOnScreen(location);
+                
+                // إحداثيات اللمس بالنسبة للشاشة
+                float screenX = x + location[0];
+                float screenY = y + location[1];
+                
+                // حدود القائمة الفعلية (مع مراعاة الخلفية)
+                int left = location[0];
+                int top = location[1];
+                int right = left + getWidth();
+                int bottom = top + getHeight();
+                
+                // إضافة مسافة تسامح صغيرة للحواف
+                int padding = AndroidUtilities.dp(8);
+                left += padding;
+                top += padding;
+                right -= padding;
+                bottom -= padding;
+                
+                // التحقق من أن النقطة داخل القائمة
+                return screenX >= left && screenX <= right && screenY >= top && screenY <= bottom;
+            } catch (Throwable ignore) {
+                return true; // في حالة الخطأ، لا نغلق القائمة
+            }
+        }
+
+        // MeeroX: dispatchTouchEvent المحسن لحل مشكلة اللمس مع دعم الضغط خارج القائمة
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
+            final int action = ev.getActionMasked();
+
+            // معالجة الضغط خارج القائمة (لجميع الحالات)
+            if (action == MotionEvent.ACTION_DOWN) {
+                // التحقق من أن الضغط خارج محتوى القائمة
+                if (!isPointInsidePopup(ev.getX(), ev.getY())) {
+                    // إغلاق القائمة إذا كان الضغط خارجها
+                    if (window != null) {
+                        window.dismiss();
+                    }
+                    return true;
+                }
+            }
+
             if (!isMeeroIosSkinOn()) {
                 return super.dispatchTouchEvent(ev);
             }
-
-            final int action = ev.getActionMasked();
 
             if (action == MotionEvent.ACTION_DOWN) {
                 if (meeroSlopPx < 0) {
@@ -839,7 +882,6 @@ public class ActionBarPopupWindow extends PopupWindow {
                             View currentView = meeroRowAt(ev.getX(), ev.getY());
                             
                             // السماح بفارق بسيط: إذا كان currentView هو نفس العنصر أو null
-                            // (إذا كان null فهذا يعني أن اللمس على نفس العنصر ولكن خارج حدوده قليلاً)
                             if (currentView == meeroTouchedView || currentView == null) {
                                 tw.nekomimi.nekogram.MeeroMenuWatch.onFallbackDelivered(meeroTouchedView.getTag());
                                 FileLog.d("MeeroX: menu fallback delivered click, id=" + meeroTouchedView.getTag());
