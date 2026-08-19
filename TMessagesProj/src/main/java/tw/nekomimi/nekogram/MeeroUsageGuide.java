@@ -104,22 +104,12 @@ public final class MeeroUsageGuide {
         drawable.setCornerRadius(AndroidUtilities.dp(100)); // Very high = pill shape
         button.setBackground(drawable);
 
-        // Just dismiss the dialog, NOT the whole app
+        // Store reference to the dialog so we can dismiss it
+        final AlertDialog[] dialogRef = new AlertDialog[1];
+
         button.setOnClickListener(v -> {
-            // Find and dismiss the dialog
-            if (v.getContext() instanceof Context) {
-                View parent = (View) v.getParent();
-                while (parent != null) {
-                    if (parent instanceof AlertDialog) {
-                        ((AlertDialog) parent).dismiss();
-                        break;
-                    }
-                    if (parent.getParent() instanceof View) {
-                        parent = (View) parent.getParent();
-                    } else {
-                        break;
-                    }
-                }
+            if (dialogRef[0] != null) {
+                dialogRef[0].dismiss();
             }
         });
 
@@ -137,6 +127,7 @@ public final class MeeroUsageGuide {
 
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
+        dialogRef[0] = dialog; // Store reference
         dialog.show();
     }
 }
