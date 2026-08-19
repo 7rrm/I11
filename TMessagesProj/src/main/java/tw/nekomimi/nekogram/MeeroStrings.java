@@ -482,9 +482,9 @@ public final class MeeroStrings {
         put("MeeroAuditIntegrityOk", "Chain verified ✓ All %1$d sealed attempts are intact.", "التحقق تم ✓ — كل المحاولات المختومة (%1$d) سليمة");
         put("MeeroAuditIntegrityBad", "Tamper detected - the first broken seal is at entry %1$d", "عبث مكتشف — أول ختم مكسور عند القياس %1$d");
         put("MeeroAuditIntegrityNone", "No sealed entries to verify yet", "لا توجد قياسات مختومة للتحقق بعد");
-        put("AboutMainChannel", "My main channel", "قناتي الاساسيه");
+        put("AboutMainChannel", "My main channel", "قناتي الاساسيـة");
         put("MeeroChannelPromoBody", "Join the official channel to get MeeroX updates first and everything new.", "اشترك بالقناة الرسمية حتى توصلك تحديثات آراس ڪرام - aRRaSGram أول بأول وكل جديدنا");
-        put("MeeroChannelPromoJoin", "Join the channel", "اشتراك في القناة");
+        put("MeeroChannelPromoJoin", "Join the channel", "انضم");
         put("MeeroWatchCopied", "Technical report copied - paste it and send it to the app developer", "تم نسخ تقرير فني — ألصقه وأرسله لمطور التطبيق");
         put("MeeroChatHeaderAvatar", "Chat top-bar avatar", "صورة البار العلوي للمحادثة");
         put("MeeroMenuWatchDiag", "Menu diagnostics", "تقارير تشخيص القوائم");
