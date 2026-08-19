@@ -83,9 +83,9 @@ public final class MeeroUsageGuide {
         
         // Padding صغير للزر البيضاوي الرفيع
         button.setPadding(
-                AndroidUtilities.dp(80),
+                AndroidUtilities.dp(100),
                 AndroidUtilities.dp(10),
-                AndroidUtilities.dp(80),
+                AndroidUtilities.dp(100),
                 AndroidUtilities.dp(10)
         );
 
