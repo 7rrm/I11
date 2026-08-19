@@ -178,7 +178,7 @@ object NaConfig {
         addConfig(
             "CustomTitle",
             ConfigItem.configTypeString,
-            "MeeroX"
+            "aRRaSGram"
         )
     val dateOfForwardedMsg =
         addConfig(
