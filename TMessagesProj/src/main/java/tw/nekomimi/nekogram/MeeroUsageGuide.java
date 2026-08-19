@@ -7,17 +7,32 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.telegram.messenger.AndroidUtilities;
+import org.telegram.messenger.LocaleController;
+import org.telegram.messenger.R;
 import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.BaseFragment;
+import org.telegram.ui.ActionBar.Theme;
 
+/**
+ * MeeroX v111 (user-requested): one shared "طريقة الاستخدام" popup.
+ *
+ * The long info footers at the bottom of the Meero feature sections grew
+ * into screens of their own ("شرح كبير مخرب الشكل" - his words). Each of
+ * those sections now ends with a tidy button instead; pressing it opens
+ * this dialog with the SAME full explanation - no information is lost, the
+ * screen just stops wearing it. Single "فهمت" button, reopenable anytime.
+ */
 public final class MeeroUsageGuide {
 
     private MeeroUsageGuide() {}
 
+    /** Shows the usage dialog. Safe no-op without a live context. */
     public static void show(BaseFragment fragment, String textKey) {
         if (fragment == null || textKey == null) return;
         show(fragment.getParentActivity(), textKey);
@@ -25,52 +40,11 @@ public final class MeeroUsageGuide {
 
     public static void show(Context context, String textKey) {
         if (context == null || textKey == null) return;
-
-        AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(MeeroStrings.s(268))
-                .setMessage(MeeroStrings.s(textKey))
-                .setPositiveButton(MeeroStrings.s(269), null)
-                .create();
-
-        dialog.setOnShowListener(dialogInterface -> {
-            // استخدام View ثم التحقق من النوع
-            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (view instanceof Button) {
-                Button positiveButton = (Button) view;
-                
-                // توسيط الزر في النافذة
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-                if (params != null) {
-                    params.gravity = Gravity.CENTER_HORIZONTAL;
-                    params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                    params.topMargin = AndroidUtilities.dp(8);
-                    params.bottomMargin = AndroidUtilities.dp(8);
-                    positiveButton.setLayoutParams(params);
-                }
-                
-                // توسيط النص داخل الزر
-                positiveButton.setGravity(Gravity.CENTER);
-                positiveButton.setTextColor(Color.WHITE);
-                positiveButton.setTextSize(16);
-                
-                // شكل بيضاوي - خلفية زرقاء
-                GradientDrawable drawable = new GradientDrawable();
-                drawable.setShape(GradientDrawable.RECTANGLE);
-                drawable.setCornerRadius(AndroidUtilities.dp(25));
-                drawable.setColor(Color.parseColor("#007AFF"));
-                positiveButton.setBackground(drawable);
-                positiveButton.setPadding(
-                    AndroidUtilities.dp(32),
-                    AndroidUtilities.dp(12),
-                    AndroidUtilities.dp(32),
-                    AndroidUtilities.dp(12)
-                );
-            }
-        });
-
-        dialog.show();
+        showDialog(context, MeeroStrings.s(textKey));
     }
 
+    /* v186 (batch 2D): numeric vault-id form - call sites no longer carry
+     * the guide key as a readable DEX literal. */
     public static void show(BaseFragment fragment, int textId) {
         if (fragment == null) return;
         show(fragment.getParentActivity(), textId);
@@ -78,45 +52,79 @@ public final class MeeroUsageGuide {
 
     public static void show(Context context, int textId) {
         if (context == null) return;
+        showDialog(context, MeeroStrings.s(textId));
+    }
 
-        AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle(MeeroStrings.s(268))
-                .setMessage(MeeroStrings.s(textId))
-                .setPositiveButton(MeeroStrings.s(269), null)
-                .create();
+    private static void showDialog(Context context, String message) {
+        if (context == null || message == null) return;
 
-        dialog.setOnShowListener(dialogInterface -> {
-            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (view instanceof Button) {
-                Button positiveButton = (Button) view;
-                
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-                if (params != null) {
-                    params.gravity = Gravity.CENTER_HORIZONTAL;
-                    params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                    params.topMargin = AndroidUtilities.dp(8);
-                    params.bottomMargin = AndroidUtilities.dp(8);
-                    positiveButton.setLayoutParams(params);
-                }
-                
-                positiveButton.setGravity(Gravity.CENTER);
-                positiveButton.setTextColor(Color.WHITE);
-                positiveButton.setTextSize(16);
-                
-                GradientDrawable drawable = new GradientDrawable();
-                drawable.setShape(GradientDrawable.RECTANGLE);
-                drawable.setCornerRadius(AndroidUtilities.dp(25));
-                drawable.setColor(Color.parseColor("#007AFF"));
-                positiveButton.setBackground(drawable);
-                positiveButton.setPadding(
-                    AndroidUtilities.dp(32),
-                    AndroidUtilities.dp(12),
-                    AndroidUtilities.dp(32),
-                    AndroidUtilities.dp(12)
-                );
+        // Custom view with centered iOS-style button
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(
+                AndroidUtilities.dp(20),
+                AndroidUtilities.dp(16),
+                AndroidUtilities.dp(20),
+                AndroidUtilities.dp(8)
+        );
+
+        // Message text
+        TextView messageView = new TextView(context);
+        messageView.setText(message);
+        messageView.setTextSize(16);
+        messageView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
+        messageView.setGravity(Gravity.CENTER);
+        messageView.setPadding(0, 0, 0, AndroidUtilities.dp(24));
+        layout.addView(messageView, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
+
+        // iOS-style button container (centered)
+        LinearLayout buttonContainer = new LinearLayout(context);
+        buttonContainer.setGravity(Gravity.CENTER);
+        buttonContainer.setPadding(0, AndroidUtilities.dp(8), 0, AndroidUtilities.dp(8));
+
+        Button button = new Button(context);
+        button.setText(MeeroStrings.s(269)); // "Got it" / "فهمت"
+        button.setTextSize(16);
+        button.setTextColor(Color.WHITE);
+        button.setAllCaps(false);
+        button.setPadding(
+                AndroidUtilities.dp(40),
+                AndroidUtilities.dp(12),
+                AndroidUtilities.dp(40),
+                AndroidUtilities.dp(12)
+        );
+
+        // Blue rounded oval background
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setColor(Theme.getColor(Theme.key_dialogButton));
+        drawable.setCornerRadius(AndroidUtilities.dp(30));
+        button.setBackground(drawable);
+
+        // Click to dismiss
+        button.setOnClickListener(v -> {
+            if (context instanceof android.app.Activity) {
+                ((android.app.Activity) context).finish();
             }
         });
 
+        buttonContainer.addView(button);
+        layout.addView(buttonContainer, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        ));
+
+        // Build alert
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(MeeroStrings.s(268))
+                .setView(layout)
+                .setPositiveButton(null, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }
 }
