@@ -71,9 +71,9 @@ public class SettingsHelper {
                 // press are .../nasettings/meerox?r=<key>. Without a case here
                 // those links would fall through to unknown.run() and do
                 // nothing - the row would offer a link that never opens.
-                case "meerox":
-                case "meero":
-                case "m":
+                case "karar":
+                case "kar":
+                case "k":
                     fragment = nekox_fragment = new MeeroSettingsActivity();
                     break;
                 case "translator":
