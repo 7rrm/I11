@@ -91,23 +91,35 @@ public final class MeeroUsageGuide {
         button.setTextColor(Color.WHITE);
         button.setAllCaps(false);
         button.setPadding(
-                AndroidUtilities.dp(40),
-                AndroidUtilities.dp(12),
-                AndroidUtilities.dp(40),
-                AndroidUtilities.dp(12)
+                AndroidUtilities.dp(50),
+                AndroidUtilities.dp(14),
+                AndroidUtilities.dp(50),
+                AndroidUtilities.dp(14)
         );
 
-        // Blue rounded oval background
+        // Vertical oval (pill-shaped) like iOS
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setColor(Theme.getColor(Theme.key_dialogButton));
-        drawable.setCornerRadius(AndroidUtilities.dp(30));
+        drawable.setCornerRadius(AndroidUtilities.dp(100)); // Very high = pill shape
         button.setBackground(drawable);
 
-        // Click to dismiss
+        // Just dismiss the dialog, NOT the whole app
         button.setOnClickListener(v -> {
-            if (context instanceof android.app.Activity) {
-                ((android.app.Activity) context).finish();
+            // Find and dismiss the dialog
+            if (v.getContext() instanceof Context) {
+                View parent = (View) v.getParent();
+                while (parent != null) {
+                    if (parent instanceof AlertDialog) {
+                        ((AlertDialog) parent).dismiss();
+                        break;
+                    }
+                    if (parent.getParent() instanceof View) {
+                        parent = (View) parent.getParent();
+                    } else {
+                        break;
+                    }
+                }
             }
         });
 
