@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="XChannel">Canale MeeroX</string>
+    <string name="XChannel">Canale aRRaSGram</string>
     <string name="EnableSaveDeletedMessages">Salva i messaggi eliminati</string>
     <string name="DeletedMessage">eliminato</string>
     <string name="EnableSaveEditsHistory">Salva cronologia modifiche</string>
@@ -15,7 +15,7 @@
     <string name="LlmApiUrl">URL API</string>
     <string name="LlmApiKey">Chiave API</string>
     <string name="LlmModelName">Modello</string>
-    <string name="LlmApiUrlNotice">URL base dell\'API. Se lasciato vuoto, per impostazione predefinita sarà l\'endpoint compatibile con Gemini/OpenAI.</string>
+    <string name="LlmApiUrlNotice">URL base dell'API. Se lasciato vuoto, per impostazione predefinita sarà l'endpoint compatibile con Gemini/OpenAI.</string>
     <string name="LlmApiKeyNotice">Inserisci una o più chiavi API, separate da virgole (ad es., key1,key2). Le chiavi multiple saranno usate a rotazione.</string>
     <string name="LlmProviderPreset">Provider Modello</string>
     <string name="LlmProviderCustom">Personalizzato</string>
@@ -23,7 +23,7 @@
     <string name="LlmProviderGeminiKey">Chiave API Gemini</string>
     <string name="LlmSystemPrompt">Prompt di sistema</string>
     <string name="LlmSystemPromptHint">Sei un traduttore professionista.</string>
-    <string name="LlmSystemPromptNotice">Definisci il ruolo e il comportamento dell\'IA.\n\nQuesto prompt imposta il tono, la personalità e i limiti dell\'IA. Considera descrivere che tipo di assistente dovrebbe essere l\'IA.</string>
+    <string name="LlmSystemPromptNotice">Definisci il ruolo e il comportamento dell'IA.\n\nQuesto prompt imposta il tono, la personalità e i limiti dell'IA. Considera descrivere che tipo di assistente dovrebbe essere l'IA.</string>
     <string name="LlmUserPrompt">Prompt Utente</string>
     <string name="LlmUserPromptHint">Traduci @text in @toLang.</string>
     <string name="LlmUserPromptNotice">Utilizza @text come placeholder per il messaggio originale e @toLang per la lingua di destinazione (facoltativo).\n\nLasciando questo campo vuoto verrà utilizzato il prompt predefinito.</string>
@@ -31,9 +31,9 @@
     <string name="LlmUseContextNotice">Migliora la qualità della traduzione a scapito di più token.</string>
     <string name="LlmContextSize">Messaggi contestuali</string>
     <string name="LlmUseContextInAutoTranslate">Usa il contesto nella traduzione automatica</string>
-    <string name="LlmUseContextInAutoTranslateNotice">Potrebbe aumentare l\'uso dei token e la latenza.</string>
+    <string name="LlmUseContextInAutoTranslateNotice">Potrebbe aumentare l'uso dei token e la latenza.</string>
     <string name="LlmTemperature">Temperatura</string>
-    <string name="LlmModelsLoadFailed">Impossibile caricare l\'elenco dei modelli.</string>
+    <string name="LlmModelsLoadFailed">Impossibile caricare l'elenco dei modelli.</string>
     <string name="LlmTest">Test</string>
     <string name="LlmTestResultHttpStatusCode">Codice HTTP</string>
     <string name="LlmTestResultDuration">Durata</string>
@@ -41,7 +41,7 @@
     <string name="AITranslatorSettings">Traduttore AI</string>
     <string name="TranslucentDeletedMessages">Messaggi cancellati traslucidi</string>
     <string name="ArticleTranslationProvider">Provider di traduzioni articoli</string>
-    <string name="EnableSeparateArticleTranslator">Usa un provider diverso per l\'articolo</string>
+    <string name="EnableSeparateArticleTranslator">Usa un provider diverso per l'articolo</string>
     <string name="DisableCrashlyticsCollection">Disabilita Firebase Crashlytics</string>
     <string name="ShowStickersRowToplevel">Mostra gli stickers nelle impostazioni principali</string>
     <string name="HideShareButtonInChannel">Nascondi il pulsante laterale \"Condividi\"</string>
@@ -56,7 +56,7 @@
     <string name="PreferredTranslateTargetLangName">Lingue preferite</string>
     <string name="ClearDeleted">Cancella eliminati</string>
     <string name="ClearDeletedAlertMessage">Sei sicuro di voler eliminare tutti i messaggi cancellati in questa chat?</string>
-    <string name="ForwardsRestrictedInfoAyuDeleted">L\'inoltro non è consentito.</string>
+    <string name="ForwardsRestrictedInfoAyuDeleted">L'inoltro non è consentito.</string>
     <string name="RegexFiltersNotice">Tocca per modificare.</string>
     <string name="RegexFiltersImport">Importa</string>
     <string name="RegexFiltersExport">Esporta</string>
@@ -64,7 +64,7 @@
     <string name="RegexFiltersImportError">Impossibile importare i filtri dagli appunti.</string>
     <string name="RegexFiltersExportError">Impossibile esportare i filtri.</string>
     <string name="RegexFiltersUserHeader">Filtri Utente</string>
-    <string name="RegexFiltersUserFilterHint">Inserisci l\'ID Utente</string>
+    <string name="RegexFiltersUserFilterHint">Inserisci l'ID Utente</string>
     <string name="RegexFiltersGlobalHeader">Filtri Globali</string>
     <string name="RegexFiltersTextSelectionAddtoShared">Aggiungi ai filtri condivisi</string>
     <string name="ShadowBan">Shadow Ban</string>
@@ -90,7 +90,7 @@
     <string name="ChatsOnly">Solo nelle chat</string>
     <string name="InstantViewTranslation">Visualizzazione istantanea</string>
     <string name="SaveDeletedMessageForBot">Salva nelle chat dei bot</string>
-    <string name="HideArchive">Rimuovi \"Chat archiviate\" dall\'elenco delle chat</string>
+    <string name="HideArchive">Rimuovi \"Chat archiviate\" dall'elenco delle chat</string>
     <string name="ConfirmAllLinks">Chiedi prima di aprire i link inline</string>
     <string name="ConfirmAllLinksDescription">Includere link interni di Telegram come i link t.me nei pulsanti inline del bot.</string>
     <string name="TranslatorMinimizedChannel">Per questo canale la barra del traduttore è stata ridotta al minimo.</string>
@@ -107,7 +107,7 @@
     <string name="SpringAnimation">Animazioni primaverili</string>
     <string name="SpringAnimationCrossfade">Barra Azione Animata</string>
     <string name="Other">Altro</string>
-    <string name="RestartApp">Riavvia l\'app</string>
+    <string name="RestartApp">Riavvia l'app</string>
     <string name="ResetSettings">Ripristina le Impostazioni</string>
     <string name="ResetSettingsAlert">Sei sicuro di voler ripristinare tutte le impostazioni?</string>
     <string name="DontAutoPlayNextVoice">Non Riprodurre Automaticamente il Messaggio Vocale Successivo</string>
@@ -123,7 +123,7 @@
     <string name="DoubleTapIncoming">Messaggi in Arrivo</string>
     <string name="DoubleTapOutgoing">Messaggi in Uscita</string>
     <string name="TgBrowserOpenFail">Il Browser In-App non è disponibile</string>
-    <string name="TgBrowserOpenFail_Desc">L\'operazione selezionata non è disponibile a causa del browser in-app disabilitato.</string>
+    <string name="TgBrowserOpenFail_Desc">L'operazione selezionata non è disponibile a causa del browser in-app disabilitato.</string>
     <string name="MapPreviewProviderYandexNax">Yandex</string>
     <string name="GhostMode">Modalità Ghost</string>
     <string name="GhostEssentialsHeader">Elementi essenziali per Ghost</string>
@@ -159,7 +159,7 @@
     <string name="CloudflareCredentialsNotSet">Le credenziali Cloudflare non sono configurate.</string>
     <string name="CloudflareAccountID">Account ID</string>
     <string name="CloudflareAPIToken">Token API</string>
-    <string name="CloudflareCredentialsDialog">Configura l\'ID account Cloudflare e il token API.\n**Come ottenerlo?**\n</string>
+    <string name="CloudflareCredentialsDialog">Configura l'ID account Cloudflare e il token API.\n**Come ottenerlo?**\n</string>
     <string name="GeminiApiKeyNotSet">La chiave API Gemini non è configurata.</string>
     <string name="GeminiApiKeyDialog">Configura la chiave API Gemini, utilizzando quella dalle impostazioni del traduttore se il campo è vuoto.\n**Come ottenerla?**\n</string>
     <string name="GeminiNotSupport">Gemini non è supportato su questo dispositivo.</string>
@@ -182,7 +182,7 @@
     <string name="DebugMenuReloadAppConfig">Ricarica configurazione app</string>
     <string name="DebugMenuForceForumTabs">Forza schede forum</string>
     <string name="DebugMenuDoNotForceForumTabs">Non forzare le schede forum</string>
-    <string name="DebugMenuCleanAppUpdate">Aggiornamento pulito dell\'app</string>
+    <string name="DebugMenuCleanAppUpdate">Aggiornamento pulito dell'app</string>
     <string name="DebugMenuMakeMemoryDump">Crea un dump della memoria</string>
     <string name="DebugMenuShowFrameMetrics">Mostra metriche frame</string>
     <string name="DebugMenuHideFrameMetrics">Nascondi metriche frame</string>
@@ -225,7 +225,7 @@
     <string name="PremiumItemStarInReactions">Stella nelle reazioni</string>
     <string name="PremiumItemVideoAvatar">Avatar Animati</string>
     <string name="PremiumItemCustomWallpaper">Sfondi personalizzati</string>
-    <string name="TranslationTargetApp">Segui l\'app</string>
+    <string name="TranslationTargetApp">Segui l'app</string>
     <string name="SwitchStyle">Cambia Stile</string>
     <string name="SliderStyle">Stile cursore</string>
     <string name="StyleModern">Moderno</string>
@@ -233,13 +233,13 @@
     <string name="SaveDeletedExcluded">Escludi</string>
     <string name="MarkdownParser">Parser Markdown</string>
     <string name="KeepTranslatorPreferences">Mantieni le preferenze del traduttore</string>
-    <string name="KeepTranslatorPreferencesNotice">Mantieni le impostazioni correnti del traduttore quando cambi la lingua dell\'app.</string>
+    <string name="KeepTranslatorPreferencesNotice">Mantieni le impostazioni correnti del traduttore quando cambi la lingua dell'app.</string>
     <string name="UsePersianCalendar">Usa il calendario Persiano</string>
     <string name="UsePersianCalendarInfo">Mostra data con il calendario Solare Hijri</string>
     <string name="DisplayPersianCalendarByLatin">Mostra il calendario Persiano (Latino)</string>
     <string name="TestBackendOn">Questo account si connetterà al server di test.</string>
     <string name="TestBackendOff">Questo account si connetterà al server di prod.</string>
-    <string name="DidNotGetTheCodeBlameDurov">Se non hai ricevuto il codice su un altro dispositivo o non hai Telegram collegato su un altro dispositivo, utilizza l\'app ufficiale di Telegram per ricevere il codice.
+    <string name="DidNotGetTheCodeBlameDurov">Se non hai ricevuto il codice su un altro dispositivo o non hai Telegram collegato su un altro dispositivo, utilizza l'app ufficiale di Telegram per ricevere il codice.
 
 Telegram ha **disabilitato la possibilità di accedere con SMS** nelle app di terze parti. Gli utenti che accedono alle app di terze parti possono ricevere i codici di accesso solo tramite Telegram.
 
@@ -256,8 +256,8 @@ Non possiamo aiutarti in questo caso; se hai problemi di accesso, contatta il Su
     <string name="PinnedReactions_Limit">Puoi selezionare fino a %d reazioni.</string>
     <string name="PinnedReactions_Type">Questa emoji non è supportata.</string>
     <string name="PinnedReactions_Apply">Aggiorna Reazioni Fissate</string>
-    <string name="HideStoriesFromHeader">Nascondi dall\'Header</string>
-    <string name="DisableAvatarBlur">Disabilita la sfocatura dell\'avatar</string>
+    <string name="HideStoriesFromHeader">Nascondi dall'Header</string>
+    <string name="DisableAvatarBlur">Disabilita la sfocatura dell'avatar</string>
     <string name="ExportSettingsIncludeApiKeys">Includi chiavi API</string>
     <string name="DisableInAppBrowserGestures">Disattiva gestures</string>
     <string name="HowToObtain">Come si ottiene?</string>
@@ -272,11 +272,11 @@ Non possiamo aiutarti in questo caso; se hai problemi di accesso, contatta il Su
     <string name="BlockedChannelsEmpty">Ancora nessun canale bloccato</string>
     <string name="UnblockAllChannelsWarn">Sei sicuro di voler sbloccare **tutti i canali**?</string>
     <string name="BlockChannelsUnavailable">Alcuni canali sono temporaneamente non disponibili.</string>
-    <string name="FixLinkPreview">Correggi l\'anteprima link</string>
+    <string name="FixLinkPreview">Correggi l'anteprima link</string>
     <string name="NoQuoteForwardShort">Ness. cit.</string>
     <string name="ViewDeleted">Visualizza eliminati</string>
     <string name="PasskeyLogin">Accesso con Passkey</string>
-    <string name="PasskeyInfo2">Questa funzione è compatibile solo con i gestori di password che consentono all\'utente di gestire le impostazioni di affidabilità per le app privilegiate, come **Bitwarden** e **KeePassDX**.</string>
+    <string name="PasskeyInfo2">Questa funzione è compatibile solo con i gestori di password che consentono all'utente di gestire le impostazioni di affidabilità per le app privilegiate, come **Bitwarden** e **KeePassDX**.</string>
     <string name="PasskeyUnsupportedTitle">Password manager non supportato</string>
     <string name="PasskeyUnsupportedMessage">Prova altri gestori di password come **Bitwarden** o **KeePassDX**.</string>
     <string name="PasskeyNoCredentialAvailable">Non è disponibile nessuna credenziale valida.</string>
@@ -304,7 +304,7 @@ Non possiamo aiutarti in questo caso; se hai problemi di accesso, contatta il Su
     <string name="SIMCard">Scheda SIM</string>
     <string name="DeviceAccount">Dispositivo</string>
     <string name="ApiKeyNotSet">La chiave API non è configurata.</string>
-    <string name="SaveLocalLastSeen">Salva data dell\'ultimo accesso</string>
+    <string name="SaveLocalLastSeen">Salva data dell'ultimo accesso</string>
     <string name="CopyVideoFrame">Copia Frame</string>
     <string name="SetLocalName">Imposta Nome Locale</string>
     <string name="DeleteChatForBothSides">Usa \"Elimina anche per\" di default</string>
@@ -313,9 +313,9 @@ Non possiamo aiutarti in questo caso; se hai problemi di accesso, contatta il Su
     <string name="BackAnimationSpring">Rimbalzo</string>
     <string name="BackAnimationPredictive">Predittiva</string>
     <string name="AddToFilter">Aggiungi al filtro</string>
-    <string name="UnifiedPushNeverReceivedNotifications">Non hai mai ricevuto notifiche con UnifiedPush da quando è stato avviato MeeroX.</string>
-    <string name="UnifiedPushLastReceivedNotification">L\'ultima notifica ricevuta con UnifiedPush è stata %1$d secondi fa.\n\nHai ricevuto %2$d notifiche da quando è stato avviato MeeroX.</string>
-    <string name="UnifiedPushCurrentEndpoint">L\'endpoint UnifiedPush corrente è: %1$s</string>
+    <string name="UnifiedPushNeverReceivedNotifications">Non hai mai ricevuto notifiche con UnifiedPush da quando è stato avviato aRRaSGram.</string>
+    <string name="UnifiedPushLastReceivedNotification">L'ultima notifica ricevuta con UnifiedPush è stata %1$d secondi fa.\n\nHai ricevuto %2$d notifiche da quando è stato avviato aRRaSGram.</string>
+    <string name="UnifiedPushCurrentEndpoint">L'endpoint UnifiedPush corrente è: %1$s</string>
     <string name="PlayOnce">Esegui una volta</string>
     <string name="StorageSettings">Archiviazione</string>
     <string name="MainTabsSettingsHeader">Tab Principali</string>
@@ -341,6 +341,6 @@ Non possiamo aiutarti in questo caso; se hai problemi di accesso, contatta il Su
     <string name="DefaultScheduleDelay">Ritardo predefinito</string>
     <string name="ExportAyuDB">Esporta database</string>
     <string name="ImportAyuDB">Importa Database</string>
-    <string name="ImportAyuDBAlert">L\'attuale database dei messaggi verrà sostituito. L\'app si riavvierà al termine dell\'importazione.</string>
+    <string name="ImportAyuDBAlert">L'attuale database dei messaggi verrà sostituito. L'app si riavvierà al termine dell'importazione.</string>
     <string name="DisableSwipeToNext">Disabilita \"Scorri verso il Prossimo\"</string>
 </resources>
