@@ -26,102 +26,78 @@ public final class MeeroUsageGuide {
     public static void show(Context context, String textKey) {
         if (context == null || textKey == null) return;
 
-        // إنشاء AlertDialog
+        // إنشاء AlertDialog بدون setPositiveButton
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(MeeroStrings.s(268));
         builder.setMessage(MeeroStrings.s(textKey));
         
-        // إنشاء زر مخصص بدلاً من استخدام setPositiveButton
         final AlertDialog dialog = builder.create();
         
-        // إنشاء LinearLayout للزر
-        LinearLayout buttonLayout = new LinearLayout(context);
-        buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
-        buttonLayout.setGravity(Gravity.CENTER_HORIZONTAL);
-        buttonLayout.setPadding(
-            AndroidUtilities.dp(16),
-            AndroidUtilities.dp(8),
-            AndroidUtilities.dp(16),
-            AndroidUtilities.dp(16)
-        );
-        
-        // إنشاء الزر المخصص
-        Button positiveButton = new Button(context);
-        positiveButton.setText(MeeroStrings.s(269));
-        positiveButton.setTextSize(16);
-        positiveButton.setTextColor(Color.WHITE);
-        positiveButton.setGravity(Gravity.CENTER);
-        
-        // شكل بيضاوي - خلفية زرقاء
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(AndroidUtilities.dp(25));
-        drawable.setColor(Color.parseColor("#007AFF"));
-        positiveButton.setBackground(drawable);
-        positiveButton.setPadding(
-            AndroidUtilities.dp(32),
-            AndroidUtilities.dp(12),
-            AndroidUtilities.dp(32),
-            AndroidUtilities.dp(12)
-        );
-        
-        // إضافة الزر إلى Layout
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.gravity = Gravity.CENTER_HORIZONTAL;
-        positiveButton.setLayoutParams(params);
-        buttonLayout.addView(positiveButton);
-        
-        // إضافة الـ Layout إلى الحوار
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, MeeroStrings.s(269), (d, which) -> d.dismiss());
-        
-        // استبدال الزر الأصلي بالزر المخصص
+        // إنشاء الزر المخصص وإضافته
         dialog.setOnShowListener(dialogInterface -> {
             try {
-                // إزالة الزر الأصلي وإضافة الزر المخصص
-                View originalButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (originalButton != null) {
-                    View parent = (View) originalButton.getParent();
-                    if (parent instanceof LinearLayout) {
-                        // نضيف الزر المخصص إلى نفس المكان
-                        LinearLayout parentLayout = (LinearLayout) parent;
-                        int index = parentLayout.indexOfChild(originalButton);
-                        parentLayout.removeView(originalButton);
-                        
-                        // إنشاء زر جديد بتنسيق iOS
-                        Button newButton = new Button(context);
-                        newButton.setText(MeeroStrings.s(269));
-                        newButton.setTextSize(16);
-                        newButton.setTextColor(Color.WHITE);
-                        newButton.setGravity(Gravity.CENTER);
-                        
-                        GradientDrawable newDrawable = new GradientDrawable();
-                        newDrawable.setShape(GradientDrawable.RECTANGLE);
-                        newDrawable.setCornerRadius(AndroidUtilities.dp(25));
-                        newDrawable.setColor(Color.parseColor("#007AFF"));
-                        newButton.setBackground(newDrawable);
-                        newButton.setPadding(
-                            AndroidUtilities.dp(32),
-                            AndroidUtilities.dp(12),
-                            AndroidUtilities.dp(32),
-                            AndroidUtilities.dp(12)
-                        );
-                        
-                        LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        newParams.gravity = Gravity.CENTER_HORIZONTAL;
-                        newParams.topMargin = AndroidUtilities.dp(8);
-                        newParams.bottomMargin = AndroidUtilities.dp(8);
-                        newButton.setLayoutParams(newParams);
-                        
-                        newButton.setOnClickListener(v -> dialog.dismiss());
-                        parentLayout.addView(newButton, index);
+                // إنشاء LinearLayout للزر
+                LinearLayout buttonLayout = new LinearLayout(context);
+                buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+                buttonLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+                buttonLayout.setPadding(
+                    AndroidUtilities.dp(16),
+                    AndroidUtilities.dp(8),
+                    AndroidUtilities.dp(16),
+                    AndroidUtilities.dp(16)
+                );
+                
+                // إنشاء الزر المخصص
+                Button positiveButton = new Button(context);
+                positiveButton.setText(MeeroStrings.s(269));
+                positiveButton.setTextSize(16);
+                positiveButton.setTextColor(Color.WHITE);
+                positiveButton.setGravity(Gravity.CENTER);
+                
+                // شكل بيضاوي - خلفية زرقاء
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.parseColor("#007AFF"));
+                positiveButton.setBackground(drawable);
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+                
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                params.topMargin = AndroidUtilities.dp(8);
+                params.bottomMargin = AndroidUtilities.dp(8);
+                positiveButton.setLayoutParams(params);
+                
+                // إضافة الزر إلى Layout
+                buttonLayout.addView(positiveButton);
+                
+                // إضافة الـ Layout إلى الحوار
+                // نبحث عن الـ Layout الرئيسي للحوار ونضيف الزر تحته
+                View decorView = dialog.getWindow().getDecorView();
+                if (decorView instanceof ViewGroup) {
+                    // نبحث عن الـ FrameLayout الذي يحتوي على محتوى الحوار
+                    ViewGroup root = (ViewGroup) decorView;
+                    for (int i = 0; i < root.getChildCount(); i++) {
+                        View child = root.getChildAt(i);
+                        if (child instanceof ViewGroup) {
+                            // نضيف الزر إلى نهاية الـ Layout
+                            ViewGroup content = (ViewGroup) child;
+                            content.addView(buttonLayout);
+                        }
                     }
                 }
+                
+                // إغلاق الحوار عند الضغط على الزر
+                positiveButton.setOnClickListener(v -> dialog.dismiss());
+                
             } catch (Throwable ignored) {}
         });
         
@@ -144,45 +120,59 @@ public final class MeeroUsageGuide {
         
         dialog.setOnShowListener(dialogInterface -> {
             try {
-                View originalButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (originalButton != null) {
-                    View parent = (View) originalButton.getParent();
-                    if (parent instanceof LinearLayout) {
-                        LinearLayout parentLayout = (LinearLayout) parent;
-                        int index = parentLayout.indexOfChild(originalButton);
-                        parentLayout.removeView(originalButton);
-                        
-                        Button newButton = new Button(context);
-                        newButton.setText(MeeroStrings.s(269));
-                        newButton.setTextSize(16);
-                        newButton.setTextColor(Color.WHITE);
-                        newButton.setGravity(Gravity.CENTER);
-                        
-                        GradientDrawable newDrawable = new GradientDrawable();
-                        newDrawable.setShape(GradientDrawable.RECTANGLE);
-                        newDrawable.setCornerRadius(AndroidUtilities.dp(25));
-                        newDrawable.setColor(Color.parseColor("#007AFF"));
-                        newButton.setBackground(newDrawable);
-                        newButton.setPadding(
-                            AndroidUtilities.dp(32),
-                            AndroidUtilities.dp(12),
-                            AndroidUtilities.dp(32),
-                            AndroidUtilities.dp(12)
-                        );
-                        
-                        LinearLayout.LayoutParams newParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        newParams.gravity = Gravity.CENTER_HORIZONTAL;
-                        newParams.topMargin = AndroidUtilities.dp(8);
-                        newParams.bottomMargin = AndroidUtilities.dp(8);
-                        newButton.setLayoutParams(newParams);
-                        
-                        newButton.setOnClickListener(v -> dialog.dismiss());
-                        parentLayout.addView(newButton, index);
+                LinearLayout buttonLayout = new LinearLayout(context);
+                buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+                buttonLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+                buttonLayout.setPadding(
+                    AndroidUtilities.dp(16),
+                    AndroidUtilities.dp(8),
+                    AndroidUtilities.dp(16),
+                    AndroidUtilities.dp(16)
+                );
+                
+                Button positiveButton = new Button(context);
+                positiveButton.setText(MeeroStrings.s(269));
+                positiveButton.setTextSize(16);
+                positiveButton.setTextColor(Color.WHITE);
+                positiveButton.setGravity(Gravity.CENTER);
+                
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.parseColor("#007AFF"));
+                positiveButton.setBackground(drawable);
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+                
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                params.topMargin = AndroidUtilities.dp(8);
+                params.bottomMargin = AndroidUtilities.dp(8);
+                positiveButton.setLayoutParams(params);
+                
+                buttonLayout.addView(positiveButton);
+                
+                View decorView = dialog.getWindow().getDecorView();
+                if (decorView instanceof ViewGroup) {
+                    ViewGroup root = (ViewGroup) decorView;
+                    for (int i = 0; i < root.getChildCount(); i++) {
+                        View child = root.getChildAt(i);
+                        if (child instanceof ViewGroup) {
+                            ViewGroup content = (ViewGroup) child;
+                            content.addView(buttonLayout);
+                        }
                     }
                 }
+                
+                positiveButton.setOnClickListener(v -> dialog.dismiss());
+                
             } catch (Throwable ignored) {}
         });
         
