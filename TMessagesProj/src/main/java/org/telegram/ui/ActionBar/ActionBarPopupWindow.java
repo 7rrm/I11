@@ -673,7 +673,7 @@ public class ActionBarPopupWindow extends PopupWindow {
                         }
                     }
                 });
-                animatorSet.setInterpolator(deceleratorInterpolator);
+                animatorSet.setInterpolator(new DecelerateInterpolator());
                 animatorSet.start();
                 if (itemAnimators == null) {
                     itemAnimators = new ArrayList<>();
