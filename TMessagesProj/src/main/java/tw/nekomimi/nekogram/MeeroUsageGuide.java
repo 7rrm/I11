@@ -21,18 +21,11 @@ import org.telegram.ui.ActionBar.Theme;
 
 /**
  * MeeroX v111 (user-requested): one shared "طريقة الاستخدام" popup.
- *
- * The long info footers at the bottom of the Meero feature sections grew
- * into screens of their own ("شرح كبير مخرب الشكل" - his words). Each of
- * those sections now ends with a tidy button instead; pressing it opens
- * this dialog with the SAME full explanation - no information is lost, the
- * screen just stops wearing it. Single "فهمت" button, reopenable anytime.
  */
 public final class MeeroUsageGuide {
 
     private MeeroUsageGuide() {}
 
-    /** Shows the usage dialog. Safe no-op without a live context. */
     public static void show(BaseFragment fragment, String textKey) {
         if (fragment == null || textKey == null) return;
         show(fragment.getParentActivity(), textKey);
@@ -43,8 +36,6 @@ public final class MeeroUsageGuide {
         showDialog(context, MeeroStrings.s(textKey));
     }
 
-    /* v186 (batch 2D): numeric vault-id form - call sites no longer carry
-     * the guide key as a readable DEX literal. */
     public static void show(BaseFragment fragment, int textId) {
         if (fragment == null) return;
         show(fragment.getParentActivity(), textId);
@@ -58,53 +49,54 @@ public final class MeeroUsageGuide {
     private static void showDialog(Context context, String message) {
         if (context == null || message == null) return;
 
-        // Custom view with centered iOS-style button
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(
+                AndroidUtilities.dp(24),
                 AndroidUtilities.dp(20),
-                AndroidUtilities.dp(16),
-                AndroidUtilities.dp(20),
-                AndroidUtilities.dp(8)
+                AndroidUtilities.dp(24),
+                AndroidUtilities.dp(16)
         );
 
-        // Message text
+        // النص
         TextView messageView = new TextView(context);
         messageView.setText(message);
-        messageView.setTextSize(16);
+        messageView.setTextSize(15);
         messageView.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
         messageView.setGravity(Gravity.CENTER);
-        messageView.setPadding(0, 0, 0, AndroidUtilities.dp(24));
+        messageView.setPadding(0, 0, 0, AndroidUtilities.dp(28));
         layout.addView(messageView, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
 
-        // iOS-style button container (centered)
+        // حاوية الزر (في المنتصف)
         LinearLayout buttonContainer = new LinearLayout(context);
         buttonContainer.setGravity(Gravity.CENTER);
-        buttonContainer.setPadding(0, AndroidUtilities.dp(8), 0, AndroidUtilities.dp(8));
+        buttonContainer.setPadding(0, AndroidUtilities.dp(4), 0, AndroidUtilities.dp(8));
 
         Button button = new Button(context);
-        button.setText(MeeroStrings.s(269)); // "Got it" / "فهمت"
-        button.setTextSize(16);
+        button.setText(MeeroStrings.s(269)); // "فهمت"
+        button.setTextSize(15);
         button.setTextColor(Color.WHITE);
         button.setAllCaps(false);
+        
+        // Padding صغير للزر البيضاوي الرفيع
         button.setPadding(
-                AndroidUtilities.dp(50),
-                AndroidUtilities.dp(14),
-                AndroidUtilities.dp(50),
-                AndroidUtilities.dp(14)
+                AndroidUtilities.dp(48),
+                AndroidUtilities.dp(10),
+                AndroidUtilities.dp(48),
+                AndroidUtilities.dp(10)
         );
 
-        // Vertical oval (pill-shaped) like iOS
+        // شكل بيضاوي رفيع (مثل iOS)
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setColor(Theme.getColor(Theme.key_dialogButton));
-        drawable.setCornerRadius(AndroidUtilities.dp(100)); // Very high = pill shape
+        drawable.setCornerRadius(AndroidUtilities.dp(100));
         button.setBackground(drawable);
 
-        // Store reference to the dialog so we can dismiss it
+        // إغلاق النافذة
         final AlertDialog[] dialogRef = new AlertDialog[1];
 
         button.setOnClickListener(v -> {
@@ -119,15 +111,14 @@ public final class MeeroUsageGuide {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
 
-        // Build alert
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(MeeroStrings.s(268))
+        builder.setTitle(MeeroStrings.s(268)) // "طريقة الاستخدام"
                 .setView(layout)
                 .setPositiveButton(null, null);
 
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
-        dialogRef[0] = dialog; // Store reference
+        dialogRef[0] = dialog;
         dialog.show();
     }
 }
