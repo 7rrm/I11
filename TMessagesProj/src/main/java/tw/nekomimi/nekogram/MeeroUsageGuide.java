@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -27,7 +26,6 @@ public final class MeeroUsageGuide {
     public static void show(Context context, String textKey) {
         if (context == null || textKey == null) return;
 
-        // الطريقة الأضمن: استخدام AlertDialog مع setPositiveButton
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(MeeroStrings.s(268))
                 .setMessage(MeeroStrings.s(textKey))
@@ -35,38 +33,39 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
-            try {
-                // الحصول على الزر
-                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    // تغيير شكل الزر
-                    positiveButton.setGravity(Gravity.CENTER);
-                    positiveButton.setTextColor(Color.WHITE);
-                    positiveButton.setTextSize(16);
-                    
-                    GradientDrawable drawable = new GradientDrawable();
-                    drawable.setShape(GradientDrawable.RECTANGLE);
-                    drawable.setCornerRadius(AndroidUtilities.dp(25));
-                    drawable.setColor(Color.parseColor("#007AFF"));
-                    positiveButton.setBackground(drawable);
-                    positiveButton.setPadding(
-                        AndroidUtilities.dp(32),
-                        AndroidUtilities.dp(12),
-                        AndroidUtilities.dp(32),
-                        AndroidUtilities.dp(12)
-                    );
-                    
-                    // توسيط الزر في النافذة
-                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-                    if (params != null) {
-                        params.gravity = Gravity.CENTER_HORIZONTAL;
-                        params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        params.topMargin = AndroidUtilities.dp(8);
-                        params.bottomMargin = AndroidUtilities.dp(8);
-                        positiveButton.setLayoutParams(params);
-                    }
+            // استخدام View ثم التحقق من النوع
+            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (view instanceof Button) {
+                Button positiveButton = (Button) view;
+                
+                // توسيط الزر في النافذة
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+                if (params != null) {
+                    params.gravity = Gravity.CENTER_HORIZONTAL;
+                    params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    params.topMargin = AndroidUtilities.dp(8);
+                    params.bottomMargin = AndroidUtilities.dp(8);
+                    positiveButton.setLayoutParams(params);
                 }
-            } catch (Throwable ignored) {}
+                
+                // توسيط النص داخل الزر
+                positiveButton.setGravity(Gravity.CENTER);
+                positiveButton.setTextColor(Color.WHITE);
+                positiveButton.setTextSize(16);
+                
+                // شكل بيضاوي - خلفية زرقاء
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.parseColor("#007AFF"));
+                positiveButton.setBackground(drawable);
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+            }
         });
 
         dialog.show();
@@ -87,35 +86,35 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
-            try {
-                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.setGravity(Gravity.CENTER);
-                    positiveButton.setTextColor(Color.WHITE);
-                    positiveButton.setTextSize(16);
-                    
-                    GradientDrawable drawable = new GradientDrawable();
-                    drawable.setShape(GradientDrawable.RECTANGLE);
-                    drawable.setCornerRadius(AndroidUtilities.dp(25));
-                    drawable.setColor(Color.parseColor("#007AFF"));
-                    positiveButton.setBackground(drawable);
-                    positiveButton.setPadding(
-                        AndroidUtilities.dp(32),
-                        AndroidUtilities.dp(12),
-                        AndroidUtilities.dp(32),
-                        AndroidUtilities.dp(12)
-                    );
-                    
-                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-                    if (params != null) {
-                        params.gravity = Gravity.CENTER_HORIZONTAL;
-                        params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                        params.topMargin = AndroidUtilities.dp(8);
-                        params.bottomMargin = AndroidUtilities.dp(8);
-                        positiveButton.setLayoutParams(params);
-                    }
+            View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            if (view instanceof Button) {
+                Button positiveButton = (Button) view;
+                
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+                if (params != null) {
+                    params.gravity = Gravity.CENTER_HORIZONTAL;
+                    params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                    params.topMargin = AndroidUtilities.dp(8);
+                    params.bottomMargin = AndroidUtilities.dp(8);
+                    positiveButton.setLayoutParams(params);
                 }
-            } catch (Throwable ignored) {}
+                
+                positiveButton.setGravity(Gravity.CENTER);
+                positiveButton.setTextColor(Color.WHITE);
+                positiveButton.setTextSize(16);
+                
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.RECTANGLE);
+                drawable.setCornerRadius(AndroidUtilities.dp(25));
+                drawable.setColor(Color.parseColor("#007AFF"));
+                positiveButton.setBackground(drawable);
+                positiveButton.setPadding(
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12),
+                    AndroidUtilities.dp(32),
+                    AndroidUtilities.dp(12)
+                );
+            }
         });
 
         dialog.show();
