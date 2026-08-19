@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,7 +16,26 @@ import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.ActionBar.Theme;
 
 /**
- * MeeroX v194: one-time subscribe prompt for the owner's main channel.
+ * MeeroX v194: one-time subscribe prompt for the owner's main channel,
+ * pinned to the MeeroX settings screen (@Y_VBB, ordered by the owner).
+ *
+ * Behaviour (his exact spec):
+ *  - shows every time the Meero settings screen is entered, until the user
+ *    taps the join button;
+ *  - deliberately non-cancelable: no back-key dismiss, no outside-touch
+ *    dismiss, no cancel button - the only way out is the join button;
+ *  - tapping it marks the promo done (global main settings - the same store
+ *    the About-screen privacy acceptance already uses) and opens the
+ *    channel in-app via openByUserName. Telegram law: the actual join
+ *    happens inside the channel page; no client may auto-join a user from
+ *    outside, so this is the deepest a prompt can legitimately go;
+ *  - once done, it never shows again on this install.
+ *
+ * Texts ride the sealed MeeroStrings vault: the title reuses v193 row id
+ * 463 ("AboutMainChannel"), body/button are the new v194 rows 464/465, so
+ * the shipped DEX carries zero Arabic literals for this dialog. The whole
+ * path is wrapped never-throw: any failure degrades to "no promo", never
+ * to a crash on a settings visit.
  */
 public final class MeeroChannelPromo {
 
@@ -73,35 +91,24 @@ public final class MeeroChannelPromo {
             buttonContainer.setPadding(0, AndroidUtilities.dp(4), 0, AndroidUtilities.dp(8));
 
             Button button = new Button(activity);
-            button.setText(MeeroStrings.s(465)); // "اشتراك في القناة"
+            button.setText(MeeroStrings.s(465)); // "انضم" أو "اشترك"
             button.setTextSize(15);
             button.setTextColor(Color.WHITE);
             button.setAllCaps(false);
-            
-            // ضبط ارتفاع الزر
-            int buttonHeight = AndroidUtilities.dp(44);
-            
-            // شكل بيضاوي رفيع (مثل iOS)
+
+            // زر بيضاوي رفيع (مثل iOS)
+            button.setPadding(
+                    AndroidUtilities.dp(100),  // ← عرض
+                    AndroidUtilities.dp(9),  // ← ارتفاع
+                    AndroidUtilities.dp(100),  // ← عرض
+                    AndroidUtilities.dp(9)   // ← ارتفاع
+            );
+
             GradientDrawable drawable = new GradientDrawable();
             drawable.setShape(GradientDrawable.RECTANGLE);
             drawable.setColor(Theme.getColor(Theme.key_dialogButton));
-            drawable.setCornerRadius(AndroidUtilities.dp(22)); // نصف الارتفاع = بيضاوي
+            drawable.setCornerRadius(AndroidUtilities.dp(100));
             button.setBackground(drawable);
-
-            // Padding للزر
-            button.setPadding(
-                    AndroidUtilities.dp(32),
-                    0,
-                    AndroidUtilities.dp(32),
-                    0
-            );
-
-            // ضبط عرض وارتفاع الزر
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    buttonHeight
-            );
-            button.setLayoutParams(params);
 
             // عند الضغط
             button.setOnClickListener(v -> {
@@ -127,7 +134,7 @@ public final class MeeroChannelPromo {
             ));
 
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(MeeroStrings.s(463)) // "قناتي الاساسيه"
+            builder.setTitle(MeeroStrings.s(463)) // عنوان القناة
                     .setView(layout)
                     .setPositiveButton(null, null);
 
