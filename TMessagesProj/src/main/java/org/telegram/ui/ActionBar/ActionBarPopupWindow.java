@@ -750,7 +750,7 @@ public class ActionBarPopupWindow extends PopupWindow {
             return null;
         }
 
-        // MeeroX v210: dispatchTouchEvent مع دعم النقر السريع والحركة الأفقية فقط
+        // MeeroX: dispatchTouchEvent مع دعم النقر السريع الثابت فقط
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
             if (!isMeeroIosSkinOn()) {
@@ -788,24 +788,15 @@ public class ActionBarPopupWindow extends PopupWindow {
 
             final boolean r = super.dispatchTouchEvent(ev);
 
-            // MeeroX fix: معالجة النقر السريع والحركة الأفقية فقط
+            // MeeroX fix: معالجة النقر السريع الثابت فقط
             if (action == MotionEvent.ACTION_UP && meeroDownX >= 0
                     && !(swipeBackLayout != null && swipeBackLayout.isForegroundOpen())
                     && tw.nekomimi.nekogram.MeeroMenuWatch.clickSeqVol() == meeroSerialAtDown) {
                 
-                // حساب اتجاه الحركة
-                final float dx = ev.getX() - meeroDownX;
-                final float dy = ev.getY() - meeroDownY;
-                final float distX = Math.abs(dx);
-                final float distY = Math.abs(dy);
-                
-                // شرط التنفيذ:
-                // 1. النقر الثابت (لم تتحرك اللمسة) -> !meeroMovedFar
-                // 2. OR الحركة أفقية (يمين/يسار) أكثر من رأسية (أعلى/أسفل)
-                boolean isHorizontalSwipe = (distX > distY && distX > dp(10));
+                // شرط التنفيذ: النقر الثابت فقط (لم تتحرك اللمسة)
                 boolean isTap = !meeroMovedFar;
                 
-                if (isTap || isHorizontalSwipe) {
+                if (isTap) {
                     final View row = meeroRowAt(ev.getX(), ev.getY());
                     if (row != null) {
                         try {
