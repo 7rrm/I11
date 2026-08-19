@@ -33,18 +33,28 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
-            // الحل: استخدام View أولاً ثم التحقق
+            // 1. جعل النص في المنتصف (هو أصلاً في المنتصف، لكن للتأكيد)
+            try {
+                android.widget.TextView messageView = dialog.getWindow().getDecorView().findViewById(android.R.id.message);
+                if (messageView != null) {
+                    messageView.setGravity(Gravity.CENTER);
+                }
+            } catch (Throwable ignored) {}
+
+            // 2. تنسيق زر "فهمت"
             View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (view != null && view instanceof Button) {
+            if (view instanceof Button) {
                 Button positiveButton = (Button) view;
                 
-                // توسيط الزر
+                // توسيط الزر في النافذة
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
                 params.gravity = Gravity.CENTER_HORIZONTAL;
                 params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
                 params.topMargin = AndroidUtilities.dp(8);
                 params.bottomMargin = AndroidUtilities.dp(8);
                 positiveButton.setLayoutParams(params);
+                
+                // توسيط النص داخل الزر
                 positiveButton.setGravity(Gravity.CENTER);
 
                 // شكل بيضاوي - خلفية زرقاء ونص أبيض
@@ -83,8 +93,17 @@ public final class MeeroUsageGuide {
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
+            // 1. جعل النص في المنتصف
+            try {
+                android.widget.TextView messageView = dialog.getWindow().getDecorView().findViewById(android.R.id.message);
+                if (messageView != null) {
+                    messageView.setGravity(Gravity.CENTER);
+                }
+            } catch (Throwable ignored) {}
+
+            // 2. تنسيق زر "فهمت"
             View view = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-            if (view != null && view instanceof Button) {
+            if (view instanceof Button) {
                 Button positiveButton = (Button) view;
                 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
