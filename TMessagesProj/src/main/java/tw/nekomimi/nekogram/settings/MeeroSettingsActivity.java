@@ -98,7 +98,7 @@ public class MeeroSettingsActivity extends BaseNekoXSettingsActivity {
 
     @Override
     protected String getSettingsPrefix() {
-        return "meerox";
+        return "karar";
     }
 
     private final CellGroup cellGroup = new CellGroup(this);
