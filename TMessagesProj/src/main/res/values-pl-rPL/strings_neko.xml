@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">Ustawienia N</string>
+    <string name="NekoSettings">Ustawienia aRRaSGram</string>
     <string name="IPv6">Preferuj IPv6</string>
     <string name="MessageMenu">Menu wiadomości</string>
     <string name="HidePhone">Ukryj numer telefonu</string>
@@ -70,7 +70,7 @@
     <string name="CallTo">Zadzwonić do **%1$s**?</string>
     <string name="DisableNumberRounding">Wyłącz zaokrąglanie liczb</string>
     <string name="Categories">Kategorie</string>
-    <string name="OfficialChannel">Kanał Meero</string>
+    <string name="OfficialChannel">Kanał aRRaSGram</string>
     <string name="About">O aplikacji</string>
     <string name="IgnoreBlockedAbout">Nie będziesz już widzieć wiadomości od zablokowanych użytkowników w grupach.</string>
     <string name="SourceCode">Kod źródłowy</string>
@@ -110,10 +110,10 @@
     <string name="enhancedFileLoader">Zwiększ prędkość pobierania</string>
     <string name="mapDriftingFixForGoogleMaps">Napraw dryfujące mapy Google w Chinach</string>
     <string name="useOSMDroidMap">Użyj mapy OSMDroid</string>
-    <string name="UnknownNekoSettingsOption">Nie ma takiej opcji w ustawieniach N</string>
+    <string name="UnknownNekoSettingsOption">Nie ma takiej opcji w ustawieniach aRRaSGram</string>
     <string name="PasscodeNeeded">Najpierw musisz włączyć blokadę kodem dostępu</string>
     <string name="PasscodeNeko">Kod dostępu</string>
-    <string name="PasscodeShowInSettings">Pokaż w ustawieniach N</string>
+    <string name="PasscodeShowInSettings">Pokaż w ustawieniach aRRaSGram</string>
     <string name="PasscodeShowInSettingsAbout">Po ukryciu możesz otworzyć tę stronę **TYLKO** za pomocą linku:</string>
     <string name="PasscodeSet">Ustaw kod dostępu</string>
     <string name="PasscodeEdit">Zmień kod dostępu</string>
@@ -151,7 +151,7 @@
     <string name="ClearRecentChats">Wyczyść ostatnie czaty</string>
     <string name="ClearRecentChatAlert">Czy chcesz wyczyścić ostatnie czaty?</string>
     <string name="CloudConfig">Ustawienia chmury</string>
-    <string name="CloudConfigDesc">Zapisz ustawienia N w chmurze Telegrama.</string>
+    <string name="CloudConfigDesc">Zapisz ustawienia aRRaSGram w chmurze Telegrama.</string>
     <string name="CloudConfigSyncDate">Ostatnia synchronizacja: %s, chmura: %s</string>
     <string name="CloudConfigSyncDateNever">nigdy</string>
     <string name="CloudConfigSync">Synchronizuj z chmurą</string>
@@ -160,7 +160,7 @@
     <string name="CloudConfigRestoreShort">Przywrócić</string>
     <string name="CloudConfigSyncing">Synchronizowanie...</string>
     <string name="CloudConfigAutoSync">Automatyczna synchronizacja</string>
-    <string name="CloudConfigAutoSyncDesc">Automatycznie synchronizuj z chmurą po wprowadzeniu zmian w ustawieniach N.</string>
+    <string name="CloudConfigAutoSyncDesc">Automatycznie synchronizuj z chmurą po wprowadzeniu zmian w ustawieniach aRRaSGram.</string>
     <string name="CloudConfigSyncFailed">Nie udało się zsynchronizować ustawień z chmurą</string>
     <string name="CloudConfigRestoreFailed">Nie udało się przywrócić ustawień z chmury</string>
     <string name="CopyCallback">Skopiuj dane wywołania zwrotnego</string>
