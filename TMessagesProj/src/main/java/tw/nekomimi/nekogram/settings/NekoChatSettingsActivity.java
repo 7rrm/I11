@@ -35,6 +35,7 @@ import org.telegram.ui.Cells.CheckBoxCell;
 import org.telegram.ui.Cells.TextCheckCell;
 import org.telegram.ui.Cells.TextCheckCell2;
 import org.telegram.ui.Cells.TextSettingsCell;
+import org.telegram.ui.Components.BulletinFactory;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RecyclerListView;
 import org.telegram.ui.Components.SeekBarView;
@@ -48,6 +49,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kotlin.Unit;
+import tw.nekomimi.nekogram.MessageStyleHelper;
+import tw.nekomimi.nekogram.MeeroStrings;
 import tw.nekomimi.nekogram.NekoConfig;
 import tw.nekomimi.nekogram.config.CellGroup;
 import tw.nekomimi.nekogram.config.cell.AbstractConfigCell;
@@ -160,6 +163,21 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
     private final AbstractConfigCell doubleTapActionRow = cellGroup.appendCell(new ConfigCellCustom("DoubleTapIncoming", CellGroup.ITEM_TYPE_TEXT_SETTINGS_CELL, true));
     private final AbstractConfigCell doubleTapActionOutRow = cellGroup.appendCell(new ConfigCellCustom("DoubleTapOutgoing", CellGroup.ITEM_TYPE_TEXT_SETTINGS_CELL, true));
     private final AbstractConfigCell dividerDoubleTap = cellGroup.appendCell(new ConfigCellDivider());
+
+    // ============================================================
+    // 🆕 Message Actions (إجراءات الرسالة) - MeeroX v202
+    // ============================================================
+    private final AbstractConfigCell headerMessageActions = cellGroup.appendCell(
+        new ConfigCellHeader(MeeroStrings.s(472))  // "إجراءات الرسالة"
+    );
+
+    private final AbstractConfigCell messageStyleRow = cellGroup.appendCell(
+        new ConfigCellCustom("MessageStyle", CellGroup.ITEM_TYPE_TEXT_SETTINGS_CELL, true)
+    );
+
+    private final AbstractConfigCell dividerMessageActions = cellGroup.appendCell(
+        new ConfigCellDivider()
+    );
 
     // Camera
     private final AbstractConfigCell headerCamera = cellGroup.appendCell(new ConfigCellHeader(getString(R.string.CameraSettings)));
@@ -653,6 +671,8 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
                 return Unit.INSTANCE;
             });
             builder.show();
+        } else if (position == cellGroup.rows.indexOf(messageStyleRow)) {
+            showMessageStyleDialog(view);
         } else if (position == cellGroup.rows.indexOf(emojiSetsRow)) {
             presentFragment(new NekoEmojiSettingsActivity());
         } else if (position == cellGroup.rows.indexOf(transcribeProviderCfCredentialsRow)) {
@@ -662,6 +682,38 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
         } else if (position == cellGroup.rows.indexOf(transcribeProviderOpenAiRow)) {
             TranscribeHelper.showOpenAiCredentialsDialog(this);
         }
+    }
+
+    /**
+     * عرض قائمة أنماط الخطوط
+     */
+    private void showMessageStyleDialog(View view) {
+        if (getParentActivity() == null) return;
+        
+        // الحصول على أسماء الأنماط من MeeroStrings
+        String[] styleNames = MessageStyleHelper.getStyleNames();
+        int currentStyle = NekoConfig.meeroMessageStyle.Int();
+        
+        // إنشاء قائمة منبثقة
+        PopupBuilder builder = new PopupBuilder(view);
+        builder.setItems(styleNames, currentStyle, (i, str) -> {
+            // حفظ النمط المختار
+            NekoConfig.meeroMessageStyle.setConfigInt(i);
+            
+            // تحديث الواجهة
+            listAdapter.notifyItemChanged(cellGroup.rows.indexOf(messageStyleRow));
+            
+            // إظهار رسالة تأكيد
+            String styleName = MessageStyleHelper.getStyleName(i);
+            String message = MeeroStrings.f(483, styleName);  // "تم تعيين الخط إلى: %s"
+            
+            BulletinFactory.of(NekoChatSettingsActivity.this)
+                .createSimpleBulletin(R.raw.chats_infotip, message)
+                .show();
+            
+            return Unit.INSTANCE;
+        });
+        builder.show();
     }
 
     @Override
@@ -796,6 +848,14 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
                     textCell.setTextAndValue(getString(R.string.DoubleTapIncoming), DoubleTap.doubleTapActionMap.get(NaConfig.INSTANCE.getDoubleTapAction().Int()), true);
                 } else if (position == cellGroup.rows.indexOf(doubleTapActionOutRow)) {
                     textCell.setTextAndValue(getString(R.string.DoubleTapOutgoing), DoubleTap.doubleTapActionMap.get(NaConfig.INSTANCE.getDoubleTapActionOut().Int()), true);
+                } else if (position == cellGroup.rows.indexOf(messageStyleRow)) {
+                    int currentStyle = NekoConfig.meeroMessageStyle.Int();
+                    String styleName = MessageStyleHelper.getStyleName(currentStyle);
+                    textCell.setTextAndValue(
+                        MeeroStrings.s(473),  // "الخط"
+                        styleName,
+                        true
+                    );
                 } else if (position == cellGroup.rows.indexOf(transcribeProviderCfCredentialsRow)) {
                     textCell.setTextAndValue(getString(R.string.CloudflareCredentials), "", true);
                 } else if (position == cellGroup.rows.indexOf(transcribeProviderGeminiApiKeyRow)) {
@@ -817,6 +877,9 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
                     break;
                 case ConfigCellCustom.CUSTOM_ITEM_EmojiSet:
                     view = new EmojiSetCell(mContext, false);
+                    break;
+                case ConfigCellCustom.CUSTOM_ITEM_MessageStyle:
+                    view = new TextSettingsCell(mContext);
                     break;
                 case CellGroup.ITEM_TYPE_CHECK2:
                     view = new TextCheckCell2(mContext);
