@@ -23,7 +23,7 @@
     <string name="ActionBarDecoration">Title Bar Decoration</string>
     <string name="DependsOnDate">Depends on date</string>
     <string name="Christmas">Yule</string>
-    <string name="Valentine">Valentine's day</string>
+    <string name="Valentine">Valentine\'s day</string>
     <string name="Snowflakes">Snowflakes</string>
     <string name="Fireworks">Fireworks</string>
     <string name="DeleteDownloadedFile">Clear</string>
@@ -46,7 +46,7 @@
     <string name="TranslateFailed">Translate server error</string>
     <string name="TranslationProvider">Translation Provider</string>
     <string name="ProviderGoogleTranslate">Google Translate</string>
-    <string name="TranslateApiUnsupported">The translation provider you selected don't support your language.</string>
+    <string name="TranslateApiUnsupported">The translation provider you selected don\'t support your language.</string>
     <string name="ProviderLingocloud">LingoCloud Translate</string>
     <string name="UndoTranslate">Hide Translation</string>
     <string name="BotToken">Token</string>
@@ -70,9 +70,9 @@
     <string name="CallTo">Call to **%1$s**?</string>
     <string name="DisableNumberRounding">Disable Number Rounding</string>
     <string name="Categories">Categories</string>
-    <string name="OfficialChannel">aRRaSGram Channel</string>
+    <string name="OfficialChannel">MeeroX Channel</string>
     <string name="About">About</string>
-    <string name="IgnoreBlockedAbout">You'll no longer see messages from blocked users in groups.</string>
+    <string name="IgnoreBlockedAbout">You\'ll no longer see messages from blocked users in groups.</string>
     <string name="SourceCode">Source Code</string>
     <string name="ResetStickerSize">Reset sticker size</string>
     <string name="RestartAppToTakeEffect">Restart app to apply changes.</string>
@@ -105,15 +105,15 @@
     <string name="channelLabel">channel</string>
     <string name="MutualContact">Mutual contact</string>
     <string name="MutualContactDescription">This contact is a mutual contact.</string>
-    <string name="DatacenterStatusAbout">Check the status of Telegram's **datacenters**.</string>
+    <string name="DatacenterStatusAbout">Check the status of Telegram\'s **datacenters**.</string>
     <string name="DatacenterStatus">Datacenter Status</string>
     <string name="enhancedFileLoader">Download Speed Boost</string>
     <string name="mapDriftingFixForGoogleMaps">Fix Google Maps Drifting in China</string>
     <string name="useOSMDroidMap">Use OSMDroid Map</string>
-    <string name="UnknownNekoSettingsOption">There is no such aRRaSGram Settings option.</string>
+    <string name="UnknownNekoSettingsOption">There is no such MeeroX Settings option.</string>
     <string name="PasscodeNeeded">You have to enable passcode lock first</string>
     <string name="PasscodeNeko">Passcode</string>
-    <string name="PasscodeShowInSettings">Show in aRRaSGram Settings</string>
+    <string name="PasscodeShowInSettings">Show in MeeroX Settings</string>
     <string name="PasscodeShowInSettingsAbout">After hiding, you can **ONLY** open this page by link:</string>
     <string name="PasscodeSet">Set passcode</string>
     <string name="PasscodeEdit">Change passcode</string>
@@ -152,7 +152,7 @@
     <string name="ClearRecentChats">Clear recent chats</string>
     <string name="ClearRecentChatAlert">Do you want to clear your recent chats?</string>
     <string name="CloudConfig">Cloud Settings</string>
-    <string name="CloudConfigDesc">Save your aRRaSGram Settings to Telegram cloud.</string>
+    <string name="CloudConfigDesc">Save your MeeroX Settings to Telegram cloud.</string>
     <string name="CloudConfigSyncDate">Last synced: %s, cloud: %s</string>
     <string name="CloudConfigSyncDateNever">never</string>
     <string name="CloudConfigSync">Sync to cloud</string>
@@ -161,7 +161,7 @@
     <string name="CloudConfigRestoreShort">Restore</string>
     <string name="CloudConfigSyncing">Syncing...</string>
     <string name="CloudConfigAutoSync">Auto sync</string>
-    <string name="CloudConfigAutoSyncDesc">Sync to cloud automatically after making changes to aRRaSGram Settings.</string>
+    <string name="CloudConfigAutoSyncDesc">Sync to cloud automatically after making changes to MeeroX Settings.</string>
     <string name="CloudConfigSyncFailed">Failed to sync settings to cloud</string>
     <string name="CloudConfigRestoreFailed">Failed to restore settings from cloud</string>
     <string name="CopyCallback">Copy Callback Data</string>
@@ -179,7 +179,7 @@
     <string name="DisableLinkPreviewByDefault">Disable Link Preview by Default</string>
     <string name="CustomApi">Custom API</string>
     <string name="UseCustomApiNotice">Log in using the custom API, if you are unable to register or log in, this may help.\n\nNote: FCM will not work if you are using a custom API.</string>
-    <string name="CustomApiNo">Don't use custom API</string>
+    <string name="CustomApiNo">Don\'t use custom API</string>
     <string name="CustomApiInput">Manual input</string>
     <string name="LinkedGroupChat">Linked Group</string>
     <string name="LinkedChannelChat">Linked Channel</string>
@@ -201,7 +201,7 @@
     <string name="DeleteAllInChatAlert">Warning! This will **delete all messages** in this chat for **all** participants.</string>
     <string name="UnblockAll">Unblock All</string>
     <string name="UnblockAllWarn">Are you sure you want to unblock **all users and bots**?</string>
-    <string name="BlockedListEmpty">You haven't blocked anyone :)</string>
+    <string name="BlockedListEmpty">You haven\'t blocked anyone :)</string>
     <string name="AddProxySocks5">Add SOCKS5 Proxy</string>
     <string name="AddProxyTelegram">Add MTProto Proxy</string>
     <string name="RetestPing">Retest ping for all servers</string>
@@ -239,7 +239,7 @@
     <string name="AutoLockImmediately">Immediately</string>
     <string name="BackupSettings">Export Settings</string>
     <string name="ImportSettings">Import Settings</string>
-    <string name="ImportSettingsAlert">Overwrite the settings? Importing settings from unknown sources may cause the pin to be overwritten and the app to be locked.</string>
+    <string name="ImportSettingsAlert">Overwrite the settings\? Importing settings from unknown sources may cause the pin to be overwritten and the app to be locked.</string>
     <string name="nekoXPaymentRemovedToast">Payment features have been removed.</string>
     <string name="unreadBadgeOnBackButton">Unread Badge on Back Button</string>
     <string name="DeleteDownloadedFileConfirm">Delete this file from local cache?</string>
@@ -264,7 +264,7 @@
     <string name="ConvertGroupAlert">This action is irreversible. It is not possible to downgrade a supergroup to a regular group.</string>
     <string name="SharedPhotosAndVideos">Photos and videos</string>
     <string name="UnofficialApp">unofficial app</string>
-    <string name="FileUploadLimit">File size shouldn't be greater than %1$s</string>
+    <string name="FileUploadLimit">File size shouldn\'t be greater than %1$s</string>
     <string name="NoFilesInfo">This folder is empty.</string>
     <string name="SearchRecentFiles">Search Recent Files</string>
     <string name="NoFilesFoundInfo">There are no matches with **%1$s** in current directory.</string>
