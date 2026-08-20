@@ -5,7 +5,7 @@
     <string name="MessageMenu">Menu Messaggi</string>
     <string name="HidePhone">Nascondi numero di telefono</string>
     <string name="DeleteAllFromSelf">Elimina i miei messaggi</string>
-    <string name="DeleteAllFromSelfAlert">Attenzione! Questo **eliminerà tutti i tuoi messaggi prima di %s** in questa chat per **tutti** i partecipanti.</string>
+    <string name="DeleteAllFromSelfAlert">Attenzione! Questo **eliminerà tutti i tuoi messaggi** in questa chat per **tutti** i partecipanti.</string>
     <string name="DeleteAllFromSelfAlertBefore">Attenzione! Questa operazione **eliminerà tutti i messaggi inviati da te prima di %s** in questa chat per **tutti** i partecipanti.</string>
     <string name="DeleteAllFromSelfBefore">Prima...</string>
     <string name="DeleteAllFromSelfAdmin">Con diritti di amministratore</string>
@@ -25,7 +25,7 @@
     <string name="Christmas">Natale</string>
     <string name="Valentine">San Valentino</string>
     <string name="Snowflakes">Fiocchi di neve</string>
-    <string name="Fireworks">Fuochi d'artificio</string>
+    <string name="Fireworks">Fuochi d&apos;artificio</string>
     <string name="DeleteDownloadedFile">Cancella</string>
     <string name="TestBackend">Backend di test</string>
     <string name="ViewHistory">Cronologia</string>
@@ -59,7 +59,7 @@
     <string name="CheckAllAdministrated">Aggiungi amministrato</string>
     <string name="RearVideoMessages">Camera posteriore nei messaggi video</string>
     <string name="HideAllTab">Nascondi la scheda \"Tutte le Chat\"</string>
-    <string name="HideAllTabAbout">Premi a lungo il titolo nell'elenco delle chat per visualizzare Tutte le Chat.</string>
+    <string name="HideAllTabAbout">Premi a lungo il titolo nell&apos;elenco delle chat per visualizzare Tutte le Chat.</string>
     <string name="TabTitleType">Mostra nelle Schede</string>
     <string name="TabTitleTypeText">Titoli</string>
     <string name="TabTitleTypeIcon">Icone</string>
@@ -68,15 +68,15 @@
     <string name="AskBeforeCalling">Chiedi prima di chiamare</string>
     <string name="ConfirmCall">Conferma chiamata</string>
     <string name="CallTo">Chiamare **%1$s**?</string>
-    <string name="DisableNumberRounding">Disabilita l'arrotondamento dei numeri</string>
+    <string name="DisableNumberRounding">Disabilita l&apos;arrotondamento dei numeri</string>
     <string name="Categories">Categorie</string>
     <string name="OfficialChannel">Canale aRRaSGram</string>
     <string name="About">Informazioni</string>
     <string name="IgnoreBlockedAbout">Non vedrai più i messaggi degli utenti bloccati nei gruppi.</string>
     <string name="SourceCode">Codice Sorgente</string>
     <string name="ResetStickerSize">Reimposta la dimensione dello sticker</string>
-    <string name="RestartAppToTakeEffect">Riavvia l'app per applicare i cambiamenti.</string>
-    <string name="MediaPreview">Anteprima multimediale nell'elenco delle chat</string>
+    <string name="RestartAppToTakeEffect">Riavvia l&apos;app per applicare i cambiamenti.</string>
+    <string name="MediaPreview">Anteprima multimediale nell&apos;elenco delle chat</string>
     <string name="AutoPauseVideo">Pausa automatica del video</string>
     <string name="AutoPauseVideoAbout">Quando si blocca lo schermo/si passa allo sfondo.</string>
     <string name="DisableProximityEvents">Disabilita eventi di prossimità</string>
@@ -84,7 +84,7 @@
     <string name="ProviderDeepLTranslate">Traduttore DeepL</string>
     <string name="ProviderMicrosoftTranslator">Traduttore Bing</string>
     <string name="TakeGIFasVideo">Acquisisci GIF come Video</string>
-    <string name="HideTimeForSticker">Nascondi l'ora sugli sticker</string>
+    <string name="HideTimeForSticker">Nascondi l&apos;ora sugli sticker</string>
     <string name="hideGroupSticker">Nascondi sticker di gruppo</string>
     <string name="customGroupVoipAudioBitrate">Bitrate audio VoIP di gruppo</string>
     <string name="maxRecentStickerCount">Numero massimo di Sticker Recenti</string>
@@ -119,7 +119,7 @@
     <string name="PasscodeRemove">Rimuovi Codice di Accesso</string>
     <string name="PasscodeHideAccount">Nascondi account</string>
     <string name="PasscodeAllowPanic">Logout con Codice Antipanico</string>
-    <string name="PasscodeAbout">Imposta codici di accesso diversi per ogni account e passa da uno all'altro inserendo il codice di accesso corrispondente.</string>
+    <string name="PasscodeAbout">Imposta codici di accesso diversi per ogni account e passa da uno all&apos;altro inserendo il codice di accesso corrispondente.</string>
     <string name="PasscodePanicCode">Codice Antipanico</string>
     <string name="PasscodePanicCodeSet">Imposta Codice Antipanico</string>
     <string name="PasscodePanicCodeEdit">Modifica Codice Antipanico</string>
@@ -151,7 +151,7 @@
     <string name="ClearRecentChatAlert">Vuoi cancellare le tue chat recenti?</string>
     <string name="CloudConfig">Impostazioni Cloud</string>
     <string name="CloudConfigDesc">Salva le tue Impostazioni aRRaSGram sul cloud di Telegram.</string>
-    <string name="CloudConfigSyncDate">Ultima sincronizzazione: %s, cloud: %s</string>
+    <string name="CloudConfigSyncDate" formatted="false">Ultima sincronizzazione: %s, cloud: %s</string>
     <string name="CloudConfigSyncDateNever">Mai</string>
     <string name="CloudConfigSync">Sincronizza con il cloud</string>
     <string name="CloudConfigSyncShort">Sincronizza</string>
@@ -175,14 +175,14 @@
     <string name="UseChatAttachEnterMenuNotice">Cambia il pulsante della registrazione in un menu di input e aggiungi un pulsante di anteprima link.</string>
     <string name="DisableLinkPreviewByDefault">Disabilita Anteprima Link per impostazione predefinita</string>
     <string name="CustomApi">API Personalizzata</string>
-    <string name="UseCustomApiNotice">Accedi utilizzando l'API personalizzata. Se non riesci a registrarti o ad accedere, questo potrebbe esserti d'aiuto.\n\nNota: FCM non funzionerà se utilizzi un'API personalizzata.</string>
+    <string name="UseCustomApiNotice">Accedi utilizzando l&apos;API personalizzata. Se non riesci a registrarti o ad accedere, questo potrebbe esserti d&apos;aiuto.\n\nNota: FCM non funzionerà se utilizzi un&apos;API personalizzata.</string>
     <string name="CustomApiNo">Non utilizzare API personalizzate</string>
     <string name="CustomApiInput">Inserimento manuale</string>
     <string name="LinkedGroupChat">Gruppo collegato</string>
     <string name="LinkedChannelChat">Canale collegato</string>
     <string name="ChangeTranslateProvider">Cambia provider</string>
     <string name="ProviderYandexTranslate">Traduttore Yandex</string>
-    <string name="GoogleCloudTransKeyNotice">Se si configura Google Cloud Trans Key, durante la traduzione verrà richiamata l'API di traduzione cloud invece di inviare un modulo falso alla versione web (più veloce, stabile e con risparmio di traffico).</string>
+    <string name="GoogleCloudTransKeyNotice">Se si configura Google Cloud Trans Key, durante la traduzione verrà richiamata l&apos;API di traduzione cloud invece di inviare un modulo falso alla versione web (più veloce, stabile e con risparmio di traffico).</string>
     <string name="TransToLang">Lingua di destinazione</string>
     <string name="TransInputToLang">Lingua di traduzione pre-invio</string>
     <string name="More">Altro</string>
@@ -218,7 +218,7 @@
     <string name="TransSite">Aiuto con la traduzione</string>
     <string name="ShareMessages">Condividi</string>
     <string name="DisableVibration">Disabilita Vibrazione</string>
-    <string name="SendCommentAfterForward">Manda un Commento dopo L'inoltro</string>
+    <string name="SendCommentAfterForward">Manda un Commento dopo L&apos;inoltro</string>
     <string name="ImportLogin">Accesso tramite QR</string>
     <string name="UserRestrictionsSendGames">Invia giochi</string>
     <string name="UserRestrictionsSendInline">Invia tramite Inline Bot</string>
@@ -235,7 +235,7 @@
     <string name="AutoLockImmediately">Immediatamente</string>
     <string name="BackupSettings">Esporta Impostazioni</string>
     <string name="ImportSettings">Importa Impostazioni</string>
-    <string name="ImportSettingsAlert">Sovrascrivere le impostazioni? L'importazione di impostazioni da fonti sconosciute potrebbe causare la sovrascrittura del PIN e il blocco dell'app.</string>
+    <string name="ImportSettingsAlert">Sovrascrivere le impostazioni? L&apos;importazione di impostazioni da fonti sconosciute potrebbe causare la sovrascrittura del PIN e il blocco dell&apos;app.</string>
     <string name="nekoXPaymentRemovedToast">Le funzionalità di pagamento sono state rimosse.</string>
     <string name="unreadBadgeOnBackButton">Badge non letto sul pulsante Indietro</string>
     <string name="DeleteDownloadedFileConfirm">Eliminare questo file dalla cache locale?</string>
