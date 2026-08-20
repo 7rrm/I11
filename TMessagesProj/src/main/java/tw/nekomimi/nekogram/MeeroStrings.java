@@ -491,7 +491,19 @@ public final class MeeroStrings {
         put("MeeroMenuWatchDiagDesc", "Off by default - turn on only when a menu misbehaves: it copies a technical report you can send to the developer", "مطفأ افتراضيًا — شغّله فقط إذا صارت مشكلة بقائمة: ينسخ تقريرًا فنيًا ترسله للمطور");
         put("MeeroIosAttachPanel", "iOS-style attach sheet", "لوحة إرفاق بنمط آيفون");
         put("MeeroIosAttachPanelDesc", "The attach panel's first face in iOS style: drag grabber and a grouped action list with colored icons", "الوجهة الأولى للوحة الإرفاق بشكل iOS: قبضة سحب وقائمة إجراءات مجمعة بأيقونات ملونة");
-
+        put("MessageActions", "Message actions", "إجراءات الرسالة");
+        put("MessageStyle", "Font style", "الخط");
+        put("MessageStyleDefault", "Default", "افتراضي");
+        put("MessageStyleBold", "Bold", "عريض");
+        put("MessageStyleItalic", "Italic", "مائل");
+        put("MessageStyleStrike", "Strikethrough", "متوسط خط");
+        put("MessageStyleUnderline", "Underline", "سفلي");
+        put("MessageStyleSpoiler", "Spoiler", "تشويش");
+        put("MessageStyleQuote", "Quote", "اقتباس");
+        put("MessageStyleCode", "Code", "كود");
+        put("MessageStyleMono", "Monospace", "نص أحادي");
+        put("MessageStyleApplied", "Font style set to: %s", "تم تعيين الخط إلى: %s");
+        put("MessageStyleHeader", "Choose font style", "اختر نمط الخط");
     }
         // ============================================================
         // ✅ المفاتيح من strings_meerox.xml (موجودة هنا)
@@ -981,8 +993,19 @@ public final class MeeroStrings {
         ID_TO_KEY.put(469, "MeeroMenuWatchDiagDesc");
         ID_TO_KEY.put(470, "MeeroIosAttachPanel");
         ID_TO_KEY.put(471, "MeeroIosAttachPanelDesc");
-        
-        // ✅ تعريف الأرقام للمفاتيح الجديدة
+        ID_TO_KEY.put(472, "MessageActions");
+        ID_TO_KEY.put(473, "MessageStyle");
+        ID_TO_KEY.put(474, "MessageStyleDefault");
+        ID_TO_KEY.put(475, "MessageStyleBold");
+        ID_TO_KEY.put(476, "MessageStyleItalic");
+        ID_TO_KEY.put(477, "MessageStyleStrike");
+        ID_TO_KEY.put(478, "MessageStyleUnderline");
+        ID_TO_KEY.put(479, "MessageStyleSpoiler");
+        ID_TO_KEY.put(480, "MessageStyleQuote");
+        ID_TO_KEY.put(481, "MessageStyleCode");
+        ID_TO_KEY.put(482, "MessageStyleMono");
+        ID_TO_KEY.put(483, "MessageStyleApplied");
+        ID_TO_KEY.put(484, "MessageStyleHeader");
     }
 
     private static boolean isArabic() {
