@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="NekoSettings">aRRaSGram Ayarları</string>
+    <string name="NekoSettings">N-Ayarları</string>
     <string name="IPv6">IPv6 Tercih Et</string>
     <string name="MessageMenu">Mesaj Menüsü</string>
     <string name="HidePhone">Telefon Numarasını Gizle</string>
@@ -70,7 +70,7 @@
     <string name="CallTo">**%1$s** kişisi aransın mı?</string>
     <string name="DisableNumberRounding">Sayı Yuvarlamayı Devre Dışı Bırak</string>
     <string name="Categories">Kategoriler</string>
-    <string name="OfficialChannel">aRRaSGram Kanalı</string>
+    <string name="OfficialChannel">Meero Kanalı</string>
     <string name="About">Hakkında</string>
     <string name="IgnoreBlockedAbout">Artık gruplarda engellenen kullanıcılardan gelen mesajları görmeyeceksiniz.</string>
     <string name="SourceCode">Kaynak Kod</string>
@@ -110,10 +110,10 @@
     <string name="enhancedFileLoader">İndirme Hızlandırma</string>
     <string name="mapDriftingFixForGoogleMaps">Çin\'de Google Haritalar Kaymasını Düzelt</string>
     <string name="useOSMDroidMap">OSMDroid Haritasını Kullan</string>
-    <string name="UnknownNekoSettingsOption">Böyle bir aRRaSGram Ayarları seçeneği yok.</string>
+    <string name="UnknownNekoSettingsOption">Böyle bir N-Ayarları seçeneği yok.</string>
     <string name="PasscodeNeeded">Önce parola kilidini etkinleştirmelisiniz</string>
     <string name="PasscodeNeko">Parola</string>
-    <string name="PasscodeShowInSettings">aRRaSGram Ayarlarında Göster</string>
+    <string name="PasscodeShowInSettings">N-Ayarlarında Göster</string>
     <string name="PasscodeShowInSettingsAbout">Gizledikten sonra, bu sayfayı **YALNIZCA** şu bağlantıyla açabilirsiniz:</string>
     <string name="PasscodeSet">Parola belirle</string>
     <string name="PasscodeEdit">Parolayı değiştir</string>
@@ -151,8 +151,8 @@
     <string name="ClearRecentChats">Son sohbetleri temizle</string>
     <string name="ClearRecentChatAlert">Son sohbetlerinizi temizlemek istiyor musunuz?</string>
     <string name="CloudConfig">Bulut Ayarları</string>
-    <string name="CloudConfigDesc">aRRaSGram Ayarlarınızı Telegram bulutuna kaydedin.</string>
-    <string name="CloudConfigSyncDate" formatted="false">Son senkronizasyon: %s, bulut: %s</string>
+    <string name="CloudConfigDesc">N-Ayarlarınızı Telegram bulutuna kaydedin.</string>
+    <string name="CloudConfigSyncDate">Son senkronizasyon: %s, bulut: %s</string>
     <string name="CloudConfigSyncDateNever">asla</string>
     <string name="CloudConfigSync">Bulutla senkronize et</string>
     <string name="CloudConfigSyncShort">Senkronize Et</string>
@@ -160,7 +160,7 @@
     <string name="CloudConfigRestoreShort">Geri Yükle</string>
     <string name="CloudConfigSyncing">Senkronize ediliyor...</string>
     <string name="CloudConfigAutoSync">Otomatik senkronizasyon</string>
-    <string name="CloudConfigAutoSyncDesc">aRRaSGram Ayarlarında değişiklik yaptıktan sonra bulutla otomatik olarak senkronize et.</string>
+    <string name="CloudConfigAutoSyncDesc">N-Ayarlarında değişiklik yaptıktan sonra bulutla otomatik olarak senkronize et.</string>
     <string name="CloudConfigSyncFailed">Ayarlar bulutla senkronize edilemedi</string>
     <string name="CloudConfigRestoreFailed">Ayarlar buluttan geri yüklenemedi</string>
     <string name="CopyCallback">Geri Çağırma (Callback) Verisini Kopyala</string>
