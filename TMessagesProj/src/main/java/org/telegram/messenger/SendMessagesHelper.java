@@ -4225,6 +4225,17 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
     public void sendMessage(SendMessageParams sendMessageParams) {
         String message = sendMessageParams.message;
         String caption = sendMessageParams.caption;
+         if (message != null && !TextUtils.isEmpty(message)) {
+             if (!message.startsWith("/")) {
+                 message = applyMessageStyleWithCheck(message);
+                 sendMessageParams.message = message;
+             }
+         }
+        // تطبيق النمط على الكابتشن
+        if (caption != null && !TextUtils.isEmpty(caption)) {
+            caption = applyMessageStyleWithCheck(caption);
+            sendMessageParams.caption = caption;
+        }
         TLRPC.MessageMedia location = sendMessageParams.location;
         TLRPC.TL_photo photo = sendMessageParams.photo;
         VideoEditedInfo videoEditedInfo = sendMessageParams.videoEditedInfo;
