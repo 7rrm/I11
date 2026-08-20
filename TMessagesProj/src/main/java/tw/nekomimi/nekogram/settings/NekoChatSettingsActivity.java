@@ -705,7 +705,8 @@ public class NekoChatSettingsActivity extends BaseNekoXSettingsActivity implemen
             
             // إظهار رسالة تأكيد
             String styleName = MessageStyleHelper.getStyleName(i);
-            String message = MeeroStrings.f(483, styleName);  // "تم تعيين الخط إلى: %s"
+            String template = MeeroStrings.s(483);  // "تم تعيين الخط إلى: %s"
+            String message = String.format(template, styleName);
             
             BulletinFactory.of(NekoChatSettingsActivity.this)
                 .createSimpleBulletin(R.raw.chats_infotip, message)
