@@ -134,6 +134,7 @@ import java.util.zip.ZipInputStream;
 import tw.nekomimi.nekogram.utils.StringUtils;
 import tw.nekomimi.nekogram.NekoConfig;
 import xyz.nextalone.nagram.NaConfig;
+import tw.nekomimi.nekogram.MessageStyleHelper;
 
 public class SendMessagesHelper extends BaseController implements NotificationCenter.NotificationCenterDelegate {
 
@@ -12355,5 +12356,33 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             }
             out.force(true);
         }}
+    }
+    public static String applyMessageStyle(String text) {
+        if (TextUtils.isEmpty(text)) {
+            return text;
+        }
+        try {
+            int style = NekoConfig.meeroMessageStyle.Int();
+            return MessageStyleHelper.applyStyle(text, style);
+        } catch (Exception e) {
+            return text;
+        }
+    }
+    public static String applyMessageStyleWithCheck(String text) {
+        if (TextUtils.isEmpty(text)) {
+            return text;
+        }
+        try {
+            int style = NekoConfig.meeroMessageStyle.Int();
+            return MessageStyleHelper.applyStyleWithCheck(text, style);
+        } catch (Exception e) {
+            return text;
+        }
+    }
+    public static CharSequence applyMessageStyle(CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return text;
+        }
+        return applyMessageStyle(text.toString());
     }
 }
