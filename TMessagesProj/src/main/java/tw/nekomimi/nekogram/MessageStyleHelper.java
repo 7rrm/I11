@@ -2,6 +2,10 @@ package tw.nekomimi.nekogram;
 
 import android.text.TextUtils;
 
+import org.telegram.tgnet.TLRPC;
+
+import java.util.ArrayList;
+
 /**
  * مساعد أنماط الرسائل
  * يحتوي على ثوابت أنماط الخطوط وأسمائها وطرق تطبيقها
@@ -153,5 +157,89 @@ public class MessageStyleHelper {
      */
     public static boolean isTextOnlyStyle(int styleIndex) {
         return styleIndex == STYLE_QUOTE || styleIndex == STYLE_CODE || styleIndex == STYLE_MONO;
+    }
+
+    // ============================================================
+    // 🆕 دوال إنشاء الكيانات (Entities) للتنسيق
+    // ============================================================
+
+    /**
+     * إنشاء كيان تنسيق حسب النمط المختار
+     * @param styleIndex رقم النمط
+     * @param start بداية النص
+     * @param length طول النص
+     * @return كيان التنسيق المناسب
+     */
+    public static TLRPC.MessageEntity createEntity(int styleIndex, int start, int length) {
+        switch (styleIndex) {
+            case STYLE_BOLD:
+                TLRPC.TL_messageEntityBold bold = new TLRPC.TL_messageEntityBold();
+                bold.offset = start;
+                bold.length = length;
+                return bold;
+            case STYLE_ITALIC:
+                TLRPC.TL_messageEntityItalic italic = new TLRPC.TL_messageEntityItalic();
+                italic.offset = start;
+                italic.length = length;
+                return italic;
+            case STYLE_STRIKE:
+                TLRPC.TL_messageEntityStrike strike = new TLRPC.TL_messageEntityStrike();
+                strike.offset = start;
+                strike.length = length;
+                return strike;
+            case STYLE_UNDERLINE:
+                TLRPC.TL_messageEntityUnderline underline = new TLRPC.TL_messageEntityUnderline();
+                underline.offset = start;
+                underline.length = length;
+                return underline;
+            case STYLE_SPOILER:
+                TLRPC.TL_messageEntitySpoiler spoiler = new TLRPC.TL_messageEntitySpoiler();
+                spoiler.offset = start;
+                spoiler.length = length;
+                return spoiler;
+            case STYLE_QUOTE:
+                TLRPC.TL_messageEntityBlockquote quote = new TLRPC.TL_messageEntityBlockquote();
+                quote.offset = start;
+                quote.length = length;
+                quote.flags |= 1;  // collapsed = true
+                return quote;
+            case STYLE_CODE:
+                TLRPC.TL_messageEntityCode code = new TLRPC.TL_messageEntityCode();
+                code.offset = start;
+                code.length = length;
+                return code;
+            case STYLE_MONO:
+                TLRPC.TL_messageEntityPre pre = new TLRPC.TL_messageEntityPre();
+                pre.offset = start;
+                pre.length = length;
+                pre.language = "";
+                return pre;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * تطبيق النمط باستخدام الكيانات (بدون تعديل النص)
+     * @param entities قائمة الكيانات الموجودة
+     * @param styleIndex رقم النمط
+     * @param textLength طول النص
+     * @return قائمة الكيانات بعد الإضافة
+     */
+    public static ArrayList<TLRPC.MessageEntity> applyStyleWithEntity(ArrayList<TLRPC.MessageEntity> entities, int styleIndex, int textLength) {
+        if (styleIndex == STYLE_DEFAULT || textLength <= 0) {
+            return entities;
+        }
+        
+        if (entities == null) {
+            entities = new ArrayList<>();
+        }
+        
+        TLRPC.MessageEntity entity = createEntity(styleIndex, 0, textLength);
+        if (entity != null) {
+            entities.add(entity);
+        }
+        
+        return entities;
     }
 }
