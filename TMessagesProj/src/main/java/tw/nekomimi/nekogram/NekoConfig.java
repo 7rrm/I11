@@ -169,6 +169,12 @@ public class NekoConfig {
     public static ConfigItem meeroIosCall = addConfig("meeroIosCall", configTypeBool, true);
     public static ConfigItem meeroIosAlerts = addConfig("meeroIosAlerts", configTypeBool, true);
     public static ConfigItem meeroIosMediaGrid = addConfig("meeroIosMediaGrid", configTypeBool, true);
+
+    // ============================================================
+    // 🆕 MeeroX: إعدادات نمط الرسالة (Message Style)
+    // ============================================================
+    public static ConfigItem meeroMessageStyle = addConfig("meeroMessageStyle", configTypeInt, 0);
+
     // MeeroX v92: delivery ticks - master switch (off = official Android
     // Telegram ticks) and the chosen shape (0 = the original iOS pair).
     public static ConfigItem meeroTicksSwitch = addConfig("meeroTicksSwitch", configTypeBool, true);
