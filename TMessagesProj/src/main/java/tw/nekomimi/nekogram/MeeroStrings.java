@@ -504,6 +504,28 @@ public final class MeeroStrings {
         put("MessageStyleMono", "Monospace", "نص أحادي");
         put("MessageStyleApplied", "Font style set to: %s", "تم تعيين الخط إلى: %s");
         put("MessageStyleHeader", "Choose font style", "اختر نمط الخط");
+        put("TagHunter", "Tag Hunter", "صائد التاكات");
+        put("TagHunterInfo", "Get notified when someone mentions your tags or replies to your messages in groups", "يُعلمك عندما يذكر أحدهم تاكاتك أو يرد على رسائلك في المجموعات");
+        put("TagHunterEnable", "Enable Tag Hunter", "تفعيل صائد التاكات");
+        put("TagHunterAddChats", "Add chats", "إضافة دردشات");
+        put("TagHunterAllChats", "All chats", "كل المحادثات");
+        put("TagHunterSpecificChat", "Specific chat", "دردشة محددة");
+        put("TagHunterAddTag", "Add tag", "إضافة تاك");
+        put("TagHunterTagHint", "e.g. @username, #hashtag, keyword", "مثال: @اسم_المستخدم, #هاشتاغ, كلمة");
+        put("TagHunterTrackReplies", "Track replies to my messages", "تتبع الردود على رسائلي");
+        put("TagHunterNoTags", "No tags added yet", "لا توجد تاكات مضاف بعد");
+        put("TagHunterDelete", "Delete tag", "حذف التاك");
+        put("TagHunterEdit", "Edit tag", "تعديل التاك");
+        put("TagHunterSaved", "Tag saved: %s", "تم حفظ التاك: %s");
+        put("TagHunterExists", "This tag already exists", "هذا التاك موجود بالفعل");
+        put("TagHunterEmpty", "Please enter a tag", "الرجاء إدخال تاك");
+        put("TagHunterClearConfirm", "Delete all tags?", "حذف جميع التاكات؟");
+        put("TagHunterClearDone", "All tags cleared", "تم حذف جميع التاكات");
+        put("TagHunterClear", "Clear all tags", "مسح جميع التاكات");
+        put("TagHunterMentioned", "mentioned you", "ذكرك");
+        put("TagHunterReplied", "replied to you", "رد عليك");
+        put("TagHunterGroupsOnly", "Tags work only in groups and channels", "التاكات تعمل فقط في المجموعات والقنوات");
+        put("TagHunterNoMessage", "No messages yet", "لا توجد رسائل بعد");
     }
         // ============================================================
         // ✅ المفاتيح من strings_meerox.xml (موجودة هنا)
@@ -1006,6 +1028,28 @@ public final class MeeroStrings {
         ID_TO_KEY.put(482, "MessageStyleMono");
         ID_TO_KEY.put(483, "MessageStyleApplied");
         ID_TO_KEY.put(484, "MessageStyleHeader");
+        ID_TO_KEY.put(485, "TagHunter");
+        ID_TO_KEY.put(486, "TagHunterInfo");
+        ID_TO_KEY.put(487, "TagHunterEnable");
+        ID_TO_KEY.put(488, "TagHunterAddChats");
+        ID_TO_KEY.put(489, "TagHunterAllChats");
+        ID_TO_KEY.put(490, "TagHunterSpecificChat");
+        ID_TO_KEY.put(491, "TagHunterAddTag");
+        ID_TO_KEY.put(492, "TagHunterTagHint");
+        ID_TO_KEY.put(493, "TagHunterTrackReplies");
+        ID_TO_KEY.put(494, "TagHunterNoTags");
+        ID_TO_KEY.put(495, "TagHunterDelete");
+        ID_TO_KEY.put(496, "TagHunterEdit");
+        ID_TO_KEY.put(497, "TagHunterSaved");
+        ID_TO_KEY.put(498, "TagHunterExists");
+        ID_TO_KEY.put(499, "TagHunterEmpty");
+        ID_TO_KEY.put(500, "TagHunterClearConfirm");
+        ID_TO_KEY.put(501, "TagHunterClearDone");
+        ID_TO_KEY.put(502, "TagHunterClear");
+        ID_TO_KEY.put(503, "TagHunterMentioned");
+        ID_TO_KEY.put(504, "TagHunterReplied");
+        ID_TO_KEY.put(505, "TagHunterGroupsOnly");
+        ID_TO_KEY.put(506, "TagHunterNoMessage");
     }
 
     private static boolean isArabic() {
