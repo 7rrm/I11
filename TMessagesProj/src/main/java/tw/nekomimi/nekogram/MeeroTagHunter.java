@@ -20,7 +20,7 @@ import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.UserConfig;
-import org.telegram.messenger.UserObject;  // ✅ إضافة الاستيراد
+import org.telegram.messenger.UserObject;
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.LaunchActivity;
 
@@ -115,9 +115,9 @@ public class MeeroTagHunter {
                 String tagLower = entry.tag.toLowerCase(Locale.ROOT);
                 if (!lowerText.contains(tagLower)) continue;
 
-                // ✅ تصحيح: استخدام getFromUserId() بدلاً من getFromId()
+                // ✅ تصحيح: استخدام getFromId() بدلاً من getFromUserId()
                 if (entry.trackReplies && msg.replyMessageObject != null) {
-                    long replyFromId = msg.replyMessageObject.getFromUserId();
+                    long replyFromId = msg.replyMessageObject.getFromId();
                     if (replyFromId != selfId) continue;
                 }
 
@@ -336,4 +336,4 @@ public class MeeroTagHunter {
         }
         return false;
     }
-}
+                }
