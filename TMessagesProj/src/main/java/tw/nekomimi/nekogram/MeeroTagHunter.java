@@ -13,7 +13,6 @@ import androidx.core.app.NotificationManagerCompat;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.DialogObject;
 import org.telegram.messenger.MessageObject;
@@ -21,6 +20,7 @@ import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.UserConfig;
+import org.telegram.messenger.UserObject;  // ✅ إضافة الاستيراد
 import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.LaunchActivity;
 
@@ -115,8 +115,9 @@ public class MeeroTagHunter {
                 String tagLower = entry.tag.toLowerCase(Locale.ROOT);
                 if (!lowerText.contains(tagLower)) continue;
 
+                // ✅ تصحيح: استخدام getFromUserId() بدلاً من getFromId()
                 if (entry.trackReplies && msg.replyMessageObject != null) {
-                    long replyFromId = msg.replyMessageObject.getFromId();
+                    long replyFromId = msg.replyMessageObject.getFromUserId();
                     if (replyFromId != selfId) continue;
                 }
 
@@ -335,4 +336,4 @@ public class MeeroTagHunter {
         }
         return false;
     }
-              }
+}
