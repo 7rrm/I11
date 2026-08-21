@@ -58,6 +58,20 @@ public class MeeroTagHunter {
     }
 
     // ============================================================
+    // دالة مساعدة للحصول على معرف المرسل (مثل صائد الحذف)
+    // ============================================================
+
+    private static long getSenderId(MessageObject msg) {
+        try {
+            if (msg != null && msg.messageOwner != null && 
+                msg.messageOwner.from_id != null) {
+                return msg.messageOwner.from_id.user_id;
+            }
+        } catch (Throwable e) {}
+        return 0;
+    }
+
+    // ============================================================
     // بدء التشغيل
     // ============================================================
 
@@ -115,9 +129,9 @@ public class MeeroTagHunter {
                 String tagLower = entry.tag.toLowerCase(Locale.ROOT);
                 if (!lowerText.contains(tagLower)) continue;
 
-                // ✅ تصحيح: استخدام getFromId() بدلاً من getFromUserId()
+                // ✅ تصحيح: استخدام getSenderId() مثل صائد الحذف
                 if (entry.trackReplies && msg.replyMessageObject != null) {
-                    long replyFromId = msg.replyMessageObject.getFromId();
+                    long replyFromId = getSenderId(msg.replyMessageObject);
                     if (replyFromId != selfId) continue;
                 }
 
