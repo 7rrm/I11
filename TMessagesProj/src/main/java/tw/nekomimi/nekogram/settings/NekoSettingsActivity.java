@@ -94,6 +94,8 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity {
     private int watchRow;
     /** MeeroX v103: delete/edit catcher entry. */
     private int hunterRow;
+    /** 🆕 MeeroX v202: tag hunter entry. */
+    private int tagHunterRow;
     /** MeeroX v105: keyword alert + view-once guard entries. */
     private int keywordRow;
     /** MeeroX v161: theme mixer + smart folders entries (his approved picks). */
@@ -139,6 +141,7 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity {
         activityStatsRow = addRow();
         watchRow = addRow();
         hunterRow = addRow();
+        tagHunterRow = addRow();  // 🆕 صائد التاكات
         keywordRow = addRow();
         mixerRow = addRow();
         foldersRow = addRow();
@@ -462,6 +465,8 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity {
             presentFragment(new MeeroWatchActivity());
         } else if (position == hunterRow) {
             presentFragment(new MeeroDeleteHunterActivity());
+        } else if (position == tagHunterRow) {
+            presentFragment(new MeeroTagHunterActivity());  // 🆕
         } else if (position == keywordRow) {
             presentFragment(new MeeroKeywordAlertActivity());
         } else if (position == mixerRow) {
@@ -561,6 +566,8 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity {
                         textCell.setTextAndIcon(MeeroStrings.s(313), R.drawable.msg_views_solar, true);
                     } else if (position == hunterRow) {
                         textCell.setTextAndIcon(MeeroStrings.s(128), R.drawable.baseline_delete_forever_24, true);
+                    } else if (position == tagHunterRow) {
+                        textCell.setTextAndIcon(MeeroStrings.s(485), R.drawable.msg_tag_solar, true);  // 🆕
                     } else if (position == keywordRow) {
                         textCell.setTextAndIcon(MeeroStrings.s(162), R.drawable.msg_search_solar, true);
                     } else if (position == mixerRow) {
@@ -611,7 +618,7 @@ public class NekoSettingsActivity extends BaseNekoSettingsActivity {
             } else if (position == meeroRow ||
                     position == chatRow || position == generalRow || position == passcodeRow || position == experimentRow || position == translatorRow ||
                     position == autoReplyRow ||
-                    position == activityStatsRow || position == watchRow || position == hunterRow ||
+                    position == activityStatsRow || position == watchRow || position == hunterRow || position == tagHunterRow ||
                     position == keywordRow || position == mixerRow || position == foldersRow ||
                     position == onceGuardRow || position == lockRow ||
                     position == fontsRow ||
