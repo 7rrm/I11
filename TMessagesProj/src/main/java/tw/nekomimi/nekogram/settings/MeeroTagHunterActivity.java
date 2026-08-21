@@ -170,7 +170,8 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
         return false;
     }
 
-    private void openMessage(long dialogId, int msgId) {
+    // ✅ تصحيح: تغيير int msgId إلى long msgId
+    private void openMessage(long dialogId, long msgId) {
         if (dialogId == 0 || msgId == 0) return;
         Bundle args = new Bundle();
         if (dialogId < 0) {
@@ -178,7 +179,7 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
         } else {
             args.putLong("user_id", dialogId);
         }
-        args.putInt("message_id", msgId);
+        args.putLong("message_id", msgId);
         org.telegram.ui.ChatActivity chatActivity = new org.telegram.ui.ChatActivity(args);
         presentFragment(chatActivity);
     }
