@@ -211,7 +211,7 @@ public class DialogCell extends BaseCell implements StoriesListPlaceProvider.Ava
      */
     private static final int MEERO_AVATAR_SIZE = 56;
     private static final int MEERO_AVATAR_START = 12;
-    private static final int MEERO_TEXT_START = 84;
+    private static final int MEERO_TEXT_START = 82;
 
     /** Avatar diameter for this row, in dp. */
     private int meeroAvatarSize() {
