@@ -227,6 +227,11 @@ public class NekoConfig {
     // are imported+cleared on first native run. ---
     public static ConfigItem meeroAutoReplyStore = addConfig("meeroAutoReplyStore", configTypeString, "");
     public static ConfigItem meeroKeywordStore = addConfig("meeroKeywordStore", configTypeString, "");
+    // ============================================================
+    // MeeroX: صائد التاكات (Tag Hunter)
+    // ============================================================
+    public static ConfigItem meeroTagHunter = addConfig("meeroTagHunter", configTypeBool, false);
+    public static ConfigItem meeroTagHunterList = addConfig("meeroTagHunterList", configTypeString, "");
     // --- v105: view-once guard (auto-save incoming once media to gallery) ---
     public static ConfigItem meeroOnceGuard = addConfig("meeroOnceGuard", configTypeBool, false);
     public static ConfigItem meeroOnceSavedCount = addConfig("meeroOnceSavedCount", configTypeInt, 0);
