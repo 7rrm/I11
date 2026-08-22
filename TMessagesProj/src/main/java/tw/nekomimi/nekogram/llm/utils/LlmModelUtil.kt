@@ -5,7 +5,7 @@ import tw.nekomimi.nekogram.llm.preset.LlmPresetRegistry
 
 object LlmModelUtil {
 
-    private val  = Regex(
+    private val gemma4ThoughtTagRegex = Regex(
         "<thought>.*?</thought>",
         setOf(RegexOption.IGNORE_CASE, RegexOption.DOT_MATCHES_ALL)
     )
