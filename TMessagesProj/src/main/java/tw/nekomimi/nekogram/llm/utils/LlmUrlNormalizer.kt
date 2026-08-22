@@ -2,7 +2,7 @@ package tw.nekomimi.nekogram.llm.utils
 
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-object UrlNormalizer {
+object LlmUrlNormalizer {
 
     private const val HTTP_PREFIX = "http://"
     private const val HTTPS_PREFIX = "https://"
