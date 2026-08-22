@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.telegram.messenger.ApplicationLoader;
 import org.telegram.messenger.DialogObject;
+import org.telegram.messenger.FileLog;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
@@ -72,7 +73,7 @@ public class MeeroTagHunter {
     }
 
     // ============================================================
-    // بدء التشغيل
+    // بدء التشغيل (باستخدام الطريقة الصحيحة)
     // ============================================================
 
     public static void start() {
@@ -80,13 +81,22 @@ public class MeeroTagHunter {
         synchronized (MeeroTagHunter.class) {
             if (started) return;
             started = true;
+            
+            FileLog.d("MeeroTagHunter: ⚡ Starting Tag Hunter...");
+            
             for (int account = 0; account < UserConfig.MAX_ACCOUNT_COUNT; account++) {
-                NotificationCenter.getInstance(account).addObserver((id, account1, args) -> {
-                    if (id == NotificationCenter.didReceiveNewMessages) {
-                        onNewMessages(account1, args);
+                // ✅ الطريقة الصحيحة لإضافة Observer
+                NotificationCenter.getInstance(account).addObserver(new NotificationCenter.NotificationCenterDelegate() {
+                    @Override
+                    public void didReceivedNotification(int id, int account1, Object... args) {
+                        if (id == NotificationCenter.didReceiveNewMessages) {
+                            onNewMessages(account1, args);
+                        }
                     }
                 }, NotificationCenter.didReceiveNewMessages);
             }
+            
+            FileLog.d("MeeroTagHunter: ✅ Tag Hunter started for " + UserConfig.MAX_ACCOUNT_COUNT + " accounts");
         }
     }
 
@@ -95,44 +105,90 @@ public class MeeroTagHunter {
     // ============================================================
 
     private static void onNewMessages(int account, Object[] args) {
-        if (!NekoConfig.meeroTagHunter.Bool()) return;
-        if (!UserConfig.getInstance(account).isClientActivated()) return;
-        if (args == null || args.length < 3) return;
+        FileLog.d("MeeroTagHunter: 📩 onNewMessages called, account=" + account);
+        
+        if (!NekoConfig.meeroTagHunter.Bool()) {
+            FileLog.d("MeeroTagHunter: ❌ feature is OFF");
+            return;
+        }
+        
+        if (!UserConfig.getInstance(account).isClientActivated()) {
+            FileLog.d("MeeroTagHunter: ❌ account not activated");
+            return;
+        }
+        
+        if (args == null || args.length < 3) {
+            FileLog.d("MeeroTagHunter: ❌ args null");
+            return;
+        }
 
         long now = System.currentTimeMillis();
         long dialogId = (Long) args[0];
         @SuppressWarnings("unchecked")
         ArrayList<MessageObject> messages = (ArrayList<MessageObject>) args[1];
         boolean scheduled = (Boolean) args[2];
-        if (scheduled || messages == null) return;
+        
+        FileLog.d("MeeroTagHunter: ✅ new message, dialogId=" + dialogId + ", messages=" + (messages != null ? messages.size() : 0));
+        
+        if (scheduled || messages == null) {
+            FileLog.d("MeeroTagHunter: ❌ scheduled or null");
+            return;
+        }
 
-        if (!DialogObject.isChatDialog(dialogId)) return;
+        if (!DialogObject.isChatDialog(dialogId)) {
+            FileLog.d("MeeroTagHunter: ❌ not a chat dialog");
+            return;
+        }
 
         ArrayList<TagEntry> tags = getTags();
-        if (tags.isEmpty()) return;
+        if (tags.isEmpty()) {
+            FileLog.d("MeeroTagHunter: ❌ no tags found");
+            return;
+        }
 
         long selfId = UserConfig.getInstance(account).getClientUserId();
+        FileLog.d("MeeroTagHunter: ✅ checking " + tags.size() + " tags");
 
         for (MessageObject msg : messages) {
-            if (msg == null || msg.isOut()) continue;
-            if (msg.messageOwner == null || msg.messageOwner.action != null) continue;
-            if (now - msg.messageOwner.date * 1000L > 120000L) continue;
+            if (msg == null || msg.isOut()) {
+                FileLog.d("MeeroTagHunter: ❌ msg null or out");
+                continue;
+            }
+            if (msg.messageOwner == null || msg.messageOwner.action != null) {
+                FileLog.d("MeeroTagHunter: ❌ action message");
+                continue;
+            }
+            if (now - msg.messageOwner.date * 1000L > 120000L) {
+                FileLog.d("MeeroTagHunter: ❌ old message");
+                continue;
+            }
 
             String text = msg.messageText != null ? msg.messageText.toString() : "";
-            if (TextUtils.isEmpty(text)) continue;
+            if (TextUtils.isEmpty(text)) {
+                FileLog.d("MeeroTagHunter: ❌ empty text");
+                continue;
+            }
             String lowerText = text.toLowerCase(Locale.ROOT);
+            FileLog.d("MeeroTagHunter: 📝 text: " + text);
 
             for (TagEntry entry : tags) {
                 if (entry.tag == null) continue;
                 if (entry.dialogId != 0 && entry.dialogId != dialogId) continue;
 
                 String tagLower = entry.tag.toLowerCase(Locale.ROOT);
-                if (!lowerText.contains(tagLower)) continue;
+                if (!lowerText.contains(tagLower)) {
+                    continue;
+                }
 
-                // ✅ تصحيح: استخدام getSenderId() مثل صائد الحذف
+                FileLog.d("MeeroTagHunter: 🎯 TAG FOUND! " + entry.tag);
+
+                // تتبع الردود
                 if (entry.trackReplies && msg.replyMessageObject != null) {
                     long replyFromId = getSenderId(msg.replyMessageObject);
-                    if (replyFromId != selfId) continue;
+                    if (replyFromId != selfId) {
+                        FileLog.d("MeeroTagHunter: ❌ reply not to self");
+                        continue;
+                    }
                 }
 
                 String senderName = getSenderName(msg, account);
@@ -143,7 +199,10 @@ public class MeeroTagHunter {
                 updateTagMessage(entry.tag, entry.dialogId, text, msg.getId(), msg.messageOwner.date, senderName);
 
                 Long last = lastNotifyAt.get(dialogId);
-                if (last != null && now - last < THROTTLE_MS) break;
+                if (last != null && now - last < THROTTLE_MS) {
+                    FileLog.d("MeeroTagHunter: ⏳ throttled");
+                    break;
+                }
                 lastNotifyAt.put(dialogId, now);
 
                 notifyTag(account, dialogId, msg.getId(), entry.tag, msg.messageText, msg, senderName);
@@ -168,6 +227,8 @@ public class MeeroTagHunter {
 
     private static void notifyTag(int account, long dialogId, int msgId, String tag, CharSequence messageText, MessageObject msg, String senderName) {
         try {
+            FileLog.d("MeeroTagHunter: 🔔 Sending notification for tag: " + tag);
+            
             Context ctx = ApplicationLoader.applicationContext;
             NotificationManager manager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
             if (Build.VERSION.SDK_INT >= 26) {
@@ -199,7 +260,11 @@ public class MeeroTagHunter {
                     .setContentIntent(pendingIntent);
 
             NotificationManagerCompat.from(ctx).notify(("tag:" + System.currentTimeMillis()).hashCode(), builder.build());
-        } catch (Throwable t) {}
+            
+            FileLog.d("MeeroTagHunter: ✅ Notification sent");
+        } catch (Throwable t) {
+            FileLog.e("MeeroTagHunter: Error sending notification", t);
+        }
     }
 
     private static String getChatTitle(long dialogId) {
@@ -249,6 +314,7 @@ public class MeeroTagHunter {
             e.lastSenderName = o.optString("lastSenderName", "");
             if (!TextUtils.isEmpty(e.tag)) out.add(e);
         }
+        FileLog.d("MeeroTagHunter: 📋 Loaded " + out.size() + " tags");
         return out;
     }
 
@@ -291,11 +357,12 @@ public class MeeroTagHunter {
                     o.put("lastMessageId", msgId);
                     o.put("lastMessageDate", date);
                     o.put("lastSenderName", sender);
+                    writeTags(array);
+                    FileLog.d("MeeroTagHunter: ✅ Updated tag message for: " + tag);
                 } catch (Throwable ignore) {}
                 break;
             }
         }
-        writeTags(array);
     }
 
     public static synchronized void addTag(String tag, boolean trackReplies, long dialogId, String chatName) {
@@ -306,6 +373,7 @@ public class MeeroTagHunter {
         for (int i = 0; i < array.length(); i++) {
             JSONObject o = array.optJSONObject(i);
             if (o != null && tag.equals(o.optString("tag", "")) && dialogId == o.optLong("dialogId", 0)) {
+                FileLog.d("MeeroTagHunter: ⚠️ Tag already exists: " + tag);
                 return;
             }
         }
@@ -321,6 +389,7 @@ public class MeeroTagHunter {
             o.put("lastSenderName", "");
             array.put(o);
             writeTags(array);
+            FileLog.d("MeeroTagHunter: ✅ Added tag: " + tag + " for dialog: " + dialogId);
         } catch (Throwable ignore) {}
     }
 
@@ -336,10 +405,12 @@ public class MeeroTagHunter {
             if (o != null) out.put(o);
         }
         writeTags(out);
+        FileLog.d("MeeroTagHunter: ✅ Removed tag: " + tag);
     }
 
     public static synchronized void clearAllTags() {
         writeTags(new JSONArray());
+        FileLog.d("MeeroTagHunter: ✅ All tags cleared");
     }
 
     public static boolean isTagExists(String tag, long dialogId) {
@@ -350,4 +421,4 @@ public class MeeroTagHunter {
         }
         return false;
     }
-                }
+                    }
