@@ -285,9 +285,8 @@ public class ChatInputViewsContainer extends FrameLayout {
         if (drawInputBackground && !meeroHideIslandForIos())
             blurredBackgroundDrawable.draw(canvas);
 
-        if (drawInputBackground) {
+        if (drawInputBackground && !meeroHideIslandForIos())
             blurredBackgroundDrawable.draw(canvas);
-        }
 
         super.dispatchDraw(canvas);
     }
