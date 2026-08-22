@@ -170,7 +170,7 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
         return false;
     }
 
-    // ✅ تصحيح: تغيير int msgId إلى long msgId
+    // ✅ فتح الرسالة مباشرة
     private void openMessage(long dialogId, long msgId) {
         if (dialogId == 0 || msgId == 0) return;
         Bundle args = new Bundle();
@@ -306,6 +306,30 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
         Context context = getParentActivity();
         if (context == null) return;
 
+        // ✅ عرض خيارين: إضافة تاك أو عرض السجل
+        String[] options = {
+                MeeroStrings.s(491), // "إضافة تاك"
+                "📋 السجل"          // عرض جميع التاكات
+        };
+
+        new AlertDialog.Builder(context)
+                .setTitle(chatName)
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        showTagInput(dialogId, chatName);
+                    } else {
+                        // عرض سجل التاكات لهذه المجموعة
+                        showTagLog(dialogId, chatName);
+                    }
+                })
+                .setNegativeButton(getString(R.string.Cancel), null)
+                .show();
+    }
+
+    private void showTagInput(long dialogId, String chatName) {
+        Context context = getParentActivity();
+        if (context == null) return;
+
         View content = createTagInputView(context);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -351,6 +375,38 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
                 AndroidUtilities.showKeyboard(editText);
             });
         }
+    }
+
+    // ✅ عرض سجل التاكات
+    private void showTagLog(long dialogId, String chatName) {
+        // جمع جميع التاكات لهذه المجموعة
+        StringBuilder sb = new StringBuilder();
+        sb.append("📋 سجل التاكات - ").append(chatName).append("\n\n");
+        
+        for (MeeroTagHunter.TagGroup group : groups) {
+            if (group.dialogId == dialogId) {
+                for (MeeroTagHunter.TagEntry entry : group.tags) {
+                    sb.append("• ").append(entry.tag);
+                    if (!TextUtils.isEmpty(entry.lastMessage)) {
+                        String sender = !TextUtils.isEmpty(entry.lastSenderName) ? entry.lastSenderName : "شخص ما";
+                        sb.append("\n  ").append(sender).append(": ").append(entry.lastMessage);
+                        sb.append("\n  ").append(timeOf(entry.lastMessageDate));
+                    }
+                    sb.append("\n\n");
+                }
+                break;
+            }
+        }
+
+        if (sb.toString().equals("📋 سجل التاكات - " + chatName + "\n\n")) {
+            sb.append(MeeroStrings.s(506)); // "لا توجد رسائل بعد"
+        }
+
+        new AlertDialog.Builder(getParentActivity())
+                .setTitle(chatName + " - السجل")
+                .setMessage(sb.toString())
+                .setPositiveButton(getString(R.string.OK), null)
+                .show();
     }
 
     private View createTagInputView(Context context) {
@@ -550,7 +606,8 @@ public class MeeroTagHunterActivity extends BaseNekoSettingsActivity {
                             msg = msg.substring(0, 60) + "…";
                         }
 
-                        String title = sender + "  •  " + entry.tag;
+                        // ✅ عرض: ذكرك (اسم الشخص) والرسالة بخط ناعم
+                        String title = MeeroStrings.s(503) + " ( " + sender + " )";
                         String detail = msg + "  •  " + timeOf(entry.lastMessageDate);
                         detailCell.setTextAndValue(title, detail, position + 1 < groupEndRow);
                         detailCell.setMultilineDetail(true);
