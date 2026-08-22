@@ -4,14 +4,20 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-    <!-- v171: clean flat letter M, google 3-color; diagonals UNDER stems -->
+    <!-- Letter K in Google 3-color style (Red + Green + Blue) -->
     <group android:scaleX="0.66" android:scaleY="0.66" android:translateX="87.04" android:translateY="88.60445">
         <group>
             <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-            <path android:pathData="M94.7 172L232.7 318L279.3 274L141.3 128Z" android:fillColor="#EA4335"/>
-            <path android:pathData="M370.7 128L232.7 274L279.3 318L417.3 172Z" android:fillColor="#EA4335"/>
-            <path android:pathData="M86 150H150V362H86Z" android:fillColor="#34A853"/>
-            <path android:pathData="M362 150H426V362H362Z" android:fillColor="#4285F4"/>
+            
+            <!-- ======== العمود الرأسي لـ K (أزرق Google) ======== -->
+            <path android:pathData="M120 128H190V384H120Z" android:fillColor="#4285F4"/>
+            
+            <!-- ======== الفرع المائل العلوي (أحمر Google) ======== -->
+            <path android:pathData="M300 128L200 256L300 384H400L280 256L400 128Z" android:fillColor="#EA4335"/>
+            
+            <!-- ======== الفرع المائل السفلي (أخضر Google) ======== -->
+            <path android:pathData="M300 384L200 256L300 128H400L280 256L400 384Z" android:fillColor="#34A853"/>
+            
         </group>
     </group>
 </vector>
