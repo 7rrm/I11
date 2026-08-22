@@ -1,8 +1,12 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    <!-- Design 3 (Negative Tile): white rounded tile, M knocked out in telegram blue -->
+    android:width="108dp" 
+    android:height="108dp"
+    android:viewportWidth="108" 
+    android:viewportHeight="108">
+    <!-- Letter K: negative tile style, white rounded tile with K knocked out in blue -->
+    
+    <!-- الخلفية الزرقاء المتدرجة -->
     <path android:pathData="M0,0h108v108h-108z">
         <aapt:attr name="android:fillColor">
             <gradient android:startX="0" android:startY="0" android:endX="0" android:endY="108" android:type="linear">
@@ -11,9 +15,23 @@
             </gradient>
         </aapt:attr>
     </path>
-    <path android:fillColor="#FFFFFF" android:pathData="M33.96,24.47 L74.04,24.47 A15.82,15.82 0 0 1 89.86,40.29 L89.86,67.71 A15.82,15.82 0 0 1 74.04,83.53 L33.96,83.53 A15.82,15.82 0 0 1 18.14,67.71 L18.14,40.29 A15.82,15.82 0 0 1 33.96,24.47 Z"/>
-    <path android:fillColor="#229ED9" android:pathData="M25.95,36.28h12.24v35.44h-12.24z"/>
-    <path android:fillColor="#229ED9" android:pathData="M69.82,36.28h12.23v35.44h-12.23z"/>
-    <path android:fillColor="#229ED9" android:pathData="M27.90,40.77 L49.83,61.02 L58.16,52.05 L36.22,31.79 L27.90,40.77 Z"/>
-    <path android:fillColor="#229ED9" android:pathData="M71.78,31.79 L49.83,52.05 L58.16,61.02 L80.08,40.77 L71.78,31.79 Z"/>
+    
+    <!-- البلاطة البيضاء المستديرة -->
+    <path android:fillColor="#FFFFFF" 
+          android:pathData="M33.96,24.47 L74.04,24.47 A15.82,15.82 0 0 1 89.86,40.29 L89.86,67.71 A15.82,15.82 0 0 1 74.04,83.53 L33.96,83.53 A15.82,15.82 0 0 1 18.14,67.71 L18.14,40.29 A15.82,15.82 0 0 1 33.96,24.47 Z"/>
+    
+    <!-- ======== حرف K باللون الأزرق (مقتطع من البلاطة) ======== -->
+    
+    <!-- العمود الرأسي -->
+    <path android:fillColor="#229ED9" 
+          android:pathData="M38.00,36.28 H50.24 V71.72 H38.00 Z"/>
+    
+    <!-- الفرع المائل العلوي -->
+    <path android:fillColor="#229ED9" 
+          android:pathData="M50.24,36.28 L68.00,48.00 L60.00,55.00 L42.24,43.28 L50.24,36.28 Z"/>
+    
+    <!-- الفرع المائل السفلي -->
+    <path android:fillColor="#229ED9" 
+          android:pathData="M42.24,64.72 L60.00,53.00 L68.00,60.00 L50.24,71.72 L42.24,64.72 Z"/>
+    
 </vector>
