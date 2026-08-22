@@ -4,14 +4,17 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-    <!-- v171: neon wireframe now a ONE-STROKE continuous M tube (never knots) -->
+    <!-- neon wireframe letter K - one-stroke continuous tube -->
     <group android:scaleX="0.649" android:scaleY="0.649" android:translateX="89.856" android:translateY="89.856">
         <group>
             <clip-path android:pathData="M0 0H512V512H0V0Z"/>
-            <path android:pathData="M146 364L146 152L256 300L366 152L366 364"
-                  android:strokeColor="#9CEFFF" android:strokeWidth="22"
+            <!-- حرف K بخط واحد مستمر: عامود + فرعين مائلين -->
+            <path android:pathData="M140 152L140 364L310 152M140 260L310 364"
+                  android:strokeColor="#9CEFFF" 
+                  android:strokeWidth="22"
                   android:fillColor="#00000000"
-                  android:strokeLineCap="round" android:strokeLineJoin="round"/>
+                  android:strokeLineCap="round" 
+                  android:strokeLineJoin="round"/>
         </group>
     </group>
 </vector>
